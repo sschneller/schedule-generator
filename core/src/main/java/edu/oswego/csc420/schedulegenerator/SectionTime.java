@@ -49,7 +49,6 @@ public class SectionTime {
         return !Collections.disjoint(days, sectionTime.getDays())
                 && start.isBefore(sectionTime.getEnd())
                 && sectionTime.getStart().isBefore(end);
-
     }
 
     /**

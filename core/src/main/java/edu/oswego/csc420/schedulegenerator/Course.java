@@ -14,12 +14,12 @@ public class Course {
 
     public Course(final Integer crn, final Integer courseNumber, final String name, final String subject, final String teacher, final boolean isOptional) {
         this.crn          = crn;
+        this.courseNumber = courseNumber;
         this.name         = name;
         this.subject      = subject;
         this.teacher      = teacher;
-        this.sections     = new HashSet<>();
         this.isOptional   = isOptional;
-        this.courseNumber = courseNumber;
+        this.sections     = new HashSet<>();
     }
 
     public boolean addSection(final Section section) {
