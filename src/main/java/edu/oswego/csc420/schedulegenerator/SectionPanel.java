@@ -24,6 +24,8 @@ public class SectionPanel extends JPanel {
         JTable table = new JTable(rowData, columnNames);
 
         add(new JScrollPane(table), "wrap");
-        add(new JButton("New Section"));
+        JButton button = new JButton("New Section");
+        button.addActionListener(a -> new NewSectionFrame().setVisible(true));
+        add(button);
     }
 }
