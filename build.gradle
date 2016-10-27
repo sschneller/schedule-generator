@@ -14,7 +14,7 @@ allprojects {
 }
 
 run {
-    mainClassName = "edu.oswego.csc420.schedulegenerator.GUI2"
+    mainClassName = "edu.oswego.csc420.schedulegenerator.GUI"
 }
 
 dependencies {

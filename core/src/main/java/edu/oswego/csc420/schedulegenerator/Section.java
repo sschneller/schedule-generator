@@ -1,66 +1,144 @@
 package edu.oswego.csc420.schedulegenerator;
 
-import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import static edu.oswego.csc420.schedulegenerator.Util.nullToEmpty;
+
 /**
  * Defines a Section for a Course.
  */
 public class Section {
-    private static final Logger logger = LoggerFactory.getLogger(Section.class);
-    private final String location;
-    private final int sectionNumber;
-    private final Set<SectionTime> sectionTimes;
+    private String teacher, location;
+    private Integer crn, sectionNumber;
+    private final Set<MeetingTime> meetingTimes;
 
     /**
      * Constructor.
      *
-     * @param sectionNumber the number of the section.
-     * @param sectionTime the time slot this section occupies.
+     * @param sectionNumber the number of the section. e.g. 800
+     * @param crn the CRN number of the section. e.g. 10279
+     * @param teacher the name of the sections teacher. e.g. Mr. Filip
+     * @param location the location of the section. e.g. Shineman Center Room 400
      */
-    public Section(final int sectionNumber, final SectionTime sectionTime) {
-        this(sectionNumber, sectionTime, null);
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param sectionNumber the number of the section.
-     * @param sectionTime the time slot this section occupies.
-     * @param location the location of this section. e.g. Building/Room #
-     */
-    public Section(final int sectionNumber, final SectionTime sectionTime, final String location) {
-        this.location = location;
+    public Section(final Integer sectionNumber, final Integer crn, final String teacher, final String location) {
+        setTeacher(teacher);
+        setLocation(location);
+        this.crn           = crn;
+        this.meetingTimes = new HashSet<>();
         this.sectionNumber = sectionNumber;
-        this.sectionTimes = new HashSet<>();
-        Validate.notNull(sectionTime, "Section time cannot be null!");
-        sectionTimes.add(sectionTime);
     }
 
     /**
-     * Returns the section number.
+     * Adds the meeting time to the section.
      *
-     * @return the section number.
+     * @param meetingTime the meeting time to add.
+     * @throws IllegalArgumentException when there is a conflict with two or more meeting times in this section.
      */
-    public int getSectionNumber() {
-        return sectionNumber;
+    public void addMeetingTime(final MeetingTime meetingTime) throws IllegalArgumentException {
+        Optional<MeetingTime> overlapping = meetingTimes.stream().filter(s -> s.overlaps(meetingTime)).findFirst();
+        if(overlapping.isPresent()) {
+            throw new IllegalArgumentException("Meeting time '" + meetingTime
+                    + "' conflicts with the existing meeting time '" + overlapping.get() + "'");
+        }
+
+        meetingTimes.add(meetingTime);
     }
 
     /**
-     * Returns an optional of the location.
+     * Removes the meeting time if it already exists.
      *
-     * @return an optional of the location.
+     * @param meetingTime the meeting time to remove.
+     * @throws UnsupportedOperationException when the meeting time exists and it is the last meeting time in the section.
      */
-    public Optional<String> getLocation() {
-        return Optional.ofNullable(location);
+    public void removeMeetingTime(final MeetingTime meetingTime) throws UnsupportedOperationException {
+        if(meetingTimes.size() == 1 && meetingTimes.contains(meetingTime)) {
+            throw new UnsupportedOperationException("Cannot remove the last meeting time in the section.");
+        }
+
+        meetingTimes.remove(meetingTime);
+    }
+
+    /**
+     * Returns the teacher name.
+     *
+     * @return the teacher name.
+     */
+    @Nonnull
+    public String getTeacher() {
+        return teacher;
+    }
+
+    /**
+     * Sets the teacher name.
+     *
+     * @param teacher the teacher name.
+     */
+    public void setTeacher(final String teacher) {
+        this.teacher = nullToEmpty(teacher);
+    }
+
+    /**
+     * Returns the location.
+     *
+     * @return the location.
+     */
+    @Nonnull
+    public String getLocation() {
+        return location;
+    }
+
+    /**
+     * Sets the location.
+     *
+     * @param location the location.
+     */
+    public void setLocation(final String location) {
+        this.location = nullToEmpty(location);
+    }
+
+    /**
+     * Returns an optional CRN.
+     *
+     * @return an optional CRN.
+     */
+    @Nonnull
+    public Optional<Integer> getCrn() {
+        return Optional.ofNullable(crn);
+    }
+
+    /**
+     * Sets the CRN.
+     *
+     * @param crn the CRN.
+     */
+    public void setCrn(Integer crn) {
+        this.crn = crn;
+    }
+
+    /**
+     * Returns an optional section number.
+     *
+     * @return an optional section number.
+     */
+    @Nonnull
+    public Optional<Integer> getSectionNumber() {
+        return Optional.ofNullable(sectionNumber);
+    }
+
+    /**
+     * Sets the section number.
+     *
+     * @param sectionNumber the section number.
+     */
+    public void setSectionNumber(final Integer sectionNumber) {
+        this.sectionNumber = sectionNumber;
     }
 
     /**
@@ -68,35 +146,9 @@ public class Section {
      *
      * @return an unmodifiable list of section times.
      */
-    public Set<SectionTime> getSectionTimes() {
-        return Collections.unmodifiableSet(sectionTimes);
-    }
-
-    /**
-     *
-     *
-     * @param sectionTime
-     * @return
-     */
-    public void addSectionTime(final SectionTime sectionTime) {
-        Optional<SectionTime> overlapping = sectionTimes.stream().filter(s -> s.overlaps(sectionTime)).findFirst();
-        if(overlapping.isPresent()) {
-            IllegalArgumentException e = new IllegalArgumentException("Section time conflicts with an existing section time.");
-            logger.error("Section '" + sectionTime + "' Conflicts with section '" + overlapping.get() + "'", e);
-            throw e;
-        }
-
-        sectionTimes.add(sectionTime);
-    }
-
-    public void removeSectionTime(final SectionTime sectionTime) {
-        if(sectionTimes.size() == 1 && sectionTimes.contains(sectionTime)) {
-            UnsupportedOperationException e = new UnsupportedOperationException("Cannot remove the last section time in a section.");
-            logger.error("Attempted to remove the last section time in a section.", e);
-            throw e;
-        }
-
-        sectionTimes.remove(sectionTime);
+    @Nonnull
+    public Set<MeetingTime> getMeetingTimes() {
+        return Collections.unmodifiableSet(meetingTimes);
     }
 
     @Override
