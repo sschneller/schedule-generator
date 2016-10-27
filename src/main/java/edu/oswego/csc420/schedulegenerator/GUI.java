@@ -9,7 +9,7 @@ import javax.swing.event.*;
 
 public class GUI extends JFrame implements ActionListener, ComponentListener, ChangeListener {
     ArrayList<String> data;
-    ArrayList<JPanel> courseList;
+    ArrayList<CourseEntry> courseList;
 
     public GUI(String windowTitle) {
         setLayout(new MigLayout("","[grow,fill]",""));
@@ -27,20 +27,9 @@ public class GUI extends JFrame implements ActionListener, ComponentListener, Ch
 
         courseList = new ArrayList<>();
         for(String title : data) {
-            JLabel hr = new JLabel(title, SwingConstants.CENTER);
-            JButton dd = new JButton("+");
-            JPanel course = new JPanel();
-            course.setBackground(Color.LIGHT_GRAY);
-            dd.addActionListener(this);
-            course.setLayout(new MigLayout("","[grow,fill][]",""));
-            course.add(dd, "dock east");
-            course.add(hr, "dock north");
-
-
-            // JButton here = new JButton(title + "                                                             +  ");
-            // here.setFont(new Font("Arial", Font.PLAIN, 40));
-            // here.addActionListener(this);
-            courseList.add(course);
+            CourseEntry ce = new CourseEntry(title);
+            ((JButton)ce.getComponent(0)).addActionListener(this);
+            courseList.add(ce);
         }
 
         for(JPanel course : courseList) {
