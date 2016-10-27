@@ -21,9 +21,14 @@ public class SectionInformationPanel extends JPanel {
         Object rowData[][] = { { "MWF", "08:00AM - 09:00AM" },
                 { "T", "10:00AM - 11:00AM" }};
         Object columnNames[] = { "Days", "Time" };
-        JTable table = new JTable(rowData, columnNames);
-
+        JTable table = new JTable(rowData, columnNames) {
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
         add(new JScrollPane(table), "wrap, span 3");
-        add(new JButton("New Meeting Time"), "span 3");
+        JButton button = new JButton("New Meeting Time");
+        button.addActionListener(a -> new NewMeetingTimeFrame().setVisible(true));
+        add(button, "span 3");
     }
 }

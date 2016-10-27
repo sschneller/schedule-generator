@@ -21,8 +21,11 @@ public class SectionPanel extends JPanel {
                 { "801", "MWF", "12:00PM - 01:00PM" },
                 { "802", "Add a meeting time.", "Add a meeting time." }};
         Object columnNames[] = { "Section #", "Days", "Times" };
-        JTable table = new JTable(rowData, columnNames);
-
+        JTable table = new JTable(rowData, columnNames) {
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
         add(new JScrollPane(table), "wrap");
         JButton button = new JButton("New Section");
         button.addActionListener(a -> new NewSectionFrame().setVisible(true));
