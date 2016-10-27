@@ -9,10 +9,10 @@ import javax.swing.event.*;
 
 public class GUI extends JFrame implements ActionListener, ComponentListener, ChangeListener {
     ArrayList<String> data;
-    ArrayList<JButton> courseList;
+    ArrayList<JPanel> courseList;
 
     public GUI(String windowTitle) {
-        setLayout(new MigLayout());
+        setLayout(new MigLayout("","[grow,fill]",""));
         setTitle(windowTitle);
         addComponentListener(this);
         data = new ArrayList<>();
@@ -27,13 +27,23 @@ public class GUI extends JFrame implements ActionListener, ComponentListener, Ch
 
         courseList = new ArrayList<>();
         for(String title : data) {
-            JButton here = new JButton(title + "                                                             +  ");
-            here.setFont(new Font("Arial", Font.PLAIN, 40));
-            here.addActionListener(this);
-            courseList.add(here);
+            JLabel hr = new JLabel(title, SwingConstants.CENTER);
+            JButton dd = new JButton("+");
+            JPanel course = new JPanel();
+            course.setBackground(Color.LIGHT_GRAY);
+            dd.addActionListener(this);
+            course.setLayout(new MigLayout("","[grow,fill][]",""));
+            course.add(dd, "dock east");
+            course.add(hr, "dock north");
+
+
+            // JButton here = new JButton(title + "                                                             +  ");
+            // here.setFont(new Font("Arial", Font.PLAIN, 40));
+            // here.addActionListener(this);
+            courseList.add(course);
         }
 
-        for(JButton course : courseList) {
+        for(JPanel course : courseList) {
             add(course, "span");
         }
     }
@@ -52,20 +62,30 @@ public class GUI extends JFrame implements ActionListener, ComponentListener, Ch
 
     public void actionPerformed(ActionEvent e) {
         JButton clickedButton = (JButton)e.getSource();
+        // JLabel parent = (JLabel)clickedButton.getParent().getComponent(0);
         clickedButton.setText(clickedButton.getText().replace("+", "-"));
-        for(JButton ccp : courseList) {
+        for(JPanel ccp : courseList) {
             this.remove(ccp);
         }
         this.validate();
-        this.add(clickedButton, "cell 0 0");
+        this.setTitle("Course Schedule Generator");
+        this.setBackground(Color.GRAY);
+        this.setLayout(new MigLayout("","[grow,fill][][]300[]","[grow,fill][]"));
+        final AccordionPanel accordionPanel = new AccordionPanel();
+        accordionPanel.add(new CoursePanel(), "cell 0 1 2 1");
+        add(accordionPanel, "span, grow");
+        add(new JButton("New Course"));
+        add(new JButton("Import"));
+        add(new JButton("Export"));
+        add(new JButton("Generate"));
         this.repaint();
     }
 
     public static void createGui() {
-        JFrame frame = new GUI("Canvas Painter");
+        JFrame frame = new GUI("Schedule Generator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300, 200);
-        frame.pack();
+        frame.setSize(890,650);
+        // frame.pack();
         frame.setVisible(true);
     }
 

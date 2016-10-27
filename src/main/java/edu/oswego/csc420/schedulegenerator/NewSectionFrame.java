@@ -18,5 +18,7 @@ public class NewSectionFrame extends JFrame {
         add(new JLabel("Teacher"),"wrap");
         add(new JTextField(),"wrap");
         add(new JButton("Add Section"));
+        this.setResizable(false);
+        this.pack();
     }
 }
