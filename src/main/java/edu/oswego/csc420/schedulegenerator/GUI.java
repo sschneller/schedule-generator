@@ -12,7 +12,7 @@ public class GUI extends JFrame implements ActionListener, ComponentListener, Ch
     ArrayList<CourseEntry> courseList;
 
     public GUI(String windowTitle) {
-        setLayout(new MigLayout("","[grow,fill]",""));
+        setLayout(new MigLayout("","[grow,fill]","[grow,fill][]"));
         setTitle(windowTitle);
         addComponentListener(this);
         data = new ArrayList<>();
@@ -25,16 +25,17 @@ public class GUI extends JFrame implements ActionListener, ComponentListener, Ch
         data.add("CSC221");
         data.add("CSC222");
 
-        courseList = new ArrayList<>();
-        for(String title : data) {
-            CourseEntry ce = new CourseEntry(title);
-            ((JButton)ce.getComponent(0)).addActionListener(this);
-            courseList.add(ce);
-        }
+        AccordionPanel ap = new AccordionPanel();
+        ap.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GRAY), "Added Classes"), BorderFactory.createEmptyBorder(5,5,5,5)));
+        add(ap, "wrap");
 
-        for(JPanel course : courseList) {
-            add(course, "span");
-        }
+        JPanel bottom = new JPanel();
+        bottom.setLayout(new MigLayout("","[grow,fill][][]300[]","[grow,fill][]"));
+        bottom.add(new JButton("New Course"));
+        bottom.add(new JButton("Import"));
+        bottom.add(new JButton("Export"));
+        bottom.add(new JButton("Generate"));
+        add(bottom);
     }
 
     public void componentResized(ComponentEvent e) {
