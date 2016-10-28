@@ -1,18 +1,27 @@
 package edu.oswego.csc420.schedulegenerator;
 
 import net.miginfocom.swing.MigLayout;
-import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
+
 import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.util.ArrayList;
 
 public class GUI extends JFrame implements ActionListener, ComponentListener, ChangeListener {
     ArrayList<String> data;
     ArrayList<CourseEntry> courseList;
+    JPanel currPanel;
+    JPanel cards;
 
     public GUI(String windowTitle) {
-        setLayout(new MigLayout("","[grow,fill]","[grow,fill][]"));
+        cards = new JPanel(new CardLayout());
+        currPanel = new JPanel(new MigLayout("","[grow,fill]","[grow,fill][]"));
+        // setLayout();
         setTitle(windowTitle);
         addComponentListener(this);
         data = new ArrayList<>();
@@ -27,7 +36,7 @@ public class GUI extends JFrame implements ActionListener, ComponentListener, Ch
 
         AccordionPanel ap = new AccordionPanel();
         ap.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GRAY), "Added Classes"), BorderFactory.createEmptyBorder(5,5,5,5)));
-        add(ap, "wrap");
+        currPanel.add(ap, "wrap");
 
         JPanel bottom = new JPanel();
         bottom.setLayout(new MigLayout("","[grow,fill][][]300[]","[grow,fill][]"));
@@ -35,7 +44,15 @@ public class GUI extends JFrame implements ActionListener, ComponentListener, Ch
         bottom.add(new JButton("Import"));
         bottom.add(new JButton("Export"));
         bottom.add(new JButton("Generate"));
-        add(bottom);
+        currPanel.add(bottom);
+        cards.add(currPanel, "ACC");
+        JPanel cp = new JPanel(new MigLayout("","[grow,fill]","[grow,fill][grow,fill]"));
+        cp.add(new CourseEntry("CSC420", false), "wrap");
+        cp.add(new CoursePanel());
+        cards.add(cp, "EXP");
+        add(cards);
+        CardLayout cl = (CardLayout)cards.getLayout();
+        cl.show(cards, "ACC");
     }
 
     public void componentResized(ComponentEvent e) {
@@ -52,7 +69,6 @@ public class GUI extends JFrame implements ActionListener, ComponentListener, Ch
 
     public void actionPerformed(ActionEvent e) {
         JButton clickedButton = (JButton)e.getSource();
-        // JLabel parent = (JLabel)clickedButton.getParent().getComponent(0);
         clickedButton.setText(clickedButton.getText().replace("+", "-"));
         for(JPanel ccp : courseList) {
             this.remove(ccp);

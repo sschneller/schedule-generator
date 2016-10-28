@@ -2,13 +2,8 @@ package edu.oswego.csc420.schedulegenerator;
 
 import net.miginfocom.swing.MigLayout;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
-import java.awt.Color;
+import javax.swing.*;
+import java.awt.*;
 
 public class SectionPanel extends JPanel {
 

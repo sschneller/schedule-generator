@@ -3,8 +3,7 @@ package edu.oswego.csc420.schedulegenerator;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import java.awt.Color;
-import java.lang.reflect.Array;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class AccordionPanel extends JPanel {
@@ -24,7 +23,7 @@ public class AccordionPanel extends JPanel {
         data.add("CSC222");
         courseList = new ArrayList<>();
         for(String title : data) {
-            CourseEntry ce = new CourseEntry(title);
+            CourseEntry ce = new CourseEntry(title, true);
             courseList.add(ce);
         }
 
