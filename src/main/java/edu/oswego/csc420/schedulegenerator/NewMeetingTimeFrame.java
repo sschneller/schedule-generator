@@ -41,5 +41,6 @@ public class NewMeetingTimeFrame extends JFrame {
         panel.add(new JCheckBox());
         add(panel,"span 4,wrap");
         add(new JButton("Add Meeting Time"), "span");
+        this.pack();
     }
 }
