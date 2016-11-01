@@ -2,10 +2,7 @@ package edu.oswego.csc420.schedulegenerator;
 
 import net.miginfocom.swing.MigLayout;
 
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class CoursePanel extends JPanel {
 
