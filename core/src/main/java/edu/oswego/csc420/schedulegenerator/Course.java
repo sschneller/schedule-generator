@@ -1,5 +1,6 @@
 package edu.oswego.csc420.schedulegenerator;
 
+import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -14,7 +15,7 @@ import static edu.oswego.csc420.schedulegenerator.Util.nullToEmpty;
 /**
  * Defines a course.
  */
-public class Course {
+public class Course implements Comparable<Course> {
     private boolean isOptional;
     private Integer courseNumber;
     private String name, subject;
@@ -154,7 +155,7 @@ public class Course {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if(obj == this) {
             return true;
         } else if(!(obj instanceof Course)) {
@@ -166,5 +167,17 @@ public class Course {
         return new EqualsBuilder()
                 .append(name, course.getName())
                 .isEquals();
+    }
+
+    @Override
+    public int compareTo(final Course course) {
+        Validate.notNull(course);
+        if(course.isOptional() == isOptional) {
+            return 0;
+        } else if(course.isOptional() && !isOptional) {
+            return -1;
+        } else {
+            return 1;
+        }
     }
 }
