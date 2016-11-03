@@ -33,4 +33,9 @@ public class AccordionPanel extends JPanel {
         // add(new JLabel("CSC 420", SwingConstants.CENTER), "al c, cell 0 0");
         // add(new JButton("-"), "al r, cell 1 0");
     }
+
+    public void addCourse() {
+        CourseEntry ce = new CourseEntry("", false);
+        courseList.add(ce);
+    }
 }

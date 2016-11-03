@@ -16,6 +16,7 @@ public class GUI extends JFrame implements ActionListener {
     JButton importButton = new JButton("Import");
     JButton exportButton = new JButton("Export");
     JButton generateButton = new JButton("Generate");
+    JPanel cp = new JPanel(new MigLayout("","[grow,fill]","[grow,fill][grow,fill]"));
 
     public GUI(String windowTitle) {
         cards = new JPanel(new CardLayout());
@@ -49,10 +50,10 @@ public class GUI extends JFrame implements ActionListener {
         bottom.add(generateButton);
         currPanel.add(bottom);
         cards.add(currPanel, "ACC");
-        JPanel cp = new JPanel(new MigLayout("","[grow,fill]","[grow,fill][grow,fill]"));
-        cp.add(new CourseEntry("CSC420", false), "wrap");
-        cp.add(new CoursePanel());
-        cards.add(cp, "EXP");
+        // JPanel cp = new JPanel(new MigLayout("","[grow,fill]","[grow,fill][grow,fill]"));
+        // cp.add(new CourseEntry("CSC420", false), "wrap");
+        // cp.add(new CoursePanel());
+        // cards.add(cp, "EXP");
         add(cards);
         CardLayout cl = (CardLayout)cards.getLayout();
         cl.show(cards, "ACC");
@@ -62,7 +63,13 @@ public class GUI extends JFrame implements ActionListener {
         JButton clickedButton = (JButton)e.getSource();
         switch(clickedButton.getText()) {
             case("New Course"): {
-                
+                cp.removeAll();
+                cp.add(new CourseEntry("", false), "wrap");
+                cp.add(new CoursePanel());
+                cards.add(cp, "EXP");
+                cards.repaint();
+                CardLayout cl = (CardLayout)cards.getLayout();
+                cl.show(cards, "EXP");
                 break;
             }
             case("Import"): {
@@ -75,7 +82,7 @@ public class GUI extends JFrame implements ActionListener {
                 break;
             }
             default: {
-                clickedButton.setText(clickedButton.getText().replace("+", "-"));
+                // clickedButton.setText(clickedButton.getText().replace("+", "-"));
                 for(JPanel ccp : courseList) {
                     this.remove(ccp);
                 }
@@ -93,7 +100,7 @@ public class GUI extends JFrame implements ActionListener {
     }
 
     public static void createGui() {
-        JFrame frame = new GUI("Schedule Generator");
+        JFrame frame = new GUI("Course Schedule Generator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(890,650);
         // frame.pack();
