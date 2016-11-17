@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class GUI extends JFrame implements ActionListener {
-    ArrayList<String> data;
     ArrayList<CourseEntry> courseList;
     JPanel currPanel;
     JPanel cards;
@@ -23,15 +22,6 @@ public class GUI extends JFrame implements ActionListener {
         currPanel = new JPanel(new MigLayout("","[grow,fill]","[grow,fill][]"));
         // setLayout();
         setTitle(windowTitle);
-        data = new ArrayList<>();
-        data.add("CSC212");
-        data.add("CSC420");
-        data.add("CSC480");
-        data.add("CSC380");
-        data.add("CSC365");
-        data.add("CSC344");
-        data.add("CSC221");
-        data.add("CSC222");
 
         newCourseButton.addActionListener(this);
         importButton.addActionListener(this);
