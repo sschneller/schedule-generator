@@ -76,7 +76,6 @@ public class CourseInfoEntryPanel extends JPanel implements ActionListener {
                 else {
                     name = " - " + nameField.getText();
                 }
-                name = nameField.getText();
                 ((CoursePanel)nameField.getParent().getParent().getParent()).setTitle(subject + courseNumber + name);
             }
         });

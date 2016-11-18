@@ -4,20 +4,18 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 
 public class CoursePanel extends JPanel {
-    public CourseEntry courseEntry;
+    public CourseHeaderPanel courseHeaderPanel;
     public CourseInfoPanel courseInfoPanel;
-    public int courseEntryIndex;
 
-    CoursePanel(CourseEntry ce, CourseInfoPanel cip, int cei) {
+    CoursePanel(CourseHeaderPanel chp, CourseInfoPanel cip) {
         setLayout(new MigLayout("","[grow,fill]","[grow,fill][grow,fill]"));
-        courseEntry = ce;
+        courseHeaderPanel = chp;
         courseInfoPanel = cip;
-        courseEntryIndex = cei;
-        add(courseEntry, "wrap");
+        add(courseHeaderPanel, "wrap");
         add(courseInfoPanel);
     }
 
     public void setTitle(String title) {
-        courseEntry.setTitle(title);
+        courseHeaderPanel.setTitle(title);
     }
 }
