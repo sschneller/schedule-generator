@@ -15,7 +15,8 @@ public class GUI extends JFrame implements ActionListener {
     JButton importButton = new JButton("Import");
     JButton exportButton = new JButton("Export");
     JButton generateButton = new JButton("Generate");
-    JPanel cp = new JPanel(new MigLayout("","[grow,fill]","[grow,fill][grow,fill]"));
+    CoursePanel coursePanel;
+    AccordionPanel ap = new AccordionPanel();
 
     public GUI(String windowTitle) {
         cards = new JPanel(new CardLayout());
@@ -28,8 +29,6 @@ public class GUI extends JFrame implements ActionListener {
         exportButton.addActionListener(this);
         generateButton.addActionListener(this);
 
-        AccordionPanel ap = new AccordionPanel();
-        ap.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GRAY), "Added Classes"), BorderFactory.createEmptyBorder(5,5,5,5)));
         currPanel.add(ap, "wrap");
 
         JPanel bottom = new JPanel();
@@ -53,10 +52,10 @@ public class GUI extends JFrame implements ActionListener {
         JButton clickedButton = (JButton)e.getSource();
         switch(clickedButton.getText()) {
             case("New Course"): {
-                cp.removeAll();
-                cp.add(new CourseEntry("", false), "wrap");
-                cp.add(new CoursePanel());
-                cards.add(cp, "EXP");
+                CourseEntry newCourse = new CourseEntry(false);
+                int ceIndex = ap.addCourse(newCourse);
+                coursePanel = new CoursePanel(newCourse, new CourseInfoPanel(), ceIndex);
+                cards.add(coursePanel, "EXP");
                 cards.repaint();
                 CardLayout cl = (CardLayout)cards.getLayout();
                 cl.show(cards, "EXP");
@@ -72,7 +71,7 @@ public class GUI extends JFrame implements ActionListener {
                 break;
             }
             default: {
-                // clickedButton.setText(clickedButton.getText().replace("+", "-"));
+                /*// clickedButton.setText(clickedButton.getText().replace("+", "-"));
                 for(JPanel ccp : courseList) {
                     this.remove(ccp);
                 }
@@ -81,10 +80,10 @@ public class GUI extends JFrame implements ActionListener {
                 this.setBackground(Color.GRAY);
                 this.setLayout(new MigLayout("","[grow,fill][][]300[]","[grow,fill][]"));
                 final AccordionPanel accordionPanel = new AccordionPanel();
-                accordionPanel.add(new CoursePanel(), "cell 0 1 2 1");
+                accordionPanel.add(new CourseInfoPanel(), "cell 0 1 2 1");
                 add(accordionPanel, "span, grow");
                 this.repaint();
-                break;
+                break;*/
             }
         }
     }

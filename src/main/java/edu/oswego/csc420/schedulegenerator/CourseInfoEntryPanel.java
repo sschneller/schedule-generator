@@ -1,0 +1,138 @@
+package edu.oswego.csc420.schedulegenerator;
+
+import edu.oswego.csc420.schedulegenerator.components.SGTextField;
+import net.miginfocom.swing.MigLayout;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+
+public class CourseInfoEntryPanel extends JPanel implements ActionListener {
+    String subject = "", courseNumber = "", name = "";
+    boolean editMode = false;
+    JButton edit;
+    SGTextField subjectField = new SGTextField();
+    SGTextField courseNumberField = new SGTextField();
+    SGTextField nameField = new SGTextField();
+    JCheckBox optionalField = new JCheckBox();
+
+    CourseInfoEntryPanel() {
+        setLayout(new MigLayout("","[grow,fill][grow,fill][grow,fill][grow,fill][]","[][]"));
+
+        subjectField.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                warn();
+            }
+            public void removeUpdate(DocumentEvent e) {
+                warn();
+            }
+            public void insertUpdate(DocumentEvent e) {
+                warn();
+            }
+
+            public void warn() {
+                subject = subjectField.getText();
+                ((CoursePanel)subjectField.getParent().getParent().getParent()).setTitle(subject + courseNumber + name);
+            }
+        });
+
+        courseNumberField.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                warn();
+            }
+            public void removeUpdate(DocumentEvent e) {
+                warn();
+            }
+            public void insertUpdate(DocumentEvent e) {
+                warn();
+            }
+
+            public void warn() {
+                courseNumber = courseNumberField.getText();
+                ((CoursePanel)courseNumberField.getParent().getParent().getParent()).setTitle(subject + courseNumber + name);
+            }
+        });
+
+        nameField.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                warn();
+            }
+            public void removeUpdate(DocumentEvent e) {
+                warn();
+            }
+            public void insertUpdate(DocumentEvent e) {
+                warn();
+            }
+
+            public void warn() {
+                if(nameField.getText().equals("")) {
+                    name = "";
+                }
+                else {
+                    name = " - " + nameField.getText();
+                }
+                name = nameField.getText();
+                ((CoursePanel)nameField.getParent().getParent().getParent()).setTitle(subject + courseNumber + name);
+            }
+        });
+
+        add(new JLabel("Subject"));
+        add(new JLabel("Course Number"));
+        add(new JLabel("Name"));
+        add(new JLabel("Optional"));
+
+        edit = new JButton();
+        edit.addActionListener(this);
+        edit.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(1, 1, 1, 1)));
+        Image img;
+        try {
+            img = ImageIO.read(new File("src\\main\\resources\\ic_mode_edit_black_18dp.png"));
+            edit.setIcon(new ImageIcon(img));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        add(edit, "wrap");
+        subjectField.setEnabled(false);
+        add(subjectField);
+        courseNumberField.setEnabled(false);
+        add(courseNumberField);
+        nameField.setEnabled(false);
+        add(nameField);
+        optionalField.setEnabled(false);
+        add(optionalField);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Image img;
+        try {
+            if(editMode) {
+                img = ImageIO.read(new File("src\\main\\resources\\ic_mode_edit_black_18dp.png"));
+                edit.setIcon(new ImageIcon(img));
+                edit.repaint();
+                editMode = false;
+                subjectField.setEnabled(editMode);
+                courseNumberField.setEnabled(editMode);
+                nameField.setEnabled(editMode);
+                optionalField.setEnabled(editMode);
+            }
+            else {
+                img = ImageIO.read(new File("src\\main\\resources\\ic_check_black_18dp.png"));
+                edit.setIcon(new ImageIcon(img));
+                edit.repaint();
+                editMode = true;
+                subjectField.setEnabled(editMode);
+                courseNumberField.setEnabled(editMode);
+                nameField.setEnabled(editMode);
+                optionalField.setEnabled(editMode);
+            }
+        } catch (IOException ed) {
+            ed.printStackTrace();
+        }
+    }
+}

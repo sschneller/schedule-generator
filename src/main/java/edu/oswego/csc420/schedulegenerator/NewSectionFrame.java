@@ -1,7 +1,6 @@
 package edu.oswego.csc420.schedulegenerator;
 
 import net.miginfocom.swing.MigLayout;
-
 import javax.swing.*;
 import java.awt.*;
 
