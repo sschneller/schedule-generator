@@ -15,7 +15,7 @@ import static edu.oswego.csc420.schedulegenerator.Util.nullToEmpty;
  * Defines a Section for a Course.
  */
 public class Section {
-    private String sectionNumber, crn, teacher, location;
+    private String sectionNumber, crn, teacher;
     private final Set<MeetingTime> meetingTimes;
 
     /**
@@ -24,13 +24,11 @@ public class Section {
      * @param sectionNumber the number of the section. e.g. 800
      * @param crn the CRN number of the section. e.g. 10279
      * @param teacher the name of the sections teacher. e.g. Mr. Filip
-     * @param location the location of the section. e.g. Shineman Center Room 400
      */
-    public Section(final String sectionNumber, final String crn, final String teacher, final String location) {
+    public Section(final String sectionNumber, final String crn, final String teacher) {
         setSectionNumber(sectionNumber);
         setCrn(crn);
         setTeacher(teacher);
-        setLocation(location);
         this.meetingTimes = new HashSet<>();
     }
 
@@ -83,24 +81,6 @@ public class Section {
         this.teacher = nullToEmpty(teacher);
     }
 
-    /**
-     * Returns the location.
-     *
-     * @return the location.
-     */
-    @Nonnull
-    public String getLocation() {
-        return location;
-    }
-
-    /**
-     * Sets the location.
-     *
-     * @param location the location.
-     */
-    public void setLocation(final String location) {
-        this.location = nullToEmpty(location);
-    }
 
     /**
      * Returns an optional CRN.

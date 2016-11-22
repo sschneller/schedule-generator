@@ -79,7 +79,7 @@ public class NewMeetingTimeFrame extends JFrame implements ActionListener {
             LocalTime end = LocalTime.of((Integer)eh.getValue(), (Integer)em.getValue());
             DayOfWeek[] dayWeek = new DayOfWeek[dow.size()];
             dayWeek = dow.toArray(dayWeek);
-            MeetingTime newMeetingTime = new MeetingTime(start, end, dayWeek);
+            //MeetingTime newMeetingTime = new MeetingTime(start, end, dayWeek);
             //(section back end).addMeetingTime(newMeetingTime);
             this.setVisible(false);
         }

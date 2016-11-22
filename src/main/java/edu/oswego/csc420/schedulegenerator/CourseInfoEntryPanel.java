@@ -38,7 +38,6 @@ public class CourseInfoEntryPanel extends JPanel implements ActionListener {
 
             public void warn() {
                 subject = subjectField.getText();
-                System.out.println(subject);
                 newCourse.setSubject(subject);
                 ((CoursePanel)subjectField.getParent().getParent().getParent()).setTitle(subject + courseNumber + name);
 
@@ -64,7 +63,6 @@ public class CourseInfoEntryPanel extends JPanel implements ActionListener {
 
             public void warn() {
                 courseNumber = courseNumberField.getText();
-                System.out.println(courseNumber);
                 newCourse.setCourseNumber(courseNumber);
                 ((CoursePanel)courseNumberField.getParent().getParent().getParent()).setTitle(subject + courseNumber + name);
 
@@ -93,7 +91,6 @@ public class CourseInfoEntryPanel extends JPanel implements ActionListener {
                     name = "";
                 }
                 else {
-                    System.out.println(nameField.getText());
                     newCourse.setName(nameField.getText());
                     name = " - " + nameField.getText();
                 }

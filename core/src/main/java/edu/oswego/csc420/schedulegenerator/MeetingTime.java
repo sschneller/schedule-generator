@@ -13,11 +13,14 @@ import java.time.format.TextStyle;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static edu.oswego.csc420.schedulegenerator.Util.nullToEmpty;
+
 /**
  * Defines a time slot and the days that time slot is active.
  */
 public class MeetingTime {
     private final LocalTime start, end;
+    private String location;
     private final Set<DayOfWeek> days;
 
     /**
@@ -29,7 +32,7 @@ public class MeetingTime {
      *
      * @throws DateTimeException when start time is equal to end time or when end time is before start time.
      */
-    public MeetingTime(final LocalTime start, final LocalTime end, final DayOfWeek... days)
+    public MeetingTime(final LocalTime start, final LocalTime end, final String location, final DayOfWeek... days)
             throws DateTimeException, NullPointerException, IllegalArgumentException {
         Validate.notNull(start, "Start time cannot be null!");
         Validate.notNull(end, "End time cannot be null!");
@@ -76,6 +79,25 @@ public class MeetingTime {
     @Nonnull
     public LocalTime getEnd() {
         return end;
+    }
+
+    /**
+     * Returns the location.
+     *
+     * @return the location.
+     */
+    @Nonnull
+    public String getLocation() {
+        return location;
+    }
+
+    /**
+     * Sets the location.
+     *
+     * @param location the location.
+     */
+    public void setLocation(final String location) {
+        this.location = nullToEmpty(location);
     }
 
     /**
