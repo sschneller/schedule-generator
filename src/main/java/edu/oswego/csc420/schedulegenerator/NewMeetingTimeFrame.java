@@ -14,6 +14,7 @@ public class NewMeetingTimeFrame extends JFrame implements ActionListener {
 
     JCheckBox su, m, t, w, r, f, s;
     JSpinner sh, sm, sap, eh, em, eap;
+    JTextField newLocation;
 
     NewMeetingTimeFrame() {
         setLayout(new MigLayout("","[grow,fill]",""));
@@ -48,6 +49,8 @@ public class NewMeetingTimeFrame extends JFrame implements ActionListener {
         panel.add(f = new JCheckBox());
         panel.add(s =  new JCheckBox());
         add(panel,"span 4,wrap");
+        add(new JLabel("Location"), "wrap");
+        add(newLocation = new JTextField(),"span");
         JButton addMeetingTime = new JButton("Add Meeting Time");
         addMeetingTime.addActionListener(this);
         add(addMeetingTime, "span");
@@ -56,8 +59,8 @@ public class NewMeetingTimeFrame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(su.isSelected() || m.isSelected() || t.isSelected() || w.isSelected()
-                || r.isSelected() || f.isSelected() || s.isSelected()) {
+        if((su.isSelected() || m.isSelected() || t.isSelected() || w.isSelected()
+                || r.isSelected() || f.isSelected() || s.isSelected()) && !(newLocation.getText().equals(""))) {
             ArrayList<DayOfWeek> dow = new ArrayList();
             if(su.isSelected()){
                 dow.add(DayOfWeek.SUNDAY);
@@ -79,7 +82,7 @@ public class NewMeetingTimeFrame extends JFrame implements ActionListener {
             LocalTime end = LocalTime.of((Integer)eh.getValue(), (Integer)em.getValue());
             DayOfWeek[] dayWeek = new DayOfWeek[dow.size()];
             dayWeek = dow.toArray(dayWeek);
-            //MeetingTime newMeetingTime = new MeetingTime(start, end, dayWeek);
+            MeetingTime newMeetingTime = new MeetingTime(start, end, newLocation.getText(), dayWeek);
             //(section back end).addMeetingTime(newMeetingTime);
             this.setVisible(false);
         }

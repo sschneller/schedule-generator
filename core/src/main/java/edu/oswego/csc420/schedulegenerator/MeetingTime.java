@@ -40,6 +40,7 @@ public class MeetingTime {
         this.end   = end;
         this.days  = new HashSet<>(Arrays.asList(days));
         this.start = start;
+        setLocation(location);
 
         if(end.isBefore(start)) {
             throw new DateTimeException("End time cannot be before start time! Start Time: " + start + " End Time: " + end);

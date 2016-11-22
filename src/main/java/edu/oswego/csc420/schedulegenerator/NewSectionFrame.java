@@ -29,13 +29,13 @@ public class NewSectionFrame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        /*if(!(newTeacher.getText().equals("")) || !(newLocation.getText().equals(""))){
-            Section createdSection = new Section(newSection.getText(),newCRN.getText(),newTeacher.getText(),newLocation.getText());
-            //Add section to class
+        if(!(newTeacher.getText().equals(""))){
+            Section createdSection = new Section(newSection.getText(),newCRN.getText(),newTeacher.getText());
+            //(course back end).addSection(createdSection);
             this.setVisible(false);
         }
         else{
             //Add pop up message saying to enter field
-        }*/
+        }
     }
 }

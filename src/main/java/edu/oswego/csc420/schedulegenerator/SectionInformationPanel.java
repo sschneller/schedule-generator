@@ -20,9 +20,9 @@ public class SectionInformationPanel extends JPanel {
         add(editSection = new JTextField());
         add(editCRN = new JTextField());
         add(editTeacher = new JTextField(),"wrap");
-        Object rowData[][] = { { "MWF", "08:00AM - 09:00AM" },
-                { "T", "10:00AM - 11:00AM" }};
-        Object columnNames[] = { "Days", "Time" };
+        Object rowData[][] = { { "MWF", "08:00AM - 09:00AM", "Shineman 444" },
+                { "T", "10:00AM - 11:00AM", "Shineman 444" }};
+        Object columnNames[] = { "Days", "Time", "Loation" };
         JTable table = new JTable(rowData, columnNames) {
             public boolean isCellEditable(int row, int column){
                 return false;
