@@ -6,17 +6,20 @@ import java.awt.*;
 
 public class SectionInformationPanel extends JPanel {
 
+    JLabel sectionL, crnL, teacherL;
+    JTextField editSection, editCRN, editTeacher;
+
     SectionInformationPanel() {
         setBackground(Color.WHITE);
         setLayout(new MigLayout("","[grow,fill]","[][][][grow,fill][]"));
         final JLabel l = new JLabel("Section Information", SwingConstants.CENTER);
         add(l, "wrap, span 3");
-        add(new JLabel("Section #"));
-        add(new JLabel("CRN"));
-        add(new JLabel("Teacher"),"wrap");
-        add(new JTextField());
-        add(new JTextField());
-        add(new JTextField(),"wrap");
+        add(sectionL = new JLabel("Section #"));
+        add(crnL = new JLabel("CRN"));
+        add(teacherL = new JLabel("Teacher"),"wrap");
+        add(editSection = new JTextField());
+        add(editCRN = new JTextField());
+        add(editTeacher = new JTextField(),"wrap");
         Object rowData[][] = { { "MWF", "08:00AM - 09:00AM" },
                 { "T", "10:00AM - 11:00AM" }};
         Object columnNames[] = { "Days", "Time" };

@@ -17,8 +17,7 @@ import static edu.oswego.csc420.schedulegenerator.Util.nullToEmpty;
  */
 public class Course implements Comparable<Course> {
     private boolean isOptional;
-    private Integer courseNumber;
-    private String name, subject;
+    private String name, subject, courseNumber;
     private final Set<Section> sections;
 
     /**
@@ -29,12 +28,12 @@ public class Course implements Comparable<Course> {
      * @param courseNumber the course number. e.g. 420
      * @param isOptional set to true if the course does not have to be in every generated schedule.
      */
-    public Course(final String name, final String subject, final Integer courseNumber, final boolean isOptional) {
+    public Course(final String name, final String subject, final String courseNumber, final boolean isOptional) {
         setName(name);
         setSubject(subject);
+        setCourseNumber(courseNumber);
+        setOptional(isOptional);
         this.sections     = new HashSet<>();
-        this.isOptional   = isOptional;
-        this.courseNumber = courseNumber;
     }
 
     /**
@@ -95,7 +94,7 @@ public class Course implements Comparable<Course> {
      * @return an optional course number.
      */
     @Nonnull
-    public Optional<Integer> getCourseNumber() {
+    public Optional<String> getCourseNumber() {
         return Optional.ofNullable(courseNumber);
     }
 
@@ -105,7 +104,7 @@ public class Course implements Comparable<Course> {
      * @param courseNumber a course number.
      */
     @Nonnull
-    public void setCourseNumber(final Integer courseNumber) {
+    public void setCourseNumber(final String courseNumber) {
         this.courseNumber = courseNumber;
     }
 

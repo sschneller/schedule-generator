@@ -20,10 +20,11 @@ public class CourseInfoEntryPanel extends JPanel implements ActionListener {
     SGTextField courseNumberField = new SGTextField();
     SGTextField nameField = new SGTextField();
     JCheckBox optionalField = new JCheckBox();
+    Course newCourse;
 
     CourseInfoEntryPanel() {
         setLayout(new MigLayout("","[grow,fill][grow,fill][grow,fill][grow,fill][]","[][]"));
-
+        newCourse = new Course(name, subject, courseNumber, optionalField.isSelected());
         subjectField.getDocument().addDocumentListener(new DocumentListener() {
             public void changedUpdate(DocumentEvent e) {
                 warn();
@@ -37,6 +38,8 @@ public class CourseInfoEntryPanel extends JPanel implements ActionListener {
 
             public void warn() {
                 subject = subjectField.getText();
+                System.out.println(subject);
+                newCourse.setSubject(subject);
                 ((CoursePanel)subjectField.getParent().getParent().getParent()).setTitle(subject + courseNumber + name);
             }
         });
@@ -54,6 +57,8 @@ public class CourseInfoEntryPanel extends JPanel implements ActionListener {
 
             public void warn() {
                 courseNumber = courseNumberField.getText();
+                System.out.println(courseNumber);
+                newCourse.setCourseNumber(courseNumber);
                 ((CoursePanel)courseNumberField.getParent().getParent().getParent()).setTitle(subject + courseNumber + name);
             }
         });
@@ -74,6 +79,8 @@ public class CourseInfoEntryPanel extends JPanel implements ActionListener {
                     name = "";
                 }
                 else {
+                    System.out.println(nameField.getText());
+                    newCourse.setName(nameField.getText());
                     name = " - " + nameField.getText();
                 }
                 ((CoursePanel)nameField.getParent().getParent().getParent()).setTitle(subject + courseNumber + name);
@@ -102,36 +109,46 @@ public class CourseInfoEntryPanel extends JPanel implements ActionListener {
         add(courseNumberField);
         nameField.setEnabled(false);
         add(nameField);
+        optionalField.addActionListener(this);
         optionalField.setEnabled(false);
         add(optionalField);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Image img;
-        try {
-            if(editMode) {
-                img = ImageIO.read(new File("src\\main\\resources\\ic_mode_edit_black_18dp.png"));
-                edit.setIcon(new ImageIcon(img));
-                edit.repaint();
-                editMode = false;
-                subjectField.setEnabled(editMode);
-                courseNumberField.setEnabled(editMode);
-                nameField.setEnabled(editMode);
-                optionalField.setEnabled(editMode);
+        if(e.getSource() instanceof JButton) {
+            Image img;
+            try {
+                if (editMode) {
+                    img = ImageIO.read(new File("src\\main\\resources\\ic_mode_edit_black_18dp.png"));
+                    edit.setIcon(new ImageIcon(img));
+                    edit.repaint();
+                    editMode = false;
+                    subjectField.setEnabled(editMode);
+                    courseNumberField.setEnabled(editMode);
+                    nameField.setEnabled(editMode);
+                    optionalField.setEnabled(editMode);
+                } else {
+                    img = ImageIO.read(new File("src\\main\\resources\\ic_check_black_18dp.png"));
+                    edit.setIcon(new ImageIcon(img));
+                    edit.repaint();
+                    editMode = true;
+                    subjectField.setEnabled(editMode);
+                    courseNumberField.setEnabled(editMode);
+                    nameField.setEnabled(editMode);
+                    optionalField.setEnabled(editMode);
+                }
+            } catch (IOException ed) {
+                ed.printStackTrace();
             }
-            else {
-                img = ImageIO.read(new File("src\\main\\resources\\ic_check_black_18dp.png"));
-                edit.setIcon(new ImageIcon(img));
-                edit.repaint();
-                editMode = true;
-                subjectField.setEnabled(editMode);
-                courseNumberField.setEnabled(editMode);
-                nameField.setEnabled(editMode);
-                optionalField.setEnabled(editMode);
+        }
+        else if(e.getSource() instanceof JCheckBox){
+            if(optionalField.isSelected()) {
+                newCourse.setOptional(true);
             }
-        } catch (IOException ed) {
-            ed.printStackTrace();
+            else{
+                newCourse.setOptional(false);
+            }
         }
     }
 }
