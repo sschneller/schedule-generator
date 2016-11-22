@@ -19,6 +19,12 @@ public class CourseHeaderListPanel extends JPanel {
     }
 
     public CoursePanel getCoursePanel(CourseHeaderPanel chp) {
-        return courses.get(chp);
+        CoursePanel cp = courses.get(chp);
+        cp.removeAll();
+        cp.courseHeaderPanel.setCollapsed(false);
+        cp.add(cp.courseHeaderPanel, "span");
+        cp.add(cp.courseInfoPanel);
+        cp.repaint();
+        return cp;
     }
 }
