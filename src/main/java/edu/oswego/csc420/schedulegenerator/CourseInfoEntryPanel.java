@@ -38,6 +38,13 @@ public class CourseInfoEntryPanel extends JPanel implements ActionListener {
             public void warn() {
                 subject = subjectField.getText();
                 ((CoursePanel)subjectField.getParent().getParent().getParent()).setTitle(subject + courseNumber + name);
+
+                if(!subjectField.getText().equals("") && !courseNumberField.getText().equals("") && !nameField.getText().equals("")) {
+                    ((CoursePanel)subjectField.getParent().getParent().getParent()).courseHeaderPanel.icb.setEnabled(true);
+                }
+                else {
+                    ((CoursePanel)subjectField.getParent().getParent().getParent()).courseHeaderPanel.icb.setEnabled(false);
+                }
             }
         });
 
@@ -55,6 +62,13 @@ public class CourseInfoEntryPanel extends JPanel implements ActionListener {
             public void warn() {
                 courseNumber = courseNumberField.getText();
                 ((CoursePanel)courseNumberField.getParent().getParent().getParent()).setTitle(subject + courseNumber + name);
+
+                if(!subjectField.getText().equals("") && !courseNumberField.getText().equals("") && !nameField.getText().equals("")) {
+                    ((CoursePanel)courseNumberField.getParent().getParent().getParent()).courseHeaderPanel.icb.setEnabled(true);
+                }
+                else {
+                    ((CoursePanel)courseNumberField.getParent().getParent().getParent()).courseHeaderPanel.icb.setEnabled(false);
+                }
             }
         });
 
@@ -77,6 +91,13 @@ public class CourseInfoEntryPanel extends JPanel implements ActionListener {
                     name = " - " + nameField.getText();
                 }
                 ((CoursePanel)nameField.getParent().getParent().getParent()).setTitle(subject + courseNumber + name);
+
+                if(!subjectField.getText().equals("") && !courseNumberField.getText().equals("") && !nameField.getText().equals("")) {
+                    ((CoursePanel)nameField.getParent().getParent().getParent()).courseHeaderPanel.icb.setEnabled(true);
+                }
+                else {
+                    ((CoursePanel)nameField.getParent().getParent().getParent()).courseHeaderPanel.icb.setEnabled(false);
+                }
             }
         });
 
