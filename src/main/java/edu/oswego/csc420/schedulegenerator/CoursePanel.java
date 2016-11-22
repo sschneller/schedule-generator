@@ -13,6 +13,7 @@ public class CoursePanel extends JPanel {
         courseInfoPanel = cip;
         add(courseHeaderPanel, "wrap");
         add(courseInfoPanel);
+        courseHeaderPanel.icb.setEnabled(false);
     }
 
     public void setTitle(String title) {
