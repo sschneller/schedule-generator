@@ -1,5 +1,6 @@
-package edu.oswego.csc420.schedulegenerator;
+package edu.oswego.csc420.schedulegenerator.frames;
 
+import edu.oswego.csc420.schedulegenerator.MeetingTime;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -16,7 +17,7 @@ public class NewMeetingTimeFrame extends JFrame implements ActionListener {
     JSpinner sh, sm, sap, eh, em, eap;
     JTextField newLocation;
 
-    NewMeetingTimeFrame() {
+    public NewMeetingTimeFrame() {
         setLayout(new MigLayout("","[grow,fill]",""));
         setMinimumSize(new Dimension(280,200));
         setTitle("New Meeting Time");

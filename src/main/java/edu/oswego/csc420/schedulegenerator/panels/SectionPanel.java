@@ -1,5 +1,6 @@
-package edu.oswego.csc420.schedulegenerator;
+package edu.oswego.csc420.schedulegenerator.panels;
 
+import edu.oswego.csc420.schedulegenerator.frames.NewSectionFrame;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.*;

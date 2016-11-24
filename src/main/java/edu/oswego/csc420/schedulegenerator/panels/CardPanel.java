@@ -1,4 +1,4 @@
-package edu.oswego.csc420.schedulegenerator;
+package edu.oswego.csc420.schedulegenerator.panels;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +8,7 @@ public class CardPanel extends JPanel {
     JPanel courseOverview = new JPanel();
     CardLayout cl = new CardLayout();
 
-    CardPanel() {
+    public CardPanel() {
         setLayout(cl);
         add(ap, "ACC");
         add(courseOverview, "EXP");

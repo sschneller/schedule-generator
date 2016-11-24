@@ -1,5 +1,7 @@
 package edu.oswego.csc420.schedulegenerator;
 
+import edu.oswego.csc420.schedulegenerator.panels.CardPanel;
+
 import javax.swing.*;
 
 public class GUI extends JFrame {

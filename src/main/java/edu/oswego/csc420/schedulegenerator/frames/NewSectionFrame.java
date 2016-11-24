@@ -1,5 +1,6 @@
-package edu.oswego.csc420.schedulegenerator;
+package edu.oswego.csc420.schedulegenerator.frames;
 
+import edu.oswego.csc420.schedulegenerator.Section;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +12,7 @@ public class NewSectionFrame extends JFrame implements ActionListener {
     JTextField newSection, newCRN, newTeacher;
     JButton addSection;
 
-    NewSectionFrame() {
+    public NewSectionFrame() {
         setLayout(new MigLayout("","[grow,fill]",""));
         setMinimumSize(new Dimension(280,240));
         setTitle("New Section");
