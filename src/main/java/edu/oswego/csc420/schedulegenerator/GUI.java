@@ -1,5 +1,6 @@
 package edu.oswego.csc420.schedulegenerator;
 
+import edu.oswego.csc420.schedulegenerator.frames.GeneratedScheduleFrame;
 import edu.oswego.csc420.schedulegenerator.panels.CardPanel;
 
 import javax.swing.*;
@@ -13,6 +14,7 @@ public class GUI extends JFrame {
 
     private static void createGui() {
         JFrame frame = new GUI("Course Schedule Generator");
+        // JFrame frame = new GeneratedScheduleFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(890,650);
         frame.setVisible(true);
