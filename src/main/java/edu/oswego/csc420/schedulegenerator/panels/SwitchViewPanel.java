@@ -1,5 +1,7 @@
 package edu.oswego.csc420.schedulegenerator.panels;
 
+import edu.oswego.csc420.schedulegenerator.frames.GeneratedScheduleFrame;
+import edu.oswego.csc420.schedulegenerator.frames.NewSectionFrame;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -44,6 +46,9 @@ public class SwitchViewPanel extends JPanel implements ActionListener {
             }
             case("Generate"): {
                 System.out.println("Generate Clicked!");
+                GeneratedScheduleFrame gsf = new GeneratedScheduleFrame();
+                gsf.setSize(890,650);
+                gsf.setVisible(true);
                 break;
             }
             default: {

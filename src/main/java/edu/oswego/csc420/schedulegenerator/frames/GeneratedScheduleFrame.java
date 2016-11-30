@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 public class GeneratedScheduleFrame extends JFrame implements ActionListener {
     int height, width, xDivider, yDivider;
+    int earliestHour = 11, latestHour = 17; // Example Input - Should be start time of earliest class, and end time of the latest class for entire week
+                                            // Needs to be military time, and round down to hour for first, and round up for last
 
     JPanel calendar = new JPanel(new MigLayout("insets 5 5", "[grow,fill][grow,fill][grow,fill][grow,fill][grow,fill][grow,fill][grow,fill]", "[][grow,fill]")) {
         @Override
@@ -21,22 +23,38 @@ public class GeneratedScheduleFrame extends JFrame implements ActionListener {
             height = getHeight() - 1;
             width = getWidth() - 1;
             xDivider = width / 7;
-            // g.setFont(new Font(Font.DIALOG, Font.BOLD, 14));
-
+            try {
+                yDivider = (height - 30) / ((latestHour + 1) - (earliestHour - 1));
+            }
+            catch(ArithmeticException ae) {
+                yDivider = 0;
+            }
+            g.setFont(new Font(Font.DIALOG, Font.BOLD, 14));
+            // DRAW THE BACKGROUND BORDER AND STUFF
+            g.setColor(Color.WHITE);
             g.fillRoundRect(0, 0, width, height, 35, 35);
-            /*g.drawLine(0, 0, 0, height); // Left Bound
-            g.drawLine(width, 0, width, height); // Right Bound
-            g.drawLine(5, 0, width, 0); // Top Bound
-            g.drawLine(0, height, width, height); // Bottom Bound*/
+            g.setColor(Color.BLACK);
+            g.drawRoundRect(0, 0, width, height, 35, 35);
             g.drawLine(0, 30, width, 30);
+            // DRAW THE LINES TO DIVIDE THE WEEK DAYS
             g.drawLine(xDivider, 0, xDivider, height);
             g.drawLine(xDivider * 2, 0, xDivider * 2, height);
             g.drawLine(xDivider * 3, 0, xDivider * 3, height);
             g.drawLine(xDivider * 4, 0, xDivider * 4, height);
             g.drawLine(xDivider * 5, 0, xDivider * 5, height);
             g.drawLine(xDivider * 6, 0, xDivider * 6, height);
-            g.drawString("Sunday", (xDivider/2) - (g.getFontMetrics().stringWidth("Sunday")/2), 11 + (g.getFontMetrics().getHeight()/2));
-            g.setColor(Color.WHITE);
+            // DRAW THE WEEKDAY NAMES
+            g.drawString("Sunday", (xDivider/2) - (g.getFontMetrics().stringWidth("Sunday")/2), 30 - (g.getFontMetrics().getHeight()/2));
+            g.drawString("Monday", (3 * xDivider/2) - (g.getFontMetrics().stringWidth("Monday")/2), 30 - (g.getFontMetrics().getHeight()/2));
+            g.drawString("Tuesday", (5 * xDivider/2) - (g.getFontMetrics().stringWidth("Tuesday")/2), 30 - (g.getFontMetrics().getHeight()/2));
+            g.drawString("Wednesday", (7 * xDivider/2) - (g.getFontMetrics().stringWidth("Wednesday")/2), 30 - (g.getFontMetrics().getHeight()/2));
+            g.drawString("Thursday", (9 * xDivider/2) - (g.getFontMetrics().stringWidth("Thursday")/2), 30 - (g.getFontMetrics().getHeight()/2));
+            g.drawString("Friday", (11 * xDivider/2) - (g.getFontMetrics().stringWidth("Friday")/2), 30 - (g.getFontMetrics().getHeight()/2));
+            g.drawString("Saturday", (13 * xDivider/2) - (g.getFontMetrics().stringWidth("Saturday")/2), 30 - (g.getFontMetrics().getHeight()/2));
+
+            for(int i = 1; i <= ((latestHour + 1) - (earliestHour - 1)); i++) {
+                g.drawLine(0, 30 + yDivider * i, width, 30 + yDivider * i);
+            }
         }
     };
 
@@ -49,7 +67,7 @@ public class GeneratedScheduleFrame extends JFrame implements ActionListener {
             back = new JButton(new ImageIcon(ImageIO.read(new File("src\\main\\resources\\ic_back_black_24dp.png"))));
             forward = new JButton(new ImageIcon(ImageIO.read(new File("src\\main\\resources\\ic_forward_black_24dp.png"))));
             back.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(), BorderFactory.createEmptyBorder()));
-            // back.setContentAreaFilled(false);
+            back.setContentAreaFilled(false);
             back.setFocusPainted(false);
             back.setOpaque(false);
             forward.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(), BorderFactory.createEmptyBorder()));
