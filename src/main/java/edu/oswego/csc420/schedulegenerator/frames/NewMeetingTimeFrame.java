@@ -74,7 +74,7 @@ public class NewMeetingTimeFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if((su.isSelected() || m.isSelected() || t.isSelected() || w.isSelected()
                 || r.isSelected() || f.isSelected() || s.isSelected()) && !(newLocation.getText().equals(""))) {
-            ArrayList<DayOfWeek> dow = new ArrayList();
+            ArrayList<DayOfWeek> dow = new ArrayList<>();
             if(su.isSelected()){
                 dow.add(DayOfWeek.SUNDAY);
             }if(m.isSelected()){
