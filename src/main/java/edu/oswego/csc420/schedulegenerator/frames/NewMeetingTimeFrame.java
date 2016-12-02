@@ -1,6 +1,10 @@
 package edu.oswego.csc420.schedulegenerator.frames;
 
+import edu.oswego.csc420.schedulegenerator.Course;
+import edu.oswego.csc420.schedulegenerator.Generator;
 import edu.oswego.csc420.schedulegenerator.MeetingTime;
+import edu.oswego.csc420.schedulegenerator.Section;
+import edu.oswego.csc420.schedulegenerator.panels.SectionInformationPanel;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -16,8 +20,16 @@ public class NewMeetingTimeFrame extends JFrame implements ActionListener {
     JCheckBox su, m, t, w, r, f, s;
     JSpinner sh, sm, sap, eh, em, eap;
     JTextField newLocation;
+    SectionInformationPanel secI;
+    Generator gen;
+    Course courseEdit;
+    Section sectionEdit;
 
-    public NewMeetingTimeFrame() {
+    public NewMeetingTimeFrame(SectionInformationPanel sI, Generator g, Course cE, Section sE) {
+        secI = sI;
+        gen = g;
+        courseEdit = cE;
+        sectionEdit = sE;
         setLayout(new MigLayout("","[grow,fill]",""));
         setMinimumSize(new Dimension(280,200));
         setTitle("New Meeting Time");
@@ -62,7 +74,7 @@ public class NewMeetingTimeFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if((su.isSelected() || m.isSelected() || t.isSelected() || w.isSelected()
                 || r.isSelected() || f.isSelected() || s.isSelected()) && !(newLocation.getText().equals(""))) {
-            ArrayList<DayOfWeek> dow = new ArrayList();
+            ArrayList<DayOfWeek> dow = new ArrayList<>();
             if(su.isSelected()){
                 dow.add(DayOfWeek.SUNDAY);
             }if(m.isSelected()){
@@ -84,11 +96,18 @@ public class NewMeetingTimeFrame extends JFrame implements ActionListener {
             DayOfWeek[] dayWeek = new DayOfWeek[dow.size()];
             dayWeek = dow.toArray(dayWeek);
             MeetingTime newMeetingTime = new MeetingTime(start, end, newLocation.getText(), dayWeek);
-            //(section back end).addMeetingTime(newMeetingTime);
+            if(sectionEdit.getMeetingTimes().size() == 0){
+                // if no section times have been added, add the course to the backend, the section to the course
+                // and the meeting time to the section
+                sectionEdit.addMeetingTime(newMeetingTime);
+                courseEdit.addSection(sectionEdit);
+                gen.addCourse(courseEdit);
+            }
+            else{
+                // If a section time has already been added just add the section time
+                sectionEdit.addMeetingTime(newMeetingTime);
+            }
             this.setVisible(false);
-        }
-        else{
-            //Pop up message saying what needs to be entered
         }
     }
 }

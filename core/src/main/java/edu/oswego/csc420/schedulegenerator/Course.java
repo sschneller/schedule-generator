@@ -5,10 +5,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.annotation.Nonnull;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import static edu.oswego.csc420.schedulegenerator.Util.nullToEmpty;
 
@@ -18,7 +15,7 @@ import static edu.oswego.csc420.schedulegenerator.Util.nullToEmpty;
 public class Course implements Comparable<Course> {
     private boolean isOptional;
     private String name, subject, courseNumber;
-    private final Set<Section> sections;
+    private final ArrayList<Section> sections;
 
     /**
      * Constructor.
@@ -33,7 +30,7 @@ public class Course implements Comparable<Course> {
         setSubject(subject);
         setCourseNumber(courseNumber);
         setOptional(isOptional);
-        this.sections     = new HashSet<>();
+        this.sections = new ArrayList<>();
     }
 
     /**
@@ -42,9 +39,7 @@ public class Course implements Comparable<Course> {
      * @return the sections of this course.
      */
     @Nonnull
-    public Set<Section> getSections() {
-        return Collections.unmodifiableSet(sections);
-    }
+    public ArrayList<Section> getSections() { return sections; }
 
     /**
      * Adds a section to this course.
@@ -94,8 +89,8 @@ public class Course implements Comparable<Course> {
      * @return an optional course number.
      */
     @Nonnull
-    public Optional<String> getCourseNumber() {
-        return Optional.ofNullable(courseNumber);
+    public String getCourseNumber() {
+        return courseNumber;
     }
 
     /**

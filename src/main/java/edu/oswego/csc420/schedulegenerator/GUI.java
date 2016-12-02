@@ -7,9 +7,11 @@ import javax.swing.*;
 
 public class GUI extends JFrame {
 
+    Generator gen = new Generator();
+
     GUI(String windowTitle) {
         setTitle(windowTitle);
-        add(new CardPanel());
+        add(new CardPanel(gen));
     }
 
     private static void createGui() {

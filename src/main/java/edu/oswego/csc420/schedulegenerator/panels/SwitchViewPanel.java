@@ -1,5 +1,6 @@
 package edu.oswego.csc420.schedulegenerator.panels;
 
+import edu.oswego.csc420.schedulegenerator.Generator;
 import edu.oswego.csc420.schedulegenerator.frames.GeneratedScheduleFrame;
 import edu.oswego.csc420.schedulegenerator.frames.NewSectionFrame;
 import net.miginfocom.swing.MigLayout;
@@ -12,8 +13,10 @@ public class SwitchViewPanel extends JPanel implements ActionListener {
     JButton importButton = new JButton("Import");
     JButton exportButton = new JButton("Export");
     JButton generateButton = new JButton("Generate");
+    Generator genVar;
 
-    SwitchViewPanel() {
+    SwitchViewPanel(Generator gen) {
+        genVar = gen;
         setLayout(new MigLayout("","[grow,fill][][]300[]","[grow,fill][]"));
         newCourseButton.addActionListener(this);
         importButton.addActionListener(this);
@@ -31,7 +34,7 @@ public class SwitchViewPanel extends JPanel implements ActionListener {
         switch(clickedButton.getText()) {
             case("New Course"): {
                 rootPanel.remove(rootPanel.courseOverview);
-                rootPanel.courseOverview = new CoursePanel(new CourseHeaderPanel(false), new CourseInfoPanel());
+                rootPanel.courseOverview = new CoursePanel(new CourseHeaderPanel(false), new CourseInfoPanel(genVar));
                 rootPanel.add(rootPanel.courseOverview, "EXP");
                 rootPanel.cl.show(rootPanel, "EXP");
                 break;
