@@ -48,6 +48,7 @@ public class SwitchViewPanel extends JPanel implements ActionListener {
                 System.out.println("Generate Clicked!");
                 GeneratedScheduleFrame gsf = new GeneratedScheduleFrame();
                 gsf.setSize(890,650);
+                gsf.setLocationRelativeTo(null);
                 gsf.setVisible(true);
                 break;
             }
