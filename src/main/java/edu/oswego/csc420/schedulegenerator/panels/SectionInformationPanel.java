@@ -53,13 +53,13 @@ public class SectionInformationPanel extends JPanel {
             }
             for(int i = 0; i < sectionChosen.getMeetingTimes().size(); i++){
                 MeetingTime m = sectionChosen.getMeetingTimes().get(i);
-                model.addRow(new Object[]{m.getDays(), m.getStart(), m.getLocation()});
+                model.addRow(new Object[]{m.getDays(), m.getStart() + " - " + m.getEnd(), m.getLocation()});
             }
         }
         else{
             for(int i = 0; i < sectionChosen.getMeetingTimes().size(); i++){
                 MeetingTime m = sectionChosen.getMeetingTimes().get(i);
-                model.addRow(new Object[]{m.getDays(), m.getStart(), m.getLocation()});
+                model.addRow(new Object[]{m.getDays(), m.getStart() + " - " + m.getEnd(), m.getLocation()});
             }
         }
     }

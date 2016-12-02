@@ -102,15 +102,11 @@ public class NewMeetingTimeFrame extends JFrame implements ActionListener {
                 sectionEdit.addMeetingTime(newMeetingTime);
                 courseEdit.addSection(sectionEdit);
                 gen.addCourse(courseEdit);
-                secI.createMeetingTimes(sectionEdit);
             }
             else{
                 // If a section time has already been added just add the section time
                 sectionEdit.addMeetingTime(newMeetingTime);
-                secI.createMeetingTimes(sectionEdit);
             }
-            System.out.println("Courses in gen: " + gen.getCourses().size() + "| Sections in course: " +
-                    courseEdit.getSections().size() + "| Meeting Times in sections: " + sectionEdit.getMeetingTimes().size());
             this.setVisible(false);
         }
     }
