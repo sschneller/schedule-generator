@@ -1,6 +1,7 @@
 package edu.oswego.csc420.schedulegenerator.panels;
 
 import edu.oswego.csc420.schedulegenerator.Course;
+import edu.oswego.csc420.schedulegenerator.Generator;
 import edu.oswego.csc420.schedulegenerator.components.SGTextField;
 import net.miginfocom.swing.MigLayout;
 import javax.imageio.ImageIO;
@@ -23,9 +24,9 @@ public class CourseInfoEntryPanel extends JPanel implements ActionListener {
     JCheckBox optionalField = new JCheckBox();
     Course newCourse;
 
-    CourseInfoEntryPanel() {
+    CourseInfoEntryPanel(Course nC) {
         setLayout(new MigLayout("","[grow,fill][grow,fill][grow,fill][grow,fill][]","[][]"));
-        newCourse = new Course(name, subject, courseNumber, optionalField.isSelected());
+        newCourse = nC;
         subjectField.getDocument().addDocumentListener(new DocumentListener() {
             public void changedUpdate(DocumentEvent e) {
                 warn();

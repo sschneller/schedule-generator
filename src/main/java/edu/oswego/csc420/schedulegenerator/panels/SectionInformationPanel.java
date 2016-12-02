@@ -1,45 +1,67 @@
 package edu.oswego.csc420.schedulegenerator.panels;
 
+import edu.oswego.csc420.schedulegenerator.Course;
+import edu.oswego.csc420.schedulegenerator.Generator;
+import edu.oswego.csc420.schedulegenerator.MeetingTime;
+import edu.oswego.csc420.schedulegenerator.Section;
 import edu.oswego.csc420.schedulegenerator.components.SGTextField;
 import edu.oswego.csc420.schedulegenerator.frames.NewMeetingTimeFrame;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class SectionInformationPanel extends JPanel {
 
     JLabel sectionL, crnL, teacherL;
     SGTextField editSection, editCRN, editTeacher;
+    Generator gen;
+    Course courseEdit;
+    Section sectionChosen;
+    JButton button;
+    Object columnNames[] = { "Days", "Time", "Location" };
+    Object rowData[][] = {};
+    JTable table;
 
-    SectionInformationPanel() {
+    SectionInformationPanel(Generator g, Course cE) {
+        gen = g;
+        courseEdit = cE;
         setBackground(Color.WHITE);
-        setLayout(new MigLayout("","[grow,fill]","[][][][grow,fill][]"));
+        setLayout(new MigLayout("","[grow,fill]","[][grow,fill][]"));
         final JLabel l = new JLabel("Section Information", SwingConstants.CENTER);
-        add(l, "wrap, span 3");
-        Object rowData[][] = { { "MWF", "08:00AM - 09:00AM", "Shineman 444" },
-                { "T", "10:00AM - 11:00AM", "Shineman 444" }};
-        Object columnNames[] = { "Days", "Time", "Location" };
-        JTable table = new JTable(rowData, columnNames) {
+        add(l, "wrap");
+        table = new JTable(new DefaultTableModel(rowData, columnNames)) {
             public boolean isCellEditable(int row, int column){
                 return false;
             }
         };
-        add(new JScrollPane(table), "wrap, span 3");
-        add(sectionL = new JLabel("Section #"));
-        add(crnL = new JLabel("CRN"));
-        add(teacherL = new JLabel("Teacher"),"wrap");
-        editSection = new SGTextField();
-        editSection.setEnabled(false);
-        add(editSection);
-        editCRN = new SGTextField();
-        editCRN.setEnabled(false);
-        add(editCRN);
-        editTeacher = new SGTextField();
-        editTeacher.setEnabled(false);
-        add(editTeacher, "wrap");
-        JButton button = new JButton("New Meeting Time");
-        button.addActionListener(a -> new NewMeetingTimeFrame().setVisible(true));
-        add(button, "span 3");
+        add(new JScrollPane(table), "wrap");
+        button = new JButton("New Meeting Time");
+        // SectionPanel sp = ((CourseInfoPanel)button.getParent()).sp;
+        // sp.table.getSelectedRow();
+        button.addActionListener(a -> new NewMeetingTimeFrame(this, gen, courseEdit, sectionChosen).setVisible(true));
+        add(button);
     }
+
+    public void createMeetingTimes(Section sec){
+        sectionChosen = sec;
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        if(model.getRowCount() > 0) {
+            for(int i = model.getRowCount() - 1; i >=0; i--){
+                model.removeRow(i);
+            }
+            for(int i = 0; i < sectionChosen.getMeetingTimes().size(); i++){
+                MeetingTime m = sectionChosen.getMeetingTimes().get(i);
+                model.addRow(new Object[]{m.getDays(), m.getStart(), m.getLocation()});
+            }
+        }
+        else{
+            for(int i = 0; i < sectionChosen.getMeetingTimes().size(); i++){
+                MeetingTime m = sectionChosen.getMeetingTimes().get(i);
+                model.addRow(new Object[]{m.getDays(), m.getStart(), m.getLocation()});
+            }
+        }
+    }
+
 }

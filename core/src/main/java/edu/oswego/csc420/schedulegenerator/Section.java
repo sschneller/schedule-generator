@@ -4,10 +4,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.annotation.Nonnull;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import static edu.oswego.csc420.schedulegenerator.Util.nullToEmpty;
 
@@ -16,7 +13,7 @@ import static edu.oswego.csc420.schedulegenerator.Util.nullToEmpty;
  */
 public class Section {
     private String sectionNumber, crn, teacher;
-    private final Set<MeetingTime> meetingTimes;
+    private final ArrayList<MeetingTime> meetingTimes;
 
     /**
      * Constructor.
@@ -29,7 +26,7 @@ public class Section {
         setSectionNumber(sectionNumber);
         setCrn(crn);
         setTeacher(teacher);
-        this.meetingTimes = new HashSet<>();
+        this.meetingTimes = new ArrayList<>();
     }
 
     /**
@@ -88,9 +85,7 @@ public class Section {
      * @return an optional CRN.
      */
     @Nonnull
-    public Optional<String> getCrn() {
-        return Optional.ofNullable(crn);
-    }
+    public String getCrn() { return crn; }
 
     /**
      * Sets the CRN.
@@ -107,9 +102,7 @@ public class Section {
      * @return an optional section number.
      */
     @Nonnull
-    public Optional<String> getSectionNumber() {
-        return Optional.ofNullable(sectionNumber);
-    }
+    public String getSectionNumber() { return sectionNumber; }
 
     /**
      * Sets the section number.
@@ -126,9 +119,7 @@ public class Section {
      * @return an unmodifiable list of section times.
      */
     @Nonnull
-    public Set<MeetingTime> getMeetingTimes() {
-        return Collections.unmodifiableSet(meetingTimes);
-    }
+    public ArrayList<MeetingTime> getMeetingTimes() { return meetingTimes; }
 
     @Override
     public int hashCode() {
