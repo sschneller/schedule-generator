@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class GeneratedScheduleFrame extends JFrame implements ActionListener {
     int height, width, xDivider, yDivider;
     int earliestHour = 11, latestHour = 14; // Example Input - Should be start time of earliest class, and end time of the latest class for entire week
-                                           // Needs to be military time, and round down to hour for first, and round up for last
+                                            // Needs to be military time, and round down to hour for first, and round up for last
     JButton back;
     JButton forward;
 
