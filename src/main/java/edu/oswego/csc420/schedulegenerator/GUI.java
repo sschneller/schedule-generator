@@ -16,6 +16,7 @@ public class GUI extends JFrame {
     private static void createGui() {
         JFrame frame = new GUI("Course Schedule Generator");
         // JFrame frame = new GeneratedScheduleFrame();
+        frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(890,650);
         frame.setVisible(true);
