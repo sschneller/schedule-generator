@@ -10,9 +10,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.ConcurrentSkipListSet;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Schedule Generator Class.
@@ -49,8 +49,37 @@ public class Generator {
      * @return a set of schedule objects.
      */
     public Set<Schedule> generate() {
-        //TODO implement.
-        return null;
+        return generate(Collections.unmodifiableList(new ArrayList<>(courses)), new Schedule());
+    }
+
+    @Nonnull
+    private Set<Schedule> generate(final List<Course> courses, final Schedule schedule) {
+        // Check if there is no more courses
+        if(courses.isEmpty()) {
+            if(schedule.getSchedule().isEmpty()) {
+                return new HashSet<>();
+            } else {
+                return new HashSet<>(Collections.singletonList(schedule));
+            }
+        }
+
+        // Get the current course
+        final Course course = courses.get(0);
+        // Remove the current course from the courses list
+        final List<Course> coursesLeft = courses.subList(1, courses.size() - 1);
+        // Create the schedules set
+        final Set<Schedule> schedules = new ConcurrentSkipListSet<>((l,r) -> 0);
+
+        // Iterate through the sections
+        course.getSections().parallelStream().forEach(s -> {
+            if(schedule.fits(s)) {
+                final Schedule newSchedule = schedule.duplicate();
+                newSchedule.addCourse(course, s);
+                schedules.addAll(generate(coursesLeft, newSchedule));
+            }
+        });
+
+        return schedules;
     }
 
     /**
