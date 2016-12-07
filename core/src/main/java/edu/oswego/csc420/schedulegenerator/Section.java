@@ -124,6 +124,9 @@ public class Section {
     @Override
     public int hashCode() {
         return new HashCodeBuilder(21, 49)
+                .append(crn)
+                .append(teacher)
+                .append(meetingTimes)
                 .append(sectionNumber)
                 .toHashCode();
     }
@@ -139,6 +142,9 @@ public class Section {
         Section section = (Section) obj;
 
         return new EqualsBuilder()
+                .append(crn, section.getCrn())
+                .append(teacher, section.getTeacher())
+                .append(meetingTimes, section.getMeetingTimes())
                 .append(sectionNumber, section.getSectionNumber())
                 .isEquals();
     }

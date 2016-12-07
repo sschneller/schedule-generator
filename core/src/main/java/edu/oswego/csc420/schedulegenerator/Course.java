@@ -145,6 +145,10 @@ public class Course implements Comparable<Course> {
     public int hashCode() {
         return new HashCodeBuilder(43, 73)
                 .append(name)
+                .append(subject)
+                .append(courseNumber)
+                .append(isOptional)
+                .append(sections)
                 .toHashCode();
     }
 
@@ -160,6 +164,10 @@ public class Course implements Comparable<Course> {
 
         return new EqualsBuilder()
                 .append(name, course.getName())
+                .append(subject, course.getSubject())
+                .append(courseNumber, course.getCourseNumber())
+                .append(isOptional, course.isOptional())
+                .append(sections, course.getSections())
                 .isEquals();
     }
 

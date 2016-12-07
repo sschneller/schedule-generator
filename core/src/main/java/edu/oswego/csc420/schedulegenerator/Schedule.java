@@ -20,16 +20,42 @@ public class Schedule {
     }
 
     /**
+     * Cloning Constructor.
+     *
+     * @param schedule the schedule to clone from.
+     */
+    private Schedule(final Schedule schedule) {
+        this.schedule = new HashSet<>(schedule.getSchedule());
+    }
+
+    /**
      * Adds a Course and its Section to the schedule.
      *
      * @param course a Course.
      * @param section a Section from the course.
      */
     public void addCourse(final Course course, final Section section) {
-        if(!course.getSections().stream().anyMatch(section::equals)) {
+        if(course.getSections().stream().noneMatch(section::equals)) {
             throw new IllegalArgumentException("Specified section is not from the specified course!");
         }
         schedule.add(Pair.of(course,section));
+    }
+
+    /**
+     * Checks if the specified section can fit inside this schedule.
+     *
+     * @param section a section.
+     * @return true if the section can fit in this schedule.
+     */
+    public boolean fits(final Section section) {
+        return schedule.parallelStream()
+                .flatMap(s -> s.getValue()
+                        .getMeetingTimes()
+                        .parallelStream())
+                .noneMatch(m -> section.getMeetingTimes()
+                        .parallelStream()
+                        .anyMatch(meetingTime -> meetingTime
+                                .overlaps(m)));
     }
 
     /**
@@ -39,5 +65,14 @@ public class Schedule {
      */
     public Set<Pair<Course,Section>> getSchedule() {
         return Collections.unmodifiableSet(schedule);
+    }
+
+    /**
+     * Creates a clone of the passed schedule.
+     *
+     * @return a clone of the passed schedule.
+     */
+    public Schedule duplicate() {
+        return new Schedule(this);
     }
 }

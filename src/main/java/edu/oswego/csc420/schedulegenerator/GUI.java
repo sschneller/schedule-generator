@@ -1,6 +1,5 @@
 package edu.oswego.csc420.schedulegenerator;
 
-import edu.oswego.csc420.schedulegenerator.frames.GeneratedScheduleFrame;
 import edu.oswego.csc420.schedulegenerator.panels.CardPanel;
 
 import javax.swing.*;
