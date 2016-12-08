@@ -2,6 +2,7 @@ package edu.oswego.csc420.schedulegenerator;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nonnull;
 import java.io.File;
@@ -12,7 +13,7 @@ import java.io.Reader;
 import java.io.Writer;
 import java.util.*;
 import java.util.concurrent.ConcurrentSkipListSet;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.stream.Collectors;
 
 /**
  * Schedule Generator Class.
@@ -49,11 +50,51 @@ public class Generator {
      * @return a set of schedule objects.
      */
     public Set<Schedule> generate() {
-        return generate(Collections.unmodifiableList(new ArrayList<>(courses)), new Schedule());
+        final List<Course> mandatory = new ArrayList<>();
+        final List<Course> optional = new ArrayList<>();
+        courses.forEach(c -> {
+            if(c.isOptional()) {
+                optional.add(c);
+            } else {
+                mandatory.add(c);
+            }
+        });
+
+        // Generate the optional class schedules
+        final Set<Schedule> optionalSchedules = generate(Collections.unmodifiableList(optional), new Schedule(), true);
+
+        // Check for left out optional classes
+        optional.parallelStream()
+                .flatMap(c -> c.getSections().parallelStream()
+                        .map(s -> Pair.of(c,s)))
+                .filter(p -> optionalSchedules.parallelStream()
+                        .noneMatch(s -> s.getSchedule().contains(p)))
+                .map(p -> {
+                    final Schedule s = new Schedule();
+                    s.addCourse(p.getLeft(), p.getRight());
+                    return s;})
+                .forEach(optionalSchedules::add);
+
+        // Create the schedules with optional classes
+        return generate(Collections.unmodifiableList(mandatory), new Schedule(), false).parallelStream()
+                .flatMap(s -> optionalSchedules.parallelStream().map(os -> {
+            final Schedule schedule = s.duplicate();
+            os.getSchedule().stream()
+                    .filter(p -> s.fits(p.getRight())).forEach(p -> schedule.addCourse(p.getLeft(), p.getRight()));
+            return schedule;
+        })).collect(Collectors.toSet());
     }
 
+    /**
+     * Generates schedules from the provided classes.
+     *
+     * @param courses the courses used to generate the schedules.
+     * @param schedule the base schedule.
+     * @param isOptional if true, the schedules generated will vary in length because non fit classes will be removed.
+     * @return valid course schedules.
+     */
     @Nonnull
-    private Set<Schedule> generate(final List<Course> courses, final Schedule schedule) {
+    private Set<Schedule> generate(final List<Course> courses, final Schedule schedule, final boolean isOptional) {
         // Check if there is no more courses
         if(courses.isEmpty()) {
             if(schedule.getSchedule().isEmpty()) {
@@ -68,14 +109,16 @@ public class Generator {
         // Remove the current course from the courses list
         final List<Course> coursesLeft = courses.subList(1, courses.size() - 1);
         // Create the schedules set
-        final Set<Schedule> schedules = new ConcurrentSkipListSet<>((l,r) -> 0);
+        final Set<Schedule> schedules = new ConcurrentSkipListSet<>();
 
         // Iterate through the sections
         course.getSections().parallelStream().forEach(s -> {
             if(schedule.fits(s)) {
                 final Schedule newSchedule = schedule.duplicate();
                 newSchedule.addCourse(course, s);
-                schedules.addAll(generate(coursesLeft, newSchedule));
+                schedules.addAll(generate(coursesLeft, newSchedule, isOptional));
+            } else if(isOptional) {
+                schedules.addAll(generate(coursesLeft, schedule.duplicate(), isOptional));
             }
         });
 

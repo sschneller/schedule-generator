@@ -1,5 +1,7 @@
 package edu.oswego.csc420.schedulegenerator;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Collections;
@@ -74,5 +76,27 @@ public class Schedule {
      */
     public Schedule duplicate() {
         return new Schedule(this);
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(13, 15)
+                .append(schedule)
+                .toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == this) {
+            return true;
+        } else if(!(obj instanceof Schedule)) {
+            return false;
+        }
+
+        Schedule schedule = (Schedule) obj;
+
+        return new EqualsBuilder()
+                .append(this.schedule, schedule.getSchedule())
+                .isEquals();
     }
 }
