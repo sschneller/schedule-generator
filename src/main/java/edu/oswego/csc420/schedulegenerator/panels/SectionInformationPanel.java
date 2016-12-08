@@ -8,7 +8,6 @@ import edu.oswego.csc420.schedulegenerator.components.SGTextField;
 import edu.oswego.csc420.schedulegenerator.frames.NewMeetingTimeFrame;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
