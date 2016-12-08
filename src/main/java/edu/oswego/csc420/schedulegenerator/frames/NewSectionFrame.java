@@ -11,7 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class NewSectionFrame extends JFrame implements ActionListener {
+public class NewSectionFrame extends JDialog implements ActionListener {
 
     JTextField newSectionNum, newCRN, newTeacher;
     JButton addSection;
@@ -20,12 +20,14 @@ public class NewSectionFrame extends JFrame implements ActionListener {
     Section createdSection;
     SectionPanel sectionP;
     SectionInformationPanel secI;
+    JFrame rootPane;
 
-    public NewSectionFrame(SectionPanel sP, SectionInformationPanel sI, Generator g, Course cE) {
+    public NewSectionFrame(SectionPanel sP, SectionInformationPanel sI, Generator g, Course cE, JFrame root) {
         sectionP = sP;
         secI = sI;
         gen = g;
         courseEdit = cE;
+        rootPane = root;
         setLayout(new MigLayout("","[grow,fill]",""));
         setMinimumSize(new Dimension(280,240));
         setTitle("New Section");
@@ -46,7 +48,7 @@ public class NewSectionFrame extends JFrame implements ActionListener {
         if(!(newSectionNum.getText().equals("")) && !(newCRN.getText().equals("")) && !(newTeacher.getText().equals(""))){
             createdSection = new Section(newSectionNum.getText(), newCRN.getText(), newTeacher.getText());
             sectionP.addSectionToTable(createdSection);
-            new NewMeetingTimeFrame(secI, gen, courseEdit, createdSection).setVisible(true);
+            new NewMeetingTimeFrame(secI, gen, courseEdit, createdSection, rootPane).setVisible(true);
             this.setVisible(false);
         }
         else{
