@@ -11,6 +11,10 @@ allprojects {
     repositories {
         mavenCentral()
     }
+
+    dependencies {
+        compile 'com.google.guava:guava:20.0'
+    }
 }
 
 run {
