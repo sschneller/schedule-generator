@@ -8,7 +8,6 @@ import edu.oswego.csc420.schedulegenerator.components.SGTextField;
 import edu.oswego.csc420.schedulegenerator.frames.NewMeetingTimeFrame;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
@@ -40,7 +39,7 @@ public class SectionInformationPanel extends JPanel {
         button = new JButton("New Meeting Time");
         // SectionPanel sp = ((CourseInfoPanel)button.getParent()).sp;
         // sp.table.getSelectedRow();
-        button.addActionListener(a -> new NewMeetingTimeFrame(this, gen, courseEdit, sectionChosen).setVisible(true));
+        button.addActionListener(a -> new NewMeetingTimeFrame(this, gen, courseEdit, sectionChosen, (JFrame)button.getTopLevelAncestor()).setVisible(true));
         add(button);
     }
 
@@ -63,5 +62,4 @@ public class SectionInformationPanel extends JPanel {
             }
         }
     }
-
 }

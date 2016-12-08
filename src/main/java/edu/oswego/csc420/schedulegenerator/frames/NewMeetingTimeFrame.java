@@ -6,7 +6,6 @@ import edu.oswego.csc420.schedulegenerator.MeetingTime;
 import edu.oswego.csc420.schedulegenerator.Section;
 import edu.oswego.csc420.schedulegenerator.panels.SectionInformationPanel;
 import net.miginfocom.swing.MigLayout;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,7 +14,7 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-public class NewMeetingTimeFrame extends JFrame implements ActionListener {
+public class NewMeetingTimeFrame extends JDialog implements ActionListener {
 
     JCheckBox su, m, t, w, r, f, s;
     JSpinner sh, sm, sap, eh, em, eap;
@@ -25,7 +24,8 @@ public class NewMeetingTimeFrame extends JFrame implements ActionListener {
     Course courseEdit;
     Section sectionEdit;
 
-    public NewMeetingTimeFrame(SectionInformationPanel sI, Generator g, Course cE, Section sE) {
+    public NewMeetingTimeFrame(SectionInformationPanel sI, Generator g, Course cE, Section sE, JFrame root) {
+        super(root, ModalityType.DOCUMENT_MODAL);
         secI = sI;
         gen = g;
         courseEdit = cE;

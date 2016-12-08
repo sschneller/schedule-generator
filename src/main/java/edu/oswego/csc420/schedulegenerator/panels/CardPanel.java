@@ -1,7 +1,6 @@
 package edu.oswego.csc420.schedulegenerator.panels;
 
 import edu.oswego.csc420.schedulegenerator.Generator;
-
 import javax.swing.*;
 import java.awt.*;
 

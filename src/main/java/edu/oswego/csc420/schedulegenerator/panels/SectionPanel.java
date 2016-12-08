@@ -37,7 +37,7 @@ public class SectionPanel extends JPanel implements ListSelectionListener {
         // table.setRowSelectionInterval(0, 0);
         add(new JScrollPane(table), "wrap");
         JButton button = new JButton("New Section");
-        button.addActionListener(a -> new NewSectionFrame(this, secI, g, cE).setVisible(true));
+        button.addActionListener(a -> new NewSectionFrame(this, secI, g, cE, (JFrame)button.getTopLevelAncestor()).setVisible(true));
         // button.addActionListener(a -> table.setRowSelectionInterval(0, 0));
         add(button);
     }
