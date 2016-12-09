@@ -4,7 +4,11 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.annotation.Nonnull;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 import static edu.oswego.csc420.schedulegenerator.Util.nullToEmpty;
 
@@ -13,7 +17,7 @@ import static edu.oswego.csc420.schedulegenerator.Util.nullToEmpty;
  */
 public class Section {
     private String sectionNumber, crn, teacher;
-    private final ArrayList<MeetingTime> meetingTimes;
+    private final List<MeetingTime> meetingTimes;
 
     /**
      * Constructor.
@@ -23,10 +27,10 @@ public class Section {
      * @param teacher the name of the sections teacher. e.g. Mr. Filip
      */
     public Section(final String sectionNumber, final String crn, final String teacher) {
-        setSectionNumber(sectionNumber);
         setCrn(crn);
         setTeacher(teacher);
-        this.meetingTimes = new ArrayList<>();
+        setSectionNumber(sectionNumber);
+        meetingTimes = new ArrayList<>();
     }
 
     /**
@@ -49,13 +53,8 @@ public class Section {
      * Removes the meeting time if it already exists.
      *
      * @param meetingTime the meeting time to remove.
-     * @throws UnsupportedOperationException when the meeting time exists and it is the last meeting time in the section.
      */
-    public void removeMeetingTime(final MeetingTime meetingTime) throws UnsupportedOperationException {
-        if(meetingTimes.size() == 1 && meetingTimes.contains(meetingTime)) {
-            throw new UnsupportedOperationException("Cannot remove the last meeting time in the section.");
-        }
-
+    public void removeMeetingTime(final MeetingTime meetingTime) {
         meetingTimes.remove(meetingTime);
     }
 
@@ -92,8 +91,8 @@ public class Section {
      *
      * @param crn the CRN.
      */
-    public void setCrn(String crn) {
-        this.crn = crn;
+    public void setCrn(final String crn) {
+        this.crn = nullToEmpty(crn);
     }
 
     /**
@@ -102,7 +101,9 @@ public class Section {
      * @return an optional section number.
      */
     @Nonnull
-    public String getSectionNumber() { return sectionNumber; }
+    public String getSectionNumber() {
+        return sectionNumber;
+    }
 
     /**
      * Sets the section number.
@@ -110,7 +111,7 @@ public class Section {
      * @param sectionNumber the section number.
      */
     public void setSectionNumber(final String sectionNumber) {
-        this.sectionNumber = sectionNumber;
+        this.sectionNumber = nullToEmpty(sectionNumber);
     }
 
     /**
@@ -119,7 +120,9 @@ public class Section {
      * @return an unmodifiable list of section times.
      */
     @Nonnull
-    public ArrayList<MeetingTime> getMeetingTimes() { return meetingTimes; }
+    public List<MeetingTime> getMeetingTimes() {
+        return Collections.unmodifiableList(meetingTimes);
+    }
 
     @Override
     public int hashCode() {
