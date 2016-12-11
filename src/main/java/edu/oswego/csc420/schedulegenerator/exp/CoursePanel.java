@@ -1,5 +1,6 @@
 package edu.oswego.csc420.schedulegenerator.exp;
 
+import edu.oswego.csc420.schedulegenerator.Colors;
 import edu.oswego.csc420.schedulegenerator.Course;
 import net.miginfocom.swing.MigLayout;
 
@@ -37,7 +38,7 @@ public class CoursePanel extends UpdatablePanel {
         add(sectionInformationPanel, "span 2");
 
         setMinimumSize(new Dimension(400,400));
-        setBackground(new Color(96,125,139));
+        setBackground(Colors.PRIMARY);
     }
 
     @Override
