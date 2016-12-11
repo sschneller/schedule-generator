@@ -31,6 +31,8 @@ public class SectionPanel extends UpdatablePanel implements ActionListener {
         add(label,"span 3, wrap");
         add(new JScrollPane(table), "span 3, wrap");
         newSection.addActionListener(this);
+        editSection.addActionListener(this);
+        deleteSection.addActionListener(this);
         add(newSection);
         add(editSection);
         add(deleteSection);

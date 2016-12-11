@@ -12,7 +12,7 @@ public class NewSectionFrame extends JDialog implements ActionListener {
 
     JTextField newSectionNum, newCRN, newTeacher;
     JButton addSection;
-    Course courseEdit;
+    Course course;
     Section createdSection;
     JFrame rootPane;
 
@@ -20,7 +20,7 @@ public class NewSectionFrame extends JDialog implements ActionListener {
         super(root, ModalityType.DOCUMENT_MODAL);
         setUndecorated(true);
         setLocationRelativeTo(root);
-        courseEdit = cE;
+        course = cE;
         rootPane = root;
         setLayout(new MigLayout("","[grow,fill]",""));
         setMinimumSize(new Dimension(280,240));
@@ -41,7 +41,8 @@ public class NewSectionFrame extends JDialog implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(!(newSectionNum.getText().equals("")) && !(newCRN.getText().equals("")) && !(newTeacher.getText().equals(""))){
             createdSection = new Section(newSectionNum.getText(), newCRN.getText(), newTeacher.getText());
-            new NewMeetingTimeFrame(courseEdit, createdSection, rootPane).setVisible(true);
+            course.addSection(createdSection);
+            new NewMeetingTimeFrame(createdSection, rootPane).setVisible(true);
             this.setVisible(false);
         }
         else{

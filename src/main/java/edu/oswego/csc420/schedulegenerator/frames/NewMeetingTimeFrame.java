@@ -17,14 +17,12 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
     JCheckBox su, m, t, w, r, f, s;
     JSpinner sh, sm, sap, eh, em, eap;
     JTextField newLocation;
-    Course courseEdit;
     Section sectionEdit;
 
-    public NewMeetingTimeFrame(Course cE, Section sE, JFrame root) {
+    public NewMeetingTimeFrame(Section sE, JFrame root) {
         super(root, ModalityType.DOCUMENT_MODAL);
         setUndecorated(true);
         setLocationRelativeTo(root);
-        courseEdit = cE;
         sectionEdit = sE;
         setLayout(new MigLayout("","[grow,fill]",""));
         setMinimumSize(new Dimension(280,200));
@@ -92,16 +90,7 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
             DayOfWeek[] dayWeek = new DayOfWeek[dow.size()];
             dayWeek = dow.toArray(dayWeek);
             MeetingTime newMeetingTime = new MeetingTime(start, end, newLocation.getText(), dayWeek);
-            if(sectionEdit.getMeetingTimes().size() == 0){
-                // if no section times have been added, add the course to the backend, the section to the course
-                // and the meeting time to the section
-                sectionEdit.addMeetingTime(newMeetingTime);
-                courseEdit.addSection(sectionEdit);
-            }
-            else{
-                // If a section time has already been added just add the section time
-                sectionEdit.addMeetingTime(newMeetingTime);
-            }
+            sectionEdit.addMeetingTime(newMeetingTime);
             this.setVisible(false);
         }
     }
