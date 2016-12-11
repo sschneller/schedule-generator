@@ -13,7 +13,7 @@ public class NewSectionFrame extends JDialog implements ActionListener {
 
     JTextField newSectionNum, newCRN, newTeacher;
     JButton addSection;
-    Course courseEdit;
+    Course course;
     Section createdSection;
     GUI2 rootFrame;
 
@@ -22,7 +22,7 @@ public class NewSectionFrame extends JDialog implements ActionListener {
         rootFrame = (GUI2)root;
         rootFrame.setDialogShown(true);
         setUndecorated(true);
-        courseEdit = cE;
+        course = cE;
         setLayout(new MigLayout("","[grow,fill]",""));
         setMinimumSize(new Dimension(280, 200));
         // setTitle("New Section");
@@ -43,9 +43,10 @@ public class NewSectionFrame extends JDialog implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(!(newSectionNum.getText().equals("")) && !(newCRN.getText().equals("")) && !(newTeacher.getText().equals(""))){
-            this.setVisible(false);
             createdSection = new Section(newSectionNum.getText(), newCRN.getText(), newTeacher.getText());
-            new NewMeetingTimeFrame(courseEdit, createdSection, rootFrame).setVisible(true);
+            course.addSection(createdSection);
+            new NewMeetingTimeFrame(createdSection, rootFrame).setVisible(true);
+            this.setVisible(false);
         }
         else{
             //Add pop up message saying to enter field

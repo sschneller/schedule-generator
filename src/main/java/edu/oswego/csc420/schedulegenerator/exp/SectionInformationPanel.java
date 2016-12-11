@@ -2,18 +2,19 @@ package edu.oswego.csc420.schedulegenerator.exp;
 
 import edu.oswego.csc420.schedulegenerator.MeetingTime;
 import edu.oswego.csc420.schedulegenerator.Section;
+import edu.oswego.csc420.schedulegenerator.frames.NewMeetingTimeFrame;
 import net.miginfocom.swing.MigLayout;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.format.TextStyle;
 import java.util.Comparator;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
-public class SectionInformationPanel extends UpdatablePanel {
+public class SectionInformationPanel extends UpdatablePanel implements ActionListener {
     private final JLabel label;
     private final JTable<MeetingTime> table;
     private final JButton newMeetingTime, editMeetingTime, deleteMeetingTime;
@@ -32,6 +33,7 @@ public class SectionInformationPanel extends UpdatablePanel {
         setLayout(new MigLayout("","[grow,fill]","[][grow,fill][]"));
         add(label, "span 3, wrap");
         add(new JScrollPane(table), "span 3, wrap");
+        newMeetingTime.addActionListener(this);
         add(newMeetingTime);
         add(editMeetingTime);
         add(deleteMeetingTime);
@@ -49,5 +51,19 @@ public class SectionInformationPanel extends UpdatablePanel {
             table.getTableModel().addAll(section.getMeetingTimes());
         }
         super.update();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == newMeetingTime){
+            new NewMeetingTimeFrame(section, (JFrame)newMeetingTime.getTopLevelAncestor()).setVisible(true);
+            update();
+        }
+        if(e.getSource() == editMeetingTime){
+
+        }
+        if(e.getSource() == deleteMeetingTime){
+
+        }
     }
 }
