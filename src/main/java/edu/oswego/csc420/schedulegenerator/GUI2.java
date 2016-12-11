@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -30,6 +31,7 @@ public class GUI2 extends JFrame implements ActionListener {
         setResizable(true);
         setSize(890,650);
         setTitle("Course Schedule Generator");
+        getContentPane().setBackground(new Color(158,158,158));
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         generator = new Generator();
         accordionPanel = new AccordionPanel(generator);
