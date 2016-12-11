@@ -139,6 +139,11 @@ public class Course {
     }
 
     @Override
+    public String toString() {
+        return getSubject().trim() + getCourseNumber().trim() + (!getName().isEmpty() ? " - " + getName().trim() : "");
+    }
+
+    @Override
     public int hashCode() {
         return new HashCodeBuilder(43, 73)
                 .append(name)

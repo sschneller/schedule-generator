@@ -115,12 +115,8 @@ public class Generator {
      * Adds the course to the generator.
      *
      * @param course the course to add.
-     * @throws IllegalArgumentException when the course does not have any sections.
      */
-    public void addCourse(final Course course) throws IllegalArgumentException {
-        if(course.getSections().size() == 0) {
-            throw new IllegalArgumentException("Course must have at least one section!");
-        }
+    public void addCourse(final Course course) {
         courses.add(course);
     }
 
