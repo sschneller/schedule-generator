@@ -26,7 +26,6 @@ public class MeetingTime {
     private final String location;
     private final Set<DayOfWeek> days;
     private final LocalTime start, end;
-    private final Range<Integer> interval;
 
     /**
      * Constructor.
@@ -53,7 +52,6 @@ public class MeetingTime {
         this.end      = end;
         this.days     = new HashSet<>(Arrays.asList(days));
         this.start    = start;
-        this.interval = Range.closed(toInt(start), toInt(end));
         this.location = nullToEmpty(location);
     }
 
@@ -76,7 +74,7 @@ public class MeetingTime {
      * @return true if the passed MeetingTime overlaps with the current MeetingTime.
      */
     public boolean overlaps(final MeetingTime meetingTime) {
-        return !Collections.disjoint(days, meetingTime.getDays()) && interval.isConnected(meetingTime.getInterval());
+        return !Collections.disjoint(days, meetingTime.getDays()) && getInterval().isConnected(meetingTime.getInterval());
     }
 
     /**
@@ -126,7 +124,7 @@ public class MeetingTime {
      */
     @Nonnull
     private Range<Integer> getInterval() {
-        return interval;
+        return Range.closed(toInt(start), toInt(end));
     }
 
     @Override

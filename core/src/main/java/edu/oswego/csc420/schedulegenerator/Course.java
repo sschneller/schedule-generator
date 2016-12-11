@@ -1,21 +1,23 @@
 package edu.oswego.csc420.schedulegenerator;
 
-import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.annotation.Nonnull;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static edu.oswego.csc420.schedulegenerator.Util.nullToEmpty;
 
 /**
  * Defines a course.
  */
-public class Course implements Comparable<Course> {
+public class Course {
     private boolean isOptional;
+    private final List<Section> sections;
     private String name, subject, courseNumber;
-    private final ArrayList<Section> sections;
 
     /**
      * Constructor.
@@ -30,7 +32,7 @@ public class Course implements Comparable<Course> {
         setSubject(subject);
         setCourseNumber(courseNumber);
         setOptional(isOptional);
-        this.sections = new ArrayList<>();
+        sections = new ArrayList<>();
     }
 
     /**
@@ -39,20 +41,16 @@ public class Course implements Comparable<Course> {
      * @return the sections of this course.
      */
     @Nonnull
-    public ArrayList<Section> getSections() { return sections; }
+    public List<Section> getSections() {
+        return Collections.unmodifiableList(sections);
+    }
 
     /**
      * Adds a section to this course.
      *
      * @param section a section.
-     * @throws IllegalArgumentException when the section being added already exists in the course.
      */
-    public void addSection(final Section section) throws IllegalArgumentException {
-        if(section.getMeetingTimes().size() == 0) {
-            throw new IllegalArgumentException("Section must have at least one meeting time!");
-        } else if(sections.contains(section)) {
-            throw new IllegalArgumentException("Section " + section.getSectionNumber() + " already exists in this course!");
-        }
+    public void addSection(final Section section) {
         sections.add(section);
     }
 
@@ -98,9 +96,8 @@ public class Course implements Comparable<Course> {
      *
      * @param courseNumber a course number.
      */
-    @Nonnull
     public void setCourseNumber(final String courseNumber) {
-        this.courseNumber = courseNumber;
+        this.courseNumber = nullToEmpty(courseNumber);
     }
 
     /**
@@ -169,17 +166,5 @@ public class Course implements Comparable<Course> {
                 .append(isOptional, course.isOptional())
                 .append(sections, course.getSections())
                 .isEquals();
-    }
-
-    @Override
-    public int compareTo(final Course course) {
-        Validate.notNull(course);
-        if(course.isOptional() == isOptional) {
-            return 0;
-        } else if(course.isOptional() && !isOptional) {
-            return -1;
-        } else {
-            return 1;
-        }
     }
 }

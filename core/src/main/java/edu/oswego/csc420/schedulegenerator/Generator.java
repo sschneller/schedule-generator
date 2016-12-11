@@ -31,20 +31,6 @@ public class Generator {
     }
 
     /**
-     * Constructor.
-     *
-     * @param importFile the file to load the generator from.
-     * @throws IOException when the file cannot be accessed.
-     * @see #export(File)
-     */
-    public Generator(final File importFile) throws IOException {
-        this();
-        try(final Reader reader = new FileReader(importFile)) {
-            courses.addAll(gson.fromJson(reader, new TypeToken<Set<Course>>(){}.getType()));
-        }
-    }
-
-    /**
      * Generates all possible schedules with the course information provided.
      *
      * @return a set of schedule objects.
@@ -160,13 +146,27 @@ public class Generator {
     /**
      * Exports the generator to a file for importing later.
      *
-     * @param exportFile the file to export to.
+     * @param exportFile the file to exportCourses to.
      * @throws IOException when the file cannot be written or accessed.
-     * @see #Generator(File)
+     * @see #importCourses(File)
      */
-    public void export(final File exportFile) throws IOException {
+    public void exportCourses(final File exportFile) throws IOException {
         try(final Writer writer = new FileWriter(exportFile)) {
             gson.toJson(courses, writer);
+        }
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param importFile the file to load the courses from.
+     * @throws IOException when the file cannot be accessed.
+     * @see #exportCourses(File)
+     */
+    public void importCourses(final File importFile) throws IOException {
+        try(final Reader reader = new FileReader(importFile)) {
+            System.out.println(courses);
+            courses.addAll(gson.fromJson(reader, new TypeToken<Set<Course>>(){}.getType()));
         }
     }
 }
