@@ -16,13 +16,15 @@ import java.util.stream.IntStream;
 public class SectionPanel extends UpdatablePanel {
     private final JLabel label;
     private final JTable<Section> table;
-    private final JButton button;
+    private final JButton newSection, editSection, deleteSection;
     private final Course course;
 
     SectionPanel(final Course course, final SectionInformationPanel sectionInformationPanel) {
         this.course = course;
         this.label = new JLabel("Sections", JLabel.CENTER);
-        this.button = new JButton("New Section");
+        this.newSection = new JButton("New Section");
+        this.editSection = new JButton("Edit");
+        this.deleteSection = new JButton("Delete");
         this.table = new JTable<>(new String[]{"Section #", "CRN", "Teacher"},
                 s -> new String[]{s.getSectionNumber(), s.getCrn(), s.getTeacher()},
                 (e, t) -> sectionInformationPanel.setSection(course.getSections().get(Math.max(0, t.getSelectedRow()))));
@@ -31,7 +33,9 @@ public class SectionPanel extends UpdatablePanel {
         setLayout(new MigLayout("wrap","[grow,fill]","[][grow,fill][]"));
         add(label);
         add(new JScrollPane(table));
-        add(button);
+        add(newSection);
+        add(editSection);
+        add(deleteSection);
     }
 
     @Override
