@@ -1,6 +1,7 @@
 package edu.oswego.csc420.schedulegenerator.frames;
 
 import edu.oswego.csc420.schedulegenerator.Course;
+import edu.oswego.csc420.schedulegenerator.GUI2;
 import edu.oswego.csc420.schedulegenerator.MeetingTime;
 import edu.oswego.csc420.schedulegenerator.Section;
 import net.miginfocom.swing.MigLayout;
@@ -18,9 +19,12 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
     JSpinner sh, sm, sap, eh, em, eap;
     JTextField newLocation;
     Section sectionEdit;
+    GUI2 rootFrame;
 
     public NewMeetingTimeFrame(Section sE, JFrame root) {
         super(root, ModalityType.DOCUMENT_MODAL);
+        rootFrame = (GUI2)root;
+        rootFrame.setDialogShown(true);
         setUndecorated(true);
         setLocationRelativeTo(root);
         sectionEdit = sE;
