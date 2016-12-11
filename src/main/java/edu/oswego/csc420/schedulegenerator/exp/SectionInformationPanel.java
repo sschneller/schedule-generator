@@ -36,6 +36,8 @@ public class SectionInformationPanel extends UpdatablePanel implements ActionLis
         add(label, "span 3, wrap");
         add(new JScrollPane(table), "span 3, wrap");
         newMeetingTime.addActionListener(this);
+        editMeetingTime.addActionListener(this);
+        deleteMeetingTime.addActionListener(this);
         add(newMeetingTime);
         add(editMeetingTime);
         add(deleteMeetingTime);

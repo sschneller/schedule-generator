@@ -16,9 +16,11 @@ public class SectionPanel extends UpdatablePanel implements ActionListener {
     private final JTable<Section> table;
     private final JButton newSection, editSection, deleteSection;
     private final Course course;
+    private final SectionInformationPanel sectionInformationPanel;
 
     SectionPanel(final Course course, final SectionInformationPanel sectionInformationPanel) {
         this.course = course;
+        this.sectionInformationPanel = sectionInformationPanel;
         this.label = new JLabel("Sections", JLabel.CENTER);
         label.setForeground(Color.WHITE);
         this.newSection = new JButton("New Section");
@@ -54,6 +56,7 @@ public class SectionPanel extends UpdatablePanel implements ActionListener {
         if(e.getSource() == deleteSection){
             int selectedRow = table.getSelectedRow();
             course.removeSection(course.getSections().get(selectedRow));
+            sectionInformationPanel.setSection(null);
             update();
         }
     }
