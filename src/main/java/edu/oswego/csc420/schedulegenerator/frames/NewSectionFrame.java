@@ -1,10 +1,7 @@
 package edu.oswego.csc420.schedulegenerator.frames;
 
 import edu.oswego.csc420.schedulegenerator.Course;
-import edu.oswego.csc420.schedulegenerator.Generator;
 import edu.oswego.csc420.schedulegenerator.Section;
-import edu.oswego.csc420.schedulegenerator.panels.SectionInformationPanel;
-import edu.oswego.csc420.schedulegenerator.panels.SectionPanel;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.*;
@@ -15,20 +12,14 @@ public class NewSectionFrame extends JDialog implements ActionListener {
 
     JTextField newSectionNum, newCRN, newTeacher;
     JButton addSection;
-    Generator gen;
     Course courseEdit;
     Section createdSection;
-    SectionPanel sectionP;
-    SectionInformationPanel secI;
     JFrame rootPane;
 
-    public NewSectionFrame(SectionPanel sP, SectionInformationPanel sI, Generator g, Course cE, JFrame root) {
+    public NewSectionFrame(Course cE, JFrame root) {
         super(root, ModalityType.DOCUMENT_MODAL);
         setUndecorated(true);
         setLocationRelativeTo(root);
-        sectionP = sP;
-        secI = sI;
-        gen = g;
         courseEdit = cE;
         rootPane = root;
         setLayout(new MigLayout("","[grow,fill]",""));
@@ -50,8 +41,7 @@ public class NewSectionFrame extends JDialog implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(!(newSectionNum.getText().equals("")) && !(newCRN.getText().equals("")) && !(newTeacher.getText().equals(""))){
             createdSection = new Section(newSectionNum.getText(), newCRN.getText(), newTeacher.getText());
-            sectionP.addSectionToTable(createdSection);
-            new NewMeetingTimeFrame(secI, gen, courseEdit, createdSection, rootPane).setVisible(true);
+            new NewMeetingTimeFrame(courseEdit, createdSection, rootPane).setVisible(true);
             this.setVisible(false);
         }
         else{

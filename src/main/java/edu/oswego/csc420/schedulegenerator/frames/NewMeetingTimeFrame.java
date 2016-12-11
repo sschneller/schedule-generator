@@ -1,10 +1,8 @@
 package edu.oswego.csc420.schedulegenerator.frames;
 
 import edu.oswego.csc420.schedulegenerator.Course;
-import edu.oswego.csc420.schedulegenerator.Generator;
 import edu.oswego.csc420.schedulegenerator.MeetingTime;
 import edu.oswego.csc420.schedulegenerator.Section;
-import edu.oswego.csc420.schedulegenerator.panels.SectionInformationPanel;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.*;
@@ -19,17 +17,13 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
     JCheckBox su, m, t, w, r, f, s;
     JSpinner sh, sm, sap, eh, em, eap;
     JTextField newLocation;
-    SectionInformationPanel secI;
-    Generator gen;
     Course courseEdit;
     Section sectionEdit;
 
-    public NewMeetingTimeFrame(SectionInformationPanel sI, Generator g, Course cE, Section sE, JFrame root) {
+    public NewMeetingTimeFrame(Course cE, Section sE, JFrame root) {
         super(root, ModalityType.DOCUMENT_MODAL);
         setUndecorated(true);
         setLocationRelativeTo(root);
-        secI = sI;
-        gen = g;
         courseEdit = cE;
         sectionEdit = sE;
         setLayout(new MigLayout("","[grow,fill]",""));
@@ -103,7 +97,6 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
                 // and the meeting time to the section
                 sectionEdit.addMeetingTime(newMeetingTime);
                 courseEdit.addSection(sectionEdit);
-                gen.addCourse(courseEdit);
             }
             else{
                 // If a section time has already been added just add the section time
