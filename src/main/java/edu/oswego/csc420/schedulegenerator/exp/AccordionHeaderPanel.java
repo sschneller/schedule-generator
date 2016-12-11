@@ -1,5 +1,6 @@
 package edu.oswego.csc420.schedulegenerator.exp;
 
+import edu.oswego.csc420.schedulegenerator.Colors;
 import edu.oswego.csc420.schedulegenerator.Course;
 import net.miginfocom.swing.MigLayout;
 
@@ -26,7 +27,7 @@ public class AccordionHeaderPanel extends ClickablePanel {
         label.setForeground(Color.white);
 
         // Set the panel properties
-        setBackground(new Color(69,90,100));
+        setBackground(Colors.DARK_PRIMARY);
         setMinimumSize(new Dimension(0, 40));
         setLayout(new MigLayout("insets 0", "[grow, fill]", "[grow, fill]"));
         add(label);

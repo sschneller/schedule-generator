@@ -1,5 +1,6 @@
 package edu.oswego.csc420.schedulegenerator.exp;
 
+import edu.oswego.csc420.schedulegenerator.Colors;
 import edu.oswego.csc420.schedulegenerator.MeetingTime;
 import edu.oswego.csc420.schedulegenerator.Section;
 import edu.oswego.csc420.schedulegenerator.frames.NewMeetingTimeFrame;
@@ -22,6 +23,7 @@ public class SectionInformationPanel extends UpdatablePanel implements ActionLis
 
     SectionInformationPanel() {
         this.label = new JLabel("Section Information", JLabel.CENTER);
+        label.setForeground(Color.WHITE);
         this.newMeetingTime = new JButton("New Meeting Time");
         this.editMeetingTime = new JButton("Edit");
         this.deleteMeetingTime = new JButton("Delete");
@@ -29,7 +31,7 @@ public class SectionInformationPanel extends UpdatablePanel implements ActionLis
                 m -> new String[]{m.getDays().stream().sorted(Comparator.comparingInt(f -> ((f.getValue() - 14) % 7))).map(d -> d.getDisplayName(TextStyle.SHORT, Locale.US).substring(0,2) + " ").collect(Collectors.joining()), m.getStart().toString() + " - " + m.getEnd().toString(), m.getLocation()},
                 (e, t) -> System.out.println("SELECTED: " + t.getSelectedRow()));
 
-        setBackground(new Color(96,125,139));
+        setBackground(Colors.PRIMARY);
         setLayout(new MigLayout("","[grow,fill]","[][grow,fill][]"));
         add(label, "span 3, wrap");
         add(new JScrollPane(table), "span 3, wrap");

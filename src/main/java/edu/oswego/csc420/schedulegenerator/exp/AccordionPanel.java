@@ -1,5 +1,6 @@
 package edu.oswego.csc420.schedulegenerator.exp;
 
+import edu.oswego.csc420.schedulegenerator.Colors;
 import edu.oswego.csc420.schedulegenerator.Generator;
 import net.miginfocom.swing.MigLayout;
 
@@ -28,7 +29,7 @@ public class AccordionPanel extends UpdatablePanel {
         this.viewableEntries = new ArrayList<>();
 
         // Set panel properties
-        setBackground(Color.WHITE);
+        setBackground(Colors.LIGHT_PRIMARY);
         setLayout(new MigLayout("wrap, insets 0","[grow,fill]",""));
     }
 

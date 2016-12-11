@@ -1,5 +1,6 @@
 package edu.oswego.csc420.schedulegenerator.exp;
 
+import edu.oswego.csc420.schedulegenerator.Colors;
 import edu.oswego.csc420.schedulegenerator.Course;
 import edu.oswego.csc420.schedulegenerator.Section;
 import edu.oswego.csc420.schedulegenerator.frames.NewSectionFrame;
@@ -19,14 +20,17 @@ public class SectionPanel extends UpdatablePanel implements ActionListener {
     SectionPanel(final Course course, final SectionInformationPanel sectionInformationPanel) {
         this.course = course;
         this.label = new JLabel("Sections", JLabel.CENTER);
+        label.setForeground(Color.WHITE);
         this.newSection = new JButton("New Section");
         this.editSection = new JButton("Edit");
         this.deleteSection = new JButton("Delete");
         this.table = new JTable<>(new String[]{"Section #", "CRN", "Teacher"},
                 s -> new String[]{s.getSectionNumber(), s.getCrn(), s.getTeacher()},
-                (e, t) -> sectionInformationPanel.setSection(course.getSections().get(Math.max(0, t.getSelectedRow()))));
+                (e, t) -> { if(!course.getSections().isEmpty()) {
+                    sectionInformationPanel.setSection(course.getSections().get(Math.max(0, t.getSelectedRow())));
+                }});
 
-        setBackground(new Color(96,125,139));
+        setBackground(Colors.PRIMARY);
         setLayout(new MigLayout("","[grow,fill]","[][grow,fill][]"));
         add(label,"span 3, wrap");
         add(new JScrollPane(table), "span 3, wrap");
