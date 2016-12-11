@@ -26,7 +26,6 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
         rootFrame = (GUI2)root;
         rootFrame.setDialogShown(true);
         setUndecorated(true);
-        setLocationRelativeTo(root);
         sectionEdit = sE;
         setLayout(new MigLayout("","[grow,fill]",""));
         setMinimumSize(new Dimension(280,200));
@@ -66,6 +65,8 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
         addMeetingTime.addActionListener(this);
         add(addMeetingTime, "span");
         this.pack();
+        setLocation(((root.getWidth() - 1) / 2) - 140, ((root.getHeight() - 1) / 2) - 100);
+        rootFrame.repaint();
     }
 
     @Override
@@ -96,6 +97,8 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
             MeetingTime newMeetingTime = new MeetingTime(start, end, newLocation.getText(), dayWeek);
             sectionEdit.addMeetingTime(newMeetingTime);
             this.setVisible(false);
+            rootFrame.setDialogShown(false);
+            rootFrame.repaint();
         }
     }
 }
