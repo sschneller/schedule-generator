@@ -27,9 +27,9 @@ public class SectionInformationPanel extends UpdatablePanel {
                 (e, t) -> System.out.println("SELECTED: " + t.getSelectedRow()));
 
         setBackground(new Color(96,125,139));
-        setLayout(new MigLayout("wrap","[grow,fill]","[][grow,fill][]"));
-        add(label);
-        add(new JScrollPane(table));
+        setLayout(new MigLayout("","[grow,fill]","[][grow,fill][]"));
+        add(label, "span 3, wrap");
+        add(new JScrollPane(table), "span 3, wrap");
         add(button);
     }
 
