@@ -44,7 +44,10 @@ public class SectionInformationPanel extends UpdatablePanel implements ActionLis
     }
 
     public void setSection(final Section section) {
-        this.section = section;
+        this.section = null;
+        if(section == null) {
+            table.getTableModel().removeAll();
+        }
         update();
     }
 
