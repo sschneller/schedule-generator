@@ -26,6 +26,8 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
 
     public NewMeetingTimeFrame(SectionInformationPanel sI, Generator g, Course cE, Section sE, JFrame root) {
         super(root, ModalityType.DOCUMENT_MODAL);
+        setUndecorated(true);
+        setLocationRelativeTo(root);
         secI = sI;
         gen = g;
         courseEdit = cE;
