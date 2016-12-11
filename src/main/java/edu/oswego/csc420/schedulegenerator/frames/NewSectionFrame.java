@@ -23,6 +23,9 @@ public class NewSectionFrame extends JDialog implements ActionListener {
     JFrame rootPane;
 
     public NewSectionFrame(SectionPanel sP, SectionInformationPanel sI, Generator g, Course cE, JFrame root) {
+        super(root, ModalityType.DOCUMENT_MODAL);
+        setUndecorated(true);
+        setLocationRelativeTo(root);
         sectionP = sP;
         secI = sI;
         gen = g;
