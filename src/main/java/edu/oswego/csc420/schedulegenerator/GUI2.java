@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -20,6 +21,7 @@ public class GUI2 extends JFrame implements ActionListener {
     private final AccordionPanel accordionPanel;
     private final JFileChooser fileChooser;
     private static final String fileExtension = "csg";
+    private boolean dialogShown = false;
 
     public static void main(String[] args) {
         final GUI2 gui = new GUI2();
@@ -109,6 +111,19 @@ public class GUI2 extends JFrame implements ActionListener {
             return selectedFile;
         } else {
             return null;
+        }
+    }
+
+    public void setDialogShown(boolean state) {
+        dialogShown = state;
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        if(dialogShown) {
+            g.setColor(new Color(128, 128, 128, 128));
+            g.fillRect(0, 0, getWidth() - 1, getHeight() - 1);
         }
     }
 }
