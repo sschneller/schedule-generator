@@ -39,7 +39,7 @@ public class SectionInformationPanel extends JPanel {
         button = new JButton("New Meeting Time");
         // SectionPanel sp = ((CourseInfoPanel)button.getParent()).sp;
         // sp.table.getSelectedRow();
-        button.addActionListener(a -> new NewMeetingTimeFrame(this, gen, courseEdit, sectionChosen, (JFrame)button.getTopLevelAncestor()).setVisible(true));
+        //button.addActionListener(a -> new NewMeetingTimeFrame(this, gen, courseEdit, sectionChosen, (JFrame)button.getTopLevelAncestor()).setVisible(true));
         add(button);
     }
 
