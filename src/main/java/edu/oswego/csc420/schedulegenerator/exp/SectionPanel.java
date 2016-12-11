@@ -48,7 +48,9 @@ public class SectionPanel extends UpdatablePanel implements ActionListener {
 
         }
         if(e.getSource() == deleteSection){
-
+            int selectedRow = table.getSelectedRow();
+            course.removeSection(course.getSections().get(selectedRow));
+            update();
         }
     }
 

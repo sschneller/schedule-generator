@@ -63,7 +63,9 @@ public class SectionInformationPanel extends UpdatablePanel implements ActionLis
 
         }
         if(e.getSource() == deleteMeetingTime){
-
+            int selectedRow = table.getSelectedRow();
+            section.removeMeetingTime(section.getMeetingTimes().get(selectedRow));
+            update();
         }
     }
 }
