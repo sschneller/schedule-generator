@@ -22,6 +22,11 @@ public class JTable<T> extends javax.swing.JTable {
         return (TableModel<T>) getModel();
     }
 
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        return false;
+    }
+
     public static class TableModel<T> extends DefaultTableModel {
         private final Function<T, String[]> mapper;
 

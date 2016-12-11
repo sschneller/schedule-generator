@@ -16,12 +16,14 @@ import java.util.stream.Collectors;
 public class SectionInformationPanel extends UpdatablePanel {
     private final JLabel label;
     private final JTable<MeetingTime> table;
-    private final JButton button;
+    private final JButton newMeetingTime, editMeetingTime, deleteMeetingTime;
     private Section section;
 
     SectionInformationPanel() {
         this.label = new JLabel("Section Information", JLabel.CENTER);
-        this.button = new JButton("New Meeting Time");
+        this.newMeetingTime = new JButton("New Meeting Time");
+        this.editMeetingTime = new JButton("Edit");
+        this.deleteMeetingTime = new JButton("Delete");
         this.table = new edu.oswego.csc420.schedulegenerator.exp.JTable<>(new String[]{"Days", "Time", "Location"},
                 m -> new String[]{m.getDays().stream().sorted(Comparator.comparingInt(f -> ((f.getValue() - 14) % 7))).map(d -> d.getDisplayName(TextStyle.SHORT, Locale.US).substring(0,2) + " ").collect(Collectors.joining()), m.getStart().toString() + " - " + m.getEnd().toString(), m.getLocation()},
                 (e, t) -> System.out.println("SELECTED: " + t.getSelectedRow()));
@@ -30,7 +32,9 @@ public class SectionInformationPanel extends UpdatablePanel {
         setLayout(new MigLayout("","[grow,fill]","[][grow,fill][]"));
         add(label, "span 3, wrap");
         add(new JScrollPane(table), "span 3, wrap");
-        add(button);
+        add(newMeetingTime);
+        add(editMeetingTime);
+        add(deleteMeetingTime);
     }
 
     public void setSection(final Section section) {
