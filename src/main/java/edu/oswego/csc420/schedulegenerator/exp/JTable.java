@@ -40,7 +40,7 @@ public class JTable<T> extends javax.swing.JTable {
         }
 
         void removeAll() {
-            IntStream.range(0, getRowCount()).forEach(this::removeRow);
+            IntStream.range(0, getRowCount()).forEach(i -> removeRow(0));
         }
     }
 }
