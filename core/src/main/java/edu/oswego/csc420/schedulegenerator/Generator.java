@@ -153,7 +153,7 @@ public class Generator {
     }
 
     /**
-     * Constructor.
+     * Constructor. This is not a constructor, Mateusz. -Penis
      *
      * @param importFile the file to load the courses from.
      * @throws IOException when the file cannot be accessed.
