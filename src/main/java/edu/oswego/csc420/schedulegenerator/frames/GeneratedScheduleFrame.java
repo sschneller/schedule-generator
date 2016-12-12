@@ -11,19 +11,17 @@ import java.io.File;
 import java.io.IOException;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
-import java.util.Set;
 
 public class GeneratedScheduleFrame extends JFrame {
-    List<Schedule> schedules;
+    ArrayList<Schedule> schedules;
     int currentSchedule = 1;
 
     int height, width, xDivider, yDivider;
-    int earliestHour, latestHour; // Example Input - Should be start time of earliest class, and end time of the latest class for entire week
-                                            // Needs to be military time, and round down to hour for first, and round up for last
+    int earliestHour, latestHour;
+
     JButton back;
     JButton forward;
 
-    // String[][] courses = {{"08.00", "09.55"}};
     ArrayList<String> options = new ArrayList<>();
     ArrayList<SectionExample> sectionExample = new ArrayList<>();
 
@@ -31,6 +29,11 @@ public class GeneratedScheduleFrame extends JFrame {
         @Override
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
+            Schedule s = schedules.get(currentSchedule);
+
+            earliestHour = s.getEarliest().getHour();
+            latestHour = s.getLatest().getHour();
+
             height = getHeight() - 1;
             width = getWidth() - 1;
             xDivider = width / 7;
@@ -86,7 +89,6 @@ public class GeneratedScheduleFrame extends JFrame {
 
             g.setFont(new Font(Font.DIALOG, Font.BOLD, 12));
 
-            Schedule s = schedules.get(currentSchedule);
             for(Pair<Course, Section> p :  s.getSchedule()) {
                 for(MeetingTime mt : p.getRight().getMeetingTimes()) {
                     int mult = mt.getStart().getHour() - (earliestHour - 1);
@@ -212,12 +214,10 @@ public class GeneratedScheduleFrame extends JFrame {
         }
     };
 
-    public GeneratedScheduleFrame(Set<Schedule> s, int earliest, int latest) {
+    public GeneratedScheduleFrame(ArrayList<Schedule> s) {
         setLayout(new MigLayout("", "[grow,fill]", "[][grow,fill]"));
 
         schedules = s;
-        earliestHour = earliest;
-        latestHour = latest;
 
         sectionExample.add(new SectionExample("PSY305", new String[]{"M", "W", "F"}, new String[][]{{"11.30", "12.25"}}));
         sectionExample.add(new SectionExample("CSC385", new String[]{"M", "W", "F"}, new String[][]{{"13.50", "14.45"}}));
@@ -241,11 +241,21 @@ public class GeneratedScheduleFrame extends JFrame {
 
             back.addActionListener(e -> {
                 if(currentSchedule - 1 < 1) {
-                    currentSchedule = s.size();
+                    currentSchedule = schedules.size();
                 }
+                else {
+                    currentSchedule = currentSchedule - 1;
+                }
+                calendar.repaint();
             });
             forward.addActionListener(e -> {
-
+                if(currentSchedule + 1 > schedules.size()) {
+                    currentSchedule = 1;
+                }
+                else {
+                    currentSchedule = currentSchedule + 1;
+                }
+                calendar.repaint();
             });
 
             makenewfilehere.add(back, "cell 1 0");
