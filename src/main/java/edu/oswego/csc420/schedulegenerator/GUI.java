@@ -82,7 +82,7 @@ public class GUI extends JFrame implements ActionListener {
             }
             case("Generate"): {
                 System.out.println("Generate Clicked!");
-                GeneratedScheduleFrame gsf = new GeneratedScheduleFrame((ArrayList<Schedule>)generator.generate());
+                GeneratedScheduleFrame gsf = new GeneratedScheduleFrame(new ArrayList<>(generator.generate()));
                 gsf.setSize(890,650);
                 gsf.setLocationRelativeTo(null);
                 gsf.setVisible(true);

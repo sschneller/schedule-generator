@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class GeneratedScheduleFrame extends JFrame {
     ArrayList<Schedule> schedules;
-    int currentSchedule = 1;
+    int currentSchedule = 0;
 
     int height, width, xDivider, yDivider;
     int earliestHour, latestHour;
