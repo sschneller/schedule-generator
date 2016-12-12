@@ -1,65 +1,68 @@
 package edu.oswego.csc420.schedulegenerator.panels;
 
-import edu.oswego.csc420.schedulegenerator.Course;
-import edu.oswego.csc420.schedulegenerator.Generator;
 import edu.oswego.csc420.schedulegenerator.MeetingTime;
 import edu.oswego.csc420.schedulegenerator.Section;
-import edu.oswego.csc420.schedulegenerator.components.SGTextField;
 import edu.oswego.csc420.schedulegenerator.frames.NewMeetingTimeFrame;
-import net.miginfocom.swing.MigLayout;
+
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
+import javax.swing.event.ListSelectionEvent;
+import java.time.format.TextStyle;
+import java.util.Comparator;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
-public class SectionInformationPanel extends JPanel {
+public class SectionInformationPanel extends AbstractSectionPanel<MeetingTime> {
+    private Section section;
 
-    JLabel sectionL, crnL, teacherL;
-    SGTextField editSection, editCRN, editTeacher;
-    Generator gen;
-    Course courseEdit;
-    Section sectionChosen;
-    JButton button;
-    Object columnNames[] = { "Days", "Time", "Location" };
-    Object rowData[][] = {};
-    JTable table;
-
-    SectionInformationPanel(Generator g, Course cE) {
-        gen = g;
-        courseEdit = cE;
-        setBackground(Color.WHITE);
-        setLayout(new MigLayout("","[grow,fill]","[][grow,fill][]"));
-        final JLabel l = new JLabel("Section Information", SwingConstants.CENTER);
-        add(l, "wrap");
-        table = new JTable(new DefaultTableModel(rowData, columnNames)) {
-            public boolean isCellEditable(int row, int column){
-                return false;
-            }
-        };
-        add(new JScrollPane(table), "wrap");
-        button = new JButton("New Meeting Time");
-        // SectionPanel sp = ((CourseInfoPanel)button.getParent()).sp;
-        // sp.table.getSelectedRow();
-        //button.addActionListener(a -> new NewMeetingTimeFrame(this, gen, courseEdit, sectionChosen, (JFrame)button.getTopLevelAncestor()).setVisible(true));
-        add(button);
+    SectionInformationPanel() {
+        super("Section Information","New Meeting Time", "Edit", "Delete", new String[]{"Days", "Time", "Location"});
     }
 
-    public void createMeetingTimes(Section sec){
-        sectionChosen = sec;
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        if(model.getRowCount() > 0) {
-            for(int i = model.getRowCount() - 1; i >=0; i--){
-                model.removeRow(i);
-            }
-            for(int i = 0; i < sectionChosen.getMeetingTimes().size(); i++){
-                MeetingTime m = sectionChosen.getMeetingTimes().get(i);
-                model.addRow(new Object[]{m.getDays(), m.getStart() + " - " + m.getEnd(), m.getLocation()});
-            }
+    void setSection(final Section section) {
+        this.section = section;
+        if(section == null) {
+            table.getTableModel().removeAll();
         }
-        else{
-            for(int i = 0; i < sectionChosen.getMeetingTimes().size(); i++){
-                MeetingTime m = sectionChosen.getMeetingTimes().get(i);
-                model.addRow(new Object[]{m.getDays(), m.getStart() + " - " + m.getEnd(), m.getLocation()});
-            }
+        update();
+    }
+
+    @Override
+    public void onRowSelected(ListSelectionEvent event, JTable<MeetingTime> jTable) {
+        System.out.println("ROW SELECTED: " + jTable.getSelectedRow());
+    }
+
+    @Override
+    public void onNewButtonClick() {
+        new NewMeetingTimeFrame(section, (JFrame)this.getTopLevelAncestor()).setVisible(true);
+        update();
+    }
+    @Override
+    public void onEditButtonClick() {
+
+    }
+
+    @Override
+    public void onDeleteButtonClick() {
+        int selectedRow = table.getSelectedRow();
+        section.removeMeetingTime(section.getMeetingTimes().get(selectedRow));
+        update();
+    }
+
+    @Override
+    public String[] objectRowMapper(MeetingTime object) {
+        return new String[]{object.getDays().stream().sorted(Comparator.comparingInt(f -> ((f.getValue() - 14) % 7)))
+                .map(d -> d.getDisplayName(TextStyle.SHORT, Locale.US).substring(0,2) + " ")
+                .collect(Collectors.joining()),
+                object.getStart().toString() + " - " + object.getEnd().toString(),
+                object.getLocation()};
+    }
+
+    @Override
+    public void update() {
+        if(section != null) {
+            table.getTableModel().removeAll();
+            table.getTableModel().addAll(section.getMeetingTimes());
         }
+        super.update();
     }
 }

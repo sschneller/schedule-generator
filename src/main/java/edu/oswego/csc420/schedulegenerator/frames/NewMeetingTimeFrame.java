@@ -1,7 +1,6 @@
 package edu.oswego.csc420.schedulegenerator.frames;
 
-import edu.oswego.csc420.schedulegenerator.Course;
-import edu.oswego.csc420.schedulegenerator.GUI2;
+import edu.oswego.csc420.schedulegenerator.GUI;
 import edu.oswego.csc420.schedulegenerator.MeetingTime;
 import edu.oswego.csc420.schedulegenerator.Section;
 import net.miginfocom.swing.MigLayout;
@@ -19,11 +18,11 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
     JSpinner sh, sm, sap, eh, em, eap;
     JTextField newLocation;
     Section sectionEdit;
-    GUI2 rootFrame;
+    GUI rootFrame;
 
     public NewMeetingTimeFrame(Section sE, JFrame root) {
         super(root, ModalityType.DOCUMENT_MODAL);
-        rootFrame = (GUI2)root;
+        rootFrame = (GUI)root;
         rootFrame.setDialogShown(true);
         setUndecorated(true);
         sectionEdit = sE;
@@ -44,13 +43,13 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
         add(em = new JSpinner(new SpinnerNumberModel(0, 0, 60, 1)));
         add(eap = new JSpinner(new SpinnerListModel(new String[]{"AM","PM"})),"wrap");
         JPanel panel = new JPanel(new MigLayout("insets 0","[grow,fill]","[grow,fill]"));
-        panel.add(new JLabel("  S"));
-        panel.add(new JLabel("  M"));
-        panel.add(new JLabel("  T"));
-        panel.add(new JLabel("  W"));
-        panel.add(new JLabel("  R"));
-        panel.add(new JLabel("  F"));
-        panel.add(new JLabel("  S"),"wrap");
+        panel.add(new JLabel(" Su"));
+        panel.add(new JLabel(" Mo"));
+        panel.add(new JLabel(" Tu"));
+        panel.add(new JLabel(" We"));
+        panel.add(new JLabel(" Th"));
+        panel.add(new JLabel(" Fr"));
+        panel.add(new JLabel(" Sa"),"wrap");
         panel.add(su = new JCheckBox());
         panel.add(m = new JCheckBox());
         panel.add(t = new JCheckBox());

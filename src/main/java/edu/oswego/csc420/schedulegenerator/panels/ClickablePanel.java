@@ -1,4 +1,4 @@
-package edu.oswego.csc420.schedulegenerator.exp;
+package edu.oswego.csc420.schedulegenerator.panels;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
