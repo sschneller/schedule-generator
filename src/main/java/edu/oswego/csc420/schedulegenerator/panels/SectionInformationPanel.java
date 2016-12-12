@@ -38,7 +38,9 @@ public class SectionInformationPanel extends AbstractSectionPanel<MeetingTime> {
     }
     @Override
     public void onEditButtonClick() {
-
+        int selectedRow = table.getSelectedRow();
+        new NewMeetingTimeFrame(section, section.getMeetingTimes().get(selectedRow), (JFrame)this.getTopLevelAncestor()).setVisible(true);
+        update();
     }
 
     @Override
@@ -50,10 +52,51 @@ public class SectionInformationPanel extends AbstractSectionPanel<MeetingTime> {
 
     @Override
     public String[] objectRowMapper(MeetingTime object) {
+        String startTime, endTime, startMinutes, endMinutes;
+
+        if(object.getStart().getMinute() < 10) {
+            startMinutes = "0" + object.getStart().getMinute();
+        }
+        else{
+            startMinutes = object.getStart().getMinute() + "";
+        }
+        if(object.getEnd().getMinute() < 10) {
+            endMinutes = "0" + object.getEnd().getMinute();
+        }
+        else{
+            endMinutes = object.getEnd().getMinute() + "";
+        }
+
+        if(object.getStart().getHour() == 0){
+            startTime = "12:" + startMinutes + " AM";
+        }
+        else if(object.getStart().getHour() == 12){
+            startTime = "12:" + startMinutes + " PM";
+        }
+        else if(object.getStart().getHour() > 12){
+            startTime = object.getStart().getHour() - 12 + ":" + startMinutes + "PM";
+        }
+        else{
+            startTime = object.getStart().getHour() + ":" + startMinutes + " AM";
+        }
+
+        if(object.getEnd().getHour() == 0){
+            endTime = "12:" + endMinutes + " AM";
+        }
+        else if(object.getEnd().getHour() == 12){
+            endTime = "12:" + endMinutes + " PM";
+        }
+        else if(object.getEnd().getHour() > 12){
+            endTime = object.getEnd().getHour() - 12 + ":" + endMinutes + " PM";
+        }
+        else{
+            endTime = object.getEnd().getHour() + ":" + endMinutes + " AM";
+        }
+
         return new String[]{object.getDays().stream().sorted(Comparator.comparingInt(f -> ((f.getValue() - 14) % 7)))
                 .map(d -> d.getDisplayName(TextStyle.SHORT, Locale.US).substring(0,2) + " ")
                 .collect(Collectors.joining()),
-                object.getStart().toString() + " - " + object.getEnd().toString(),
+                startTime + " - " + endTime,
                 object.getLocation()};
     }
 
