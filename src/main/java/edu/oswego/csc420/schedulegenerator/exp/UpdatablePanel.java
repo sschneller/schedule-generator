@@ -3,7 +3,6 @@ package edu.oswego.csc420.schedulegenerator.exp;
 import edu.oswego.csc420.schedulegenerator.Colors;
 
 import javax.swing.JPanel;
-import java.awt.Color;
 import java.util.Arrays;
 
 /**

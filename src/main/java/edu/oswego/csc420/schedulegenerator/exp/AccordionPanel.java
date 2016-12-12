@@ -4,6 +4,7 @@ import edu.oswego.csc420.schedulegenerator.Colors;
 import edu.oswego.csc420.schedulegenerator.Generator;
 import net.miginfocom.swing.MigLayout;
 
+import javax.swing.BorderFactory;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,7 @@ public class AccordionPanel extends UpdatablePanel {
 
         // Set panel properties
         setBackground(Colors.LIGHT_PRIMARY);
+        setBorder(BorderFactory.createLoweredBevelBorder());
         setLayout(new MigLayout("wrap, insets 0","[grow,fill]",""));
     }
 

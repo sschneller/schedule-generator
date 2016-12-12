@@ -33,7 +33,7 @@ public class GUI2 extends JFrame implements ActionListener {
         setResizable(true);
         setSize(890,650);
         setTitle("Course Schedule Generator");
-        getContentPane().setBackground(new Color(158,158,158));
+        getContentPane().setBackground(Colors.LIGHT_PRIMARY.getColor());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         generator = new Generator();
         accordionPanel = new AccordionPanel(generator);
@@ -48,18 +48,9 @@ public class GUI2 extends JFrame implements ActionListener {
         add(new JButton("Generate", this));
     }
 
-    private class JButton extends javax.swing.JButton {
-
-        private JButton(final String text, final GUI2 listener) {
-            super(text);
-            addActionListener(listener);
-            putClientProperty("id", text);
-        }
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
-        switch((String)((JButton)e.getSource()).getClientProperty("id")) {
+        switch(((JButton)e.getSource()).getText()) {
             case("New Course"): {
                 generator.addCourse(new Course("","","",false));
                 accordionPanel.update();

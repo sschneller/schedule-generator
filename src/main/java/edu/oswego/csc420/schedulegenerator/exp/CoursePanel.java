@@ -2,11 +2,10 @@ package edu.oswego.csc420.schedulegenerator.exp;
 
 import edu.oswego.csc420.schedulegenerator.Colors;
 import edu.oswego.csc420.schedulegenerator.Course;
+import edu.oswego.csc420.schedulegenerator.JTextField;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.JCheckBox;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -18,13 +17,14 @@ public class CoursePanel extends UpdatablePanel {
 
     public CoursePanel(final Course course, final Runnable listener) {
         this.course    = course;
-        this.name      = new JTextField(course.getName());
-        this.number    = new JTextField(course.getCourseNumber());
-        this.subject   = new JTextField(course.getSubject());
-        this.listener = listener;
-        this.optional = new JCheckBox();
+        this.name      = new JTextField(course.getName(), t -> update());
+        this.number    = new JTextField(course.getCourseNumber(), t -> update());
+        this.subject   = new JTextField(course.getSubject(), t -> update());
+        this.listener  = listener;
+        this.optional  = new JCheckBox();
+        optional.setBackground(new Color(0,0,0,0));
 
-        setLayout(new MigLayout("","[grow 25,fill]","[][][grow,fill]"));
+        setLayout(new MigLayout("","[grow,fill][grow,fill][grow,fill][grow,fill]","[][][grow,fill]"));
         add(new JLabel("Course Subject:"));
         add(new JLabel("Course Number:"));
         add(new JLabel("Course Name:"));
@@ -56,30 +56,6 @@ public class CoursePanel extends UpdatablePanel {
         JLabel(final String text) {
             super(text);
             setForeground(Color.WHITE);
-        }
-    }
-
-    private class JTextField extends javax.swing.JTextField {
-
-        JTextField(final String text) {
-            setText(text);
-            setColumns(1);
-            getDocument().addDocumentListener(new DocumentListener() {
-                @Override
-                public void insertUpdate(DocumentEvent e) {
-                    CoursePanel.this.update();
-                }
-
-                @Override
-                public void removeUpdate(DocumentEvent e) {
-                    CoursePanel.this.update();
-                }
-
-                @Override
-                public void changedUpdate(DocumentEvent e) {
-                    CoursePanel.this.update();
-                }
-            });
         }
     }
 }

@@ -3,6 +3,7 @@ package edu.oswego.csc420.schedulegenerator.exp;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Color;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Function;

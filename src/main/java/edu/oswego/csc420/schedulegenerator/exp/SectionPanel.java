@@ -1,59 +1,46 @@
 package edu.oswego.csc420.schedulegenerator.exp;
 
-import edu.oswego.csc420.schedulegenerator.Colors;
 import edu.oswego.csc420.schedulegenerator.Course;
 import edu.oswego.csc420.schedulegenerator.Section;
 import edu.oswego.csc420.schedulegenerator.frames.NewSectionFrame;
-import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.event.ListSelectionEvent;
 
-public class SectionPanel extends UpdatablePanel implements ActionListener {
-    private final JLabel label;
-    private final JTable<Section> table;
-    private final JButton newSection, editSection, deleteSection;
+public class SectionPanel extends AbstractSectionPanel<Section> {
     private final Course course;
+    private final SectionInformationPanel sectionInformationPanel;
 
     SectionPanel(final Course course, final SectionInformationPanel sectionInformationPanel) {
+        super("Sections", "New Section", "Edit", "Delete", new String[]{"Section #", "CRN", "Teacher"});
         this.course = course;
-        this.label = new JLabel("Sections", JLabel.CENTER);
-        label.setForeground(Color.WHITE);
-        this.newSection = new JButton("New Section");
-        this.editSection = new JButton("Edit");
-        this.deleteSection = new JButton("Delete");
-        this.table = new JTable<>(new String[]{"Section #", "CRN", "Teacher"},
-                s -> new String[]{s.getSectionNumber(), s.getCrn(), s.getTeacher()},
-                (e, t) -> { if(!course.getSections().isEmpty()) {
-                    sectionInformationPanel.setSection(course.getSections().get(Math.max(0, t.getSelectedRow())));
-                }});
-
-        setBackground(Colors.PRIMARY);
-        setLayout(new MigLayout("","[grow,fill]","[][grow,fill][]"));
-        add(label,"span 3, wrap");
-        add(new JScrollPane(table), "span 3, wrap");
-        newSection.addActionListener(this);
-        editSection.addActionListener(this);
-        deleteSection.addActionListener(this);
-        add(newSection);
-        add(editSection);
-        add(deleteSection);
+        this.sectionInformationPanel = sectionInformationPanel;
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == newSection){
-            new NewSectionFrame(course, (JFrame)newSection.getTopLevelAncestor()).setVisible(true);
-            update();
-        }
-        if(e.getSource() == editSection){
+    public void onRowSelected(ListSelectionEvent event, JTable<Section> jTable) {
+        sectionInformationPanel.setSection(course.getSections().get(Math.max(0, jTable.getSelectedRow())));
+    }
 
-        }
-        if(e.getSource() == deleteSection){
+    @Override
+    public void onNewButtonClick() {
+        new NewSectionFrame(course, (JFrame)this.getTopLevelAncestor()).setVisible(true);
+        update();
+    }
 
-        }
+    @Override
+    public void onEditButtonClick() {
+
+    }
+
+    @Override
+    public void onDeleteButtonClick() {
+
+    }
+
+    @Override
+    public String[] objectRowMapper(Section object) {
+        return new String[]{object.getSectionNumber(), object.getCrn(), object.getTeacher()};
     }
 
     @Override

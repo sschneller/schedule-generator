@@ -3,9 +3,10 @@ package edu.oswego.csc420.schedulegenerator;
 import java.awt.Color;
 
 public enum  Colors {
-    DARK_PRIMARY(4, 38, 51),
-    LIGHT_PRIMARY(46, 75, 85),
-    PRIMARY(26, 57,69);
+    DARK_PRIMARY(38, 50, 56),
+    LIGHT_PRIMARY(96,125,139),
+    PRIMARY(55,71,79),
+    ACCENT(0,121,107);
 
     final Color color;
 
