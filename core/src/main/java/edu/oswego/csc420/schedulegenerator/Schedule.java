@@ -4,9 +4,13 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.time.LocalTime;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 
 /**
  * A wrapper for course and section objects.
@@ -76,6 +80,22 @@ public class Schedule {
      */
     public Schedule duplicate() {
         return new Schedule(this);
+    }
+
+    public LocalTime getEarliest() {
+        return schedule.parallelStream().map(Pair::getRight)
+                .flatMap(s -> s.getMeetingTimes().stream())
+                .map(MeetingTime::getStart)
+                .min(Comparator.comparing(Function.identity()))
+                .orElse(null);
+    }
+
+    public LocalTime getLatest() {
+        return schedule.parallelStream().map(Pair::getRight)
+                .flatMap(s -> s.getMeetingTimes().stream())
+                .map(MeetingTime::getEnd)
+                .max(Comparator.comparing(Function.identity()))
+                .orElse(null);
     }
 
     @Override
