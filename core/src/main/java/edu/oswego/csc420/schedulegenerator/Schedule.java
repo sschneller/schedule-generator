@@ -1,5 +1,6 @@
 package edu.oswego.csc420.schedulegenerator;
 
+import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.tuple.Pair;
@@ -17,7 +18,7 @@ import java.util.function.Function;
 /**
  * A wrapper for course and section objects.
  */
-public class Schedule {
+public class Schedule implements Comparable<Schedule> {
     private final List<Pair<Course,Section>> schedule;
 
     /**
@@ -120,5 +121,12 @@ public class Schedule {
         return new EqualsBuilder()
                 .append(this.schedule, schedule.getSchedule())
                 .isEquals();
+    }
+
+    @Override
+    public int compareTo(Schedule o) {
+        return new CompareToBuilder()
+                .append(this.schedule, o.getSchedule())
+                .toComparison();
     }
 }
