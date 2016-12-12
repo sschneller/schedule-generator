@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class GUI extends JFrame implements ActionListener {
     private final Generator generator;
@@ -81,7 +82,7 @@ public class GUI extends JFrame implements ActionListener {
             }
             case("Generate"): {
                 System.out.println("Generate Clicked!");
-                GeneratedScheduleFrame gsf = new GeneratedScheduleFrame();
+                GeneratedScheduleFrame gsf = new GeneratedScheduleFrame((ArrayList<Schedule>)generator.generate());
                 gsf.setSize(890,650);
                 gsf.setLocationRelativeTo(null);
                 gsf.setVisible(true);
