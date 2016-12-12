@@ -5,9 +5,11 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
@@ -16,13 +18,13 @@ import java.util.function.Function;
  * A wrapper for course and section objects.
  */
 public class Schedule {
-    private final Set<Pair<Course,Section>> schedule;
+    private final List<Pair<Course,Section>> schedule;
 
     /**
      * Constructor.
      */
     public Schedule() {
-        schedule = new HashSet<>();
+        schedule = new ArrayList<>();
     }
 
     /**
@@ -31,7 +33,7 @@ public class Schedule {
      * @param schedule the schedule to clone from.
      */
     private Schedule(final Schedule schedule) {
-        this.schedule = new HashSet<>(schedule.getSchedule());
+        this.schedule = new ArrayList<>(schedule.getSchedule());
     }
 
     /**
@@ -69,8 +71,8 @@ public class Schedule {
      *
      * @return a set of Course-Section pairs that represents a schedule.
      */
-    public Set<Pair<Course,Section>> getSchedule() {
-        return Collections.unmodifiableSet(schedule);
+    public List<Pair<Course,Section>> getSchedule() {
+        return Collections.unmodifiableList(schedule);
     }
 
     /**
