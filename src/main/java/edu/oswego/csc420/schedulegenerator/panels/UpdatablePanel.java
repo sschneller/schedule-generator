@@ -1,4 +1,6 @@
-package edu.oswego.csc420.schedulegenerator.exp;
+package edu.oswego.csc420.schedulegenerator.panels;
+
+import edu.oswego.csc420.schedulegenerator.Colors;
 
 import javax.swing.JPanel;
 import java.util.Arrays;
@@ -17,5 +19,9 @@ public class UpdatablePanel extends JPanel {
                 .forEach(UpdatablePanel::update);
         revalidate();
         repaint();
+    }
+
+    public void setBackground(final Colors bg) {
+        super.setBackground(bg.getColor());
     }
 }

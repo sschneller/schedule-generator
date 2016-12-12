@@ -1,4 +1,4 @@
-package edu.oswego.csc420.schedulegenerator.exp;
+package edu.oswego.csc420.schedulegenerator.panels;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;

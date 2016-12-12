@@ -1,7 +1,7 @@
 package edu.oswego.csc420.schedulegenerator.frames;
 
 import edu.oswego.csc420.schedulegenerator.Course;
-import edu.oswego.csc420.schedulegenerator.GUI2;
+import edu.oswego.csc420.schedulegenerator.GUI;
 import edu.oswego.csc420.schedulegenerator.Section;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
@@ -15,11 +15,11 @@ public class NewSectionFrame extends JDialog implements ActionListener {
     JButton addSection;
     Course course;
     Section createdSection;
-    GUI2 rootFrame;
+    GUI rootFrame;
 
     public NewSectionFrame(Course cE, JFrame root) {
         super(root, ModalityType.DOCUMENT_MODAL);
-        rootFrame = (GUI2)root;
+        rootFrame = (GUI)root;
         rootFrame.setDialogShown(true);
         setUndecorated(true);
         course = cE;
