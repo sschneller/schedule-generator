@@ -1,6 +1,7 @@
 package edu.oswego.csc420.schedulegenerator.frames;
 
 import edu.oswego.csc420.schedulegenerator.*;
+import edu.oswego.csc420.schedulegenerator.JButton;
 import net.miginfocom.swing.MigLayout;
 import org.apache.commons.lang3.tuple.Pair;
 import javax.imageio.ImageIO;
@@ -265,13 +266,5 @@ public class GeneratedScheduleFrame extends JFrame {
 
         add(makenewfilehere, "growx, wrap");
         add(calendar, "growx, growy");
-    }
-
-    public void fillSchedulePanel(Schedule sch) {
-
-    }
-
-    public void addClassToCalendar() {
-
     }
 }

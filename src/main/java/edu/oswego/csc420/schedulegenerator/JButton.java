@@ -1,6 +1,6 @@
 package edu.oswego.csc420.schedulegenerator;
 
-import javax.swing.BorderFactory;
+import javax.swing.*;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -8,6 +8,10 @@ import java.awt.event.MouseListener;
 
 public class JButton extends javax.swing.JButton {
     private boolean enabled;
+
+    public JButton(final ImageIcon icon) {
+        super(icon);
+    }
 
     public JButton(final String text, final ActionListener actionListener) {
         super(text);
