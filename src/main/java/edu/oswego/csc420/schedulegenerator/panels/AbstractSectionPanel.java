@@ -28,9 +28,9 @@ public abstract class AbstractSectionPanel<T> extends UpdatablePanel implements 
         setLayout(new MigLayout("","[grow,fill]","[][grow,fill][]"));
         add(label,"span 3, wrap");
         final JScrollPane tablePane = new JScrollPane(table);
-        tablePane.getViewport().setBackground(new Color(120,144,156));
+        tablePane.getViewport().setBackground(Colors.ACCENT.getColor());
         tablePane.setBorder(BorderFactory.createEmptyBorder());
-        table.getTableHeader().setBackground(Colors.DARK_PRIMARY.getColor());
+        table.getTableHeader().setBackground(Colors.ACCENT.getColor());
         table.getTableHeader().setForeground(Color.WHITE);
 
         add(tablePane, "span 3, wrap");

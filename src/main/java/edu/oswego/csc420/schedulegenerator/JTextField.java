@@ -3,7 +3,6 @@ package edu.oswego.csc420.schedulegenerator;
 import javax.swing.BorderFactory;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -15,8 +14,9 @@ public class JTextField extends javax.swing.JTextField {
         setText(text);
         setColumns(1);
         listeners = new ArrayList<>();
-        setForeground(Color.WHITE);
-        setBackground(new Color(120,144,156));
+        setForeground(Colors.TEXT_FIELD_TEXT.getColor());
+        setBackground(Colors.TEXT_FIELD.getColor());
+        setCaretColor(Colors.TEXT_FIELD_TEXT.getColor());
         setBorder(null);
         setBorder(BorderFactory.createCompoundBorder(
                 getBorder(),

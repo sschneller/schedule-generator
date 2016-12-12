@@ -22,7 +22,7 @@ public class CoursePanel extends UpdatablePanel {
         this.subject   = new JTextField(course.getSubject(), t -> update());
         this.listener  = listener;
         this.optional  = new JCheckBox();
-        optional.setBackground(new Color(0,0,0,0));
+        optional.setOpaque(true);
 
         setLayout(new MigLayout("","[grow,fill][grow,fill][grow,fill][grow,fill]","[][][grow,fill]"));
         add(new JLabel("Course Subject:"));
