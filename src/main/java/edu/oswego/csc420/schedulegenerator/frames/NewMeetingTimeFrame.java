@@ -8,13 +8,7 @@ import edu.oswego.csc420.schedulegenerator.MeetingTime;
 import edu.oswego.csc420.schedulegenerator.Section;
 import net.miginfocom.swing.MigLayout;
 
-import javax.swing.BorderFactory;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.SpinnerListModel;
-import javax.swing.SpinnerNumberModel;
+import javax.swing.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -348,7 +342,7 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
         }
     }
 
-    private class JSpinner extends javax.swing.JSpinner {
+    /*private class JSpinner extends javax.swing.JSpinner {
 
         JSpinner(final SpinnerNumberModel model) {
             super(model);
@@ -368,6 +362,6 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
                     BorderFactory.createEmptyBorder(),
                     BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(70,69,69))));
         }
-    }
+    }*/
 
 }
