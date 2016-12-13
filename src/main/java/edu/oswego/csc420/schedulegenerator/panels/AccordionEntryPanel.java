@@ -16,6 +16,7 @@ public class AccordionEntryPanel extends ClickablePanel {
     private final Course course;
     private final CoursePanel coursePanel;
     private final AccordionHeaderPanel accordionHeaderPanel;
+    private boolean isMinimized;
 
     /**
      * The constructor.
@@ -28,7 +29,7 @@ public class AccordionEntryPanel extends ClickablePanel {
         this.course               = course;
         this.accordionHeaderPanel = new AccordionHeaderPanel(course);
         this.coursePanel          = new CoursePanel(course, accordionHeaderPanel::update);
-
+        this.isMinimized          = true;
         // Set the panel properties
         setLayout(new MigLayout("insets 0, wrap, gap rel 0", "[grow, fill]", "[][grow, fill]"));
         add(accordionHeaderPanel);
@@ -43,6 +44,7 @@ public class AccordionEntryPanel extends ClickablePanel {
         if(Arrays.stream(getComponents()).noneMatch(c -> c == coursePanel)) {
             add(coursePanel);
         }
+        isMinimized = false;
         update();
     }
 
@@ -51,6 +53,7 @@ public class AccordionEntryPanel extends ClickablePanel {
      */
     public void contract() {
         remove(coursePanel);
+        isMinimized = true;
         update();
     }
 
@@ -61,5 +64,9 @@ public class AccordionEntryPanel extends ClickablePanel {
      */
     public Course getCourse() {
         return course;
+    }
+
+    public boolean isMinimized() {
+        return isMinimized;
     }
 }

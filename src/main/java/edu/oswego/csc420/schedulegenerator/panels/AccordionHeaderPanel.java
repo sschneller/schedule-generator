@@ -3,10 +3,11 @@ package edu.oswego.csc420.schedulegenerator.panels;
 import edu.oswego.csc420.schedulegenerator.Colors;
 import edu.oswego.csc420.schedulegenerator.Course;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.JLabel;
-import java.awt.Color;
-import java.awt.Dimension;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * The Accordion Header Panel. This is what is shown when an Accordion Entry is contracted.
@@ -42,5 +43,28 @@ public class AccordionHeaderPanel extends ClickablePanel {
     public void update() {
         label.setText(course.toString());
         super.update();
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if(((AccordionEntryPanel)getParent()).isMinimized()) {
+            try {
+                Image i = new ImageIcon(ImageIO.read(new File("src\\main\\resources\\ic_expand_more_black_18dp.png"))).getImage();
+                g.drawImage(i, getWidth() - i.getWidth(null) - 10, getHeight()/2 - i.getHeight(null)/2, null);
+            }
+            catch(IOException ioe) {
+                System.out.println("HI");
+            }
+        }
+        else {
+            try {
+                Image i = new ImageIcon(ImageIO.read(new File("src\\main\\resources\\ic_expand_less_black_18dp.png"))).getImage();
+                g.drawImage(i, getWidth() - i.getWidth(null) - 10, getHeight()/2 - i.getHeight(null)/2, null);
+            }
+            catch(IOException ioe) {
+                System.out.println("HI");
+            }
+        }
     }
 }

@@ -88,6 +88,9 @@ public class GUI extends JFrame implements ActionListener {
                 gsf.setVisible(true);
                 break;
             }
+            case("Delete Course"): {
+
+            }
             default: {
                 System.out.println("Something Bad Was Clicked!!\nSource Was: " + e.getSource());
             }
