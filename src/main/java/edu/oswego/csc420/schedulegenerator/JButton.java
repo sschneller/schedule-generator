@@ -79,7 +79,7 @@ public class JButton extends javax.swing.JButton {
     public enum ButtonStyle {
         DEFAULT(new Color(70,69, 69), new Color(44, 44, 44)),
         PRIMARY(new Color(55,90,127), new Color(40, 65, 91)),
-        SUCCESS(new Color(0, 188, 140), new Color(0, 137, 102)),
+        SUCCESS(new Color(0, 157, 122), new Color(0, 106, 84)),
         INFO(new Color(52, 152, 219), new Color(33, 125, 187)),
         WARNING(new Color(243, 156, 18), new Color(200, 127, 10)),
         DANGER(new Color(231, 76, 60), new Color(214, 44, 26));
