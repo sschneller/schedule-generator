@@ -1,11 +1,13 @@
 package edu.oswego.csc420.schedulegenerator.panels;
 
-import edu.oswego.csc420.schedulegenerator.MeetingTime;
-import edu.oswego.csc420.schedulegenerator.Section;
+import edu.oswego.csc420.schedulegenerator.*;
+import edu.oswego.csc420.schedulegenerator.JButton;
 import edu.oswego.csc420.schedulegenerator.frames.NewMeetingTimeFrame;
+import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
+import java.awt.*;
 import java.time.format.TextStyle;
 import java.util.Comparator;
 import java.util.Locale;
@@ -15,7 +17,7 @@ public class SectionInformationPanel extends AbstractSectionPanel<MeetingTime> {
     private Section section;
 
     SectionInformationPanel() {
-        super("Section Information","New Meeting Time", "Edit", "Delete", new String[]{"Days", "Time", "Location"});
+        super("Meeting Time","New Meeting Time", "Edit", "Delete", new String[]{"Days", "Time", "Location"});
     }
 
     void setSection(final Section section) {
@@ -33,21 +35,46 @@ public class SectionInformationPanel extends AbstractSectionPanel<MeetingTime> {
 
     @Override
     public void onNewButtonClick() {
-        new NewMeetingTimeFrame(section, (JFrame)this.getTopLevelAncestor()).setVisible(true);
-        update();
+        if(section != null) {
+            new NewMeetingTimeFrame(section, (JFrame) this.getTopLevelAncestor()).setVisible(true);
+            update();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Need a Section Selected to Add Meeting Time!");
+        }
     }
     @Override
     public void onEditButtonClick() {
-        int selectedRow = table.getSelectedRow();
-        new NewMeetingTimeFrame(section, section.getMeetingTimes().get(selectedRow), (JFrame)this.getTopLevelAncestor()).setVisible(true);
-        update();
+        if(section != null && table.getSelectedRow() != -1) {
+            int selectedRow = table.getSelectedRow();
+            new NewMeetingTimeFrame(section, section.getMeetingTimes().get(selectedRow), (JFrame) this.getTopLevelAncestor()).setVisible(true);
+            update();
+        }
+        else{
+            if(section == null) {
+                JOptionPane.showMessageDialog(null, "Need a Section to be Selected to Edit a Meeting Time!");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Need to Select a Meeting Time to Edit!");
+            }
+        }
     }
 
     @Override
     public void onDeleteButtonClick() {
-        int selectedRow = table.getSelectedRow();
-        section.removeMeetingTime(section.getMeetingTimes().get(selectedRow));
-        update();
+        if(section != null && table.getSelectedRow() != -1) {
+            int selectedRow = table.getSelectedRow();
+            section.removeMeetingTime(section.getMeetingTimes().get(selectedRow));
+            update();
+        }
+        else{
+            if(section == null) {
+                JOptionPane.showMessageDialog(null, "Need a Section to be Selected to Delete a Meeting Time!");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Need to Select a Meeting Time to Delete!");
+            }
+        }
     }
 
     @Override

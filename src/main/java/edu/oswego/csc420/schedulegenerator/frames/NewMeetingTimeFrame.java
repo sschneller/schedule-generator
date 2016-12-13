@@ -219,8 +219,59 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if((su.isSelected() || m.isSelected() || t.isSelected() || w.isSelected()
-                || r.isSelected() || f.isSelected() || s.isSelected()) && !(newLocation.getText().equals(""))) {
+        String errorMessage = "";
+
+        LocalTime start;
+        if(sap.getValue().equals("AM")) {
+            if((Integer) sh.getValue() == 12) {
+                start = LocalTime.of(0, (Integer) sm.getValue());
+            }
+            else{
+                start = LocalTime.of((Integer) sh.getValue(), (Integer) sm.getValue());
+            }
+        }
+        else{
+            if((Integer) sh.getValue() == 12) {
+                start = LocalTime.of((Integer) sh.getValue(), (Integer) sm.getValue());
+            }
+            else{
+                start = LocalTime.of((Integer) sh.getValue() + 12, (Integer) sm.getValue());
+            }
+        }
+        LocalTime end;
+        if(eap.getValue().equals("AM")) {
+            if((Integer) eh.getValue() == 12) {
+                end = LocalTime.of(0, (Integer) em.getValue());
+            }
+            else{
+                end = LocalTime.of((Integer) eh.getValue(), (Integer) em.getValue());
+            }
+        }
+        else{
+            if((Integer) eh.getValue() == 12) {
+                end = LocalTime.of((Integer) eh.getValue(), (Integer) em.getValue());
+            }
+            else{
+                end = LocalTime.of((Integer) eh.getValue() + 12, (Integer) em.getValue());
+            }
+        }
+
+        if(end.isBefore(start)){
+            errorMessage += "End time cannot be before start time!" + System.lineSeparator();
+        }
+        if(end.compareTo(start) == 0){
+            errorMessage += "Start and end time cannot be the same!" + System.lineSeparator();
+        }
+
+        if((!su.isSelected() && !m.isSelected() && !t.isSelected() && !w.isSelected()
+                && !r.isSelected() && !f.isSelected() && !s.isSelected())){
+            errorMessage += "Need to Select a Day!" + System.lineSeparator();
+        }
+        if(newLocation.getText().equals("")){
+            errorMessage += "Need to Enter a Location!" + System.lineSeparator();
+        }
+
+        if(errorMessage.equals("")) {
             ArrayList<DayOfWeek> dow = new ArrayList<>();
             if(su.isSelected()){
                 dow.add(DayOfWeek.SUNDAY);
@@ -238,43 +289,11 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
                 dow.add(DayOfWeek.SATURDAY);
             }
 
-            LocalTime start;
-            if(sap.getValue().equals("AM")) {
-                if((Integer) sh.getValue() == 12) {
-                    start = LocalTime.of(0, (Integer) sm.getValue());
-                }
-                else{
-                    start = LocalTime.of((Integer) sh.getValue(), (Integer) sm.getValue());
-                }
-            }
-            else{
-                if((Integer) sh.getValue() == 12) {
-                    start = LocalTime.of((Integer) sh.getValue(), (Integer) sm.getValue());
-                }
-                else{
-                    start = LocalTime.of((Integer) sh.getValue() + 12, (Integer) sm.getValue());
-                }
-            }
-            LocalTime end;
-            if(eap.getValue().equals("AM")) {
-                if((Integer) eh.getValue() == 12) {
-                    end = LocalTime.of(0, (Integer) em.getValue());
-                }
-                else{
-                    end = LocalTime.of((Integer) eh.getValue(), (Integer) em.getValue());
-                }
-            }
-            else{
-                if((Integer) eh.getValue() == 12) {
-                    end = LocalTime.of((Integer) eh.getValue(), (Integer) em.getValue());
-                }
-                else{
-                    end = LocalTime.of((Integer) eh.getValue() + 12, (Integer) em.getValue());
-                }
-            }
             DayOfWeek[] dayWeek = new DayOfWeek[dow.size()];
             dayWeek = dow.toArray(dayWeek);
+
             MeetingTime newMeetingTime = new MeetingTime(start, end, newLocation.getText(), dayWeek);
+
             if(editMode){
                 sectionEdit.removeMeetingTime(meetingTime);
                 sectionEdit.addMeetingTime(newMeetingTime);
@@ -285,6 +304,9 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
             this.setVisible(false);
             rootFrame.setDialogShown(false);
             rootFrame.repaint();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, errorMessage);
         }
     }
 }
