@@ -16,6 +16,9 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
+
+import static edu.oswego.csc420.schedulegenerator.JButton.*;
 
 public class GUI extends JFrame implements ActionListener {
     private final Generator generator;
@@ -42,10 +45,10 @@ public class GUI extends JFrame implements ActionListener {
         fileChooser.setFileFilter(new FileNameExtensionFilter("Course File", fileExtension));
         setLayout(new MigLayout("","[grow 100, fill][grow 1, fill][grow 1, fill]30%[grow 100, fill]","[grow,fill][]"));
         add(accordionPanel, "wrap, span");
-        add(newCourseBtn = new JButton("New Course", this));
-        add(importBtn = new JButton("Import", this));
-        add(exportBtn = new JButton("Export", this));
-        add(generateBtn = new JButton("Generate", this));
+        add(newCourseBtn = new JButton("New Course", ButtonStyle.PRIMARY, this));
+        add(importBtn = new JButton("Import", ButtonStyle.DEFAULT, this));
+        add(exportBtn = new JButton("Export", ButtonStyle.DEFAULT, this));
+        add(generateBtn = new JButton("Generate", ButtonStyle.SUCCESS, this));
     }
 
     @Override
@@ -81,7 +84,13 @@ public class GUI extends JFrame implements ActionListener {
             }
             case("Generate"): {
                 System.out.println("Generate Clicked!");
-                GeneratedScheduleFrame gsf = new GeneratedScheduleFrame(new ArrayList<>(generator.generate()));
+                Set<Schedule> scheduleSet = generator.generate();
+                scheduleSet.forEach(p -> {
+                    p.getSchedule().forEach(g ->
+                            g.getRight().getMeetingTimes().forEach(m -> System.out.println(m.getStart() + " - " + m.getEnd())));
+                    System.out.println("E: " + p.getEarliest() + " L: " + p.getLatest());});
+                System.out.println(generator.generate());
+                GeneratedScheduleFrame gsf = new GeneratedScheduleFrame(new ArrayList<>(scheduleSet));
                 gsf.setSize(890,650);
                 gsf.setLocationRelativeTo(null);
                 gsf.setVisible(true);
@@ -121,7 +130,7 @@ public class GUI extends JFrame implements ActionListener {
             remove(3);
             remove(4);
             validate();
-            add(new JButton("Delete Course", this), "span");
+            add(new JButton("Delete Course", ButtonStyle.DANGER, this), "span");
         }
         else {
             remove(1);

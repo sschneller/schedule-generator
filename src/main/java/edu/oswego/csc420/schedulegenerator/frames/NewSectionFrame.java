@@ -1,13 +1,23 @@
 package edu.oswego.csc420.schedulegenerator.frames;
 
+import edu.oswego.csc420.schedulegenerator.Colors;
 import edu.oswego.csc420.schedulegenerator.Course;
 import edu.oswego.csc420.schedulegenerator.GUI;
+import edu.oswego.csc420.schedulegenerator.JButton;
+import edu.oswego.csc420.schedulegenerator.JTextField;
 import edu.oswego.csc420.schedulegenerator.Section;
 import net.miginfocom.swing.MigLayout;
-import javax.swing.*;
-import java.awt.*;
+
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import static edu.oswego.csc420.schedulegenerator.JButton.ButtonStyle.PRIMARY;
 
 public class NewSectionFrame extends JDialog implements ActionListener {
 
@@ -23,16 +33,17 @@ public class NewSectionFrame extends JDialog implements ActionListener {
         rootFrame.setDialogShown(true);
         setUndecorated(true);
         course = cE;
+        getContentPane().setBackground(Colors.LIGHT_PRIMARY.getColor());
         setLayout(new MigLayout("","[grow,fill]",""));
         setMinimumSize(new Dimension(280, 200));
         // setTitle("New Section");
         add(new JLabel("Section #"),"wrap");
-        add(newSectionNum = new JTextField(),"wrap");
+        add(newSectionNum = new JTextField(""),"wrap");
         add(new JLabel("CRN"),"wrap");
-        add(newCRN = new JTextField(),"wrap");
+        add(newCRN = new JTextField(""),"wrap");
         add(new JLabel("Teacher"),"wrap");
-        add(newTeacher = new JTextField(),"wrap");
-        add(addSection = new JButton("Add Section"));
+        add(newTeacher = new JTextField(""),"wrap");
+        add(addSection = new JButton("Add Section", PRIMARY));
         addSection.addActionListener(this);
         this.setResizable(false);
         this.pack();
@@ -45,20 +56,21 @@ public class NewSectionFrame extends JDialog implements ActionListener {
         sec = section;
         rootFrame = (GUI)root;
         rootFrame.setDialogShown(true);
+        getContentPane().setBackground(Colors.LIGHT_PRIMARY.getColor());
         setUndecorated(true);
         setLayout(new MigLayout("","[grow,fill]",""));
         setMinimumSize(new Dimension(280, 200));
         // setTitle("New Section");
         add(new JLabel("Section #"),"wrap");
-        add(newSectionNum = new JTextField(),"wrap");
+        add(newSectionNum = new JTextField(""),"wrap");
         newSectionNum.setText(sec.getSectionNumber());
         add(new JLabel("CRN"),"wrap");
-        add(newCRN = new JTextField(),"wrap");
+        add(newCRN = new JTextField(""),"wrap");
         newCRN.setText(sec.getCrn());
         add(new JLabel("Teacher"),"wrap");
-        add(newTeacher = new JTextField(),"wrap");
+        add(newTeacher = new JTextField(""),"wrap");
         newTeacher.setText(sec.getTeacher());
-        add(editSection = new JButton("Finished Editing"));
+        add(editSection = new JButton("Finished Editing", PRIMARY));
         editSection.addActionListener(this);
         this.setResizable(false);
         this.pack();
@@ -105,6 +117,14 @@ public class NewSectionFrame extends JDialog implements ActionListener {
             else {
                 JOptionPane.showMessageDialog(null, errorMessage);
             }
+        }
+    }
+
+    private class JLabel extends javax.swing.JLabel {
+
+        private JLabel(final String text) {
+            super(text);
+            setForeground(Color.WHITE);
         }
     }
 }
