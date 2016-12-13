@@ -14,22 +14,20 @@ import java.util.ArrayList;
 
 public class GeneratedScheduleFrame extends JFrame {
     ArrayList<Schedule> schedules;
-    int currentSchedule = 0;
+    int currentSchedule = 1;
 
     int height, width, xDivider, yDivider;
     int earliestHour, latestHour;
 
     JButton back;
     JButton forward;
-
-    ArrayList<String> options = new ArrayList<>();
-    ArrayList<SectionExample> sectionExample = new ArrayList<>();
+    JLabel scheduleNumber;
 
     JPanel calendar = new JPanel(new MigLayout("insets 5 5", "[grow,fill][grow,fill][grow,fill][grow,fill][grow,fill][grow,fill][grow,fill]", "[][grow,fill]")) {
         @Override
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
-            Schedule s = schedules.get(currentSchedule);
+            Schedule s = schedules.get(currentSchedule - 1);
 
             earliestHour = s.getEarliest().getHour();
             latestHour = s.getLatest().getHour();
@@ -187,6 +185,7 @@ public class GeneratedScheduleFrame extends JFrame {
                 else {
                     currentSchedule = currentSchedule - 1;
                 }
+                scheduleNumber.setText(currentSchedule + "");
                 calendar.repaint();
             });
             forward.addActionListener(e -> {
@@ -196,20 +195,13 @@ public class GeneratedScheduleFrame extends JFrame {
                 else {
                     currentSchedule = currentSchedule + 1;
                 }
+                scheduleNumber.setText(currentSchedule + "");
                 calendar.repaint();
             });
 
             makenewfilehere.add(back, "cell 1 0");
             makenewfilehere.add(new JLabel("Schedule"), "cell 2 0");
-
-            for(int i = 0; i < schedules.size(); i++) {
-                options.add(i + 1 + "");
-            }
-
-            JComboBox<Object> comboBox = new JComboBox<>(options.toArray());
-            ((JLabel)comboBox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
-
-            makenewfilehere.add(comboBox, "cell 3 0");
+            makenewfilehere.add(scheduleNumber = new JLabel(currentSchedule + ""), "cell 3 0");
             makenewfilehere.add(forward, "cell 4 0");
         } catch (IOException e) {
             e.printStackTrace();
