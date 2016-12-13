@@ -89,7 +89,6 @@ public class Generator {
     private Set<Schedule> generate(final List<Course> courses, final Schedule schedule, final boolean isOptional) {
         // Check if there is no more courses
         if(courses.isEmpty()) {
-            System.out.println("EMPTYYYY");
             if(schedule.getSchedule().isEmpty()) {
                 return new HashSet<>();
             } else {

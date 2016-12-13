@@ -179,7 +179,7 @@ public class GeneratedScheduleFrame extends JFrame {
             forward.setOpaque(false);
 
             back.addActionListener(e -> {
-                if(currentSchedule - 1 < 0) {
+                if(currentSchedule - 2 < 0) {
                     currentSchedule = schedules.size();
                 }
                 else {

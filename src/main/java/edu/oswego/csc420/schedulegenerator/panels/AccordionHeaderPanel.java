@@ -53,18 +53,14 @@ public class AccordionHeaderPanel extends ClickablePanel {
                 Image i = new ImageIcon(ImageIO.read(new File("src\\main\\resources\\ic_expand_more_black_18dp.png"))).getImage();
                 g.drawImage(i, getWidth() - i.getWidth(null) - 10, getHeight()/2 - i.getHeight(null)/2, null);
             }
-            catch(IOException ioe) {
-                System.out.println("HI");
-            }
+            catch(IOException ioe) {}
         }
         else {
             try {
                 Image i = new ImageIcon(ImageIO.read(new File("src\\main\\resources\\ic_expand_less_black_18dp.png"))).getImage();
                 g.drawImage(i, getWidth() - i.getWidth(null) - 10, getHeight()/2 - i.getHeight(null)/2, null);
             }
-            catch(IOException ioe) {
-                System.out.println("HI");
-            }
+            catch(IOException ioe) {}
         }
     }
 }
