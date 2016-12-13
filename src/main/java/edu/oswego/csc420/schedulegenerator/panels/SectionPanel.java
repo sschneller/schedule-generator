@@ -32,7 +32,9 @@ public class SectionPanel extends AbstractSectionPanel<Section> {
 
     @Override
     public void onEditButtonClick() {
-
+        int selectedRow = table.getSelectedRow();
+        new NewSectionFrame(course.getSections().get(selectedRow), (JFrame)this.getTopLevelAncestor()).setVisible(true);
+        update();
     }
 
     @Override
