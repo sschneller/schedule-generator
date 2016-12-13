@@ -12,7 +12,7 @@ import java.awt.Dimension;
 public class CoursePanel extends UpdatablePanel {
     private final Course course;
     private final Runnable listener;
-    private final JCheckBox optional;
+//    private final JCheckBox optional;
     private final JTextField subject, number, name;
 
     public CoursePanel(final Course course, final Runnable listener) {
@@ -21,17 +21,17 @@ public class CoursePanel extends UpdatablePanel {
         this.number    = new JTextField(course.getCourseNumber(), t -> update());
         this.subject   = new JTextField(course.getSubject(), t -> update());
         this.listener  = listener;
-        this.optional  = new JCheckBox();
+//        this.optional  = new JCheckBox();
 
         setLayout(new MigLayout("","[grow,fill][grow,fill][grow,fill][grow,fill]","[][][grow,fill]"));
         add(new JLabel("Course Subject:"));
         add(new JLabel("Course Number:"));
-        add(new JLabel("Course Name:"));
-        add(new JLabel("Optional?"), "wrap");
+        add(new JLabel("Course Name:"), "span 2, wrap");
+//        add(new JLabel("Optional?"), "wrap");
         add(subject);
         add(number);
-        add(name);
-        add(optional, "wrap");
+        add(name, "span 2, wrap");
+//        add(optional, "wrap");
         final SectionInformationPanel sectionInformationPanel = new SectionInformationPanel();
         add(new SectionPanel(course, sectionInformationPanel), "span 2");
         add(sectionInformationPanel, "span 2");
@@ -45,7 +45,7 @@ public class CoursePanel extends UpdatablePanel {
         course.setName(name.getText());
         course.setSubject(subject.getText());
         course.setCourseNumber(number.getText());
-        course.setOptional(optional.isSelected());
+//        course.setOptional(optional.isSelected());
         listener.run();
         super.update();
     }

@@ -1,16 +1,30 @@
 package edu.oswego.csc420.schedulegenerator.frames;
 
+import edu.oswego.csc420.schedulegenerator.Colors;
 import edu.oswego.csc420.schedulegenerator.GUI;
+import edu.oswego.csc420.schedulegenerator.JButton;
+import edu.oswego.csc420.schedulegenerator.JTextField;
 import edu.oswego.csc420.schedulegenerator.MeetingTime;
 import edu.oswego.csc420.schedulegenerator.Section;
 import net.miginfocom.swing.MigLayout;
-import javax.swing.*;
-import java.awt.*;
+
+import javax.swing.BorderFactory;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SpinnerListModel;
+import javax.swing.SpinnerNumberModel;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import static edu.oswego.csc420.schedulegenerator.JButton.ButtonStyle.PRIMARY;
 
 public class NewMeetingTimeFrame extends JDialog implements ActionListener {
 
@@ -32,6 +46,7 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
         setLayout(new MigLayout("","[grow,fill]",""));
         setMinimumSize(new Dimension(280,200));
         setTitle("New Meeting Time");
+        getContentPane().setBackground(Colors.LIGHT_PRIMARY.getColor());
         setResizable(false);
         add(new JLabel(""));
         add(new JLabel("Hour"));
@@ -57,6 +72,7 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
         em.setEditor(editor4);
 
         JPanel panel = new JPanel(new MigLayout("insets 0","[grow,fill]","[grow,fill]"));
+        panel.setBackground(Colors.LIGHT_PRIMARY.getColor());
         panel.add(new JLabel(" Su"));
         panel.add(new JLabel(" Mo"));
         panel.add(new JLabel(" Tu"));
@@ -73,8 +89,8 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
         panel.add(s =  new JCheckBox());
         add(panel,"span 4,wrap");
         add(new JLabel("Location"), "wrap");
-        add(newLocation = new JTextField(),"span");
-        JButton addMeetingTime = new JButton("Add Meeting Time");
+        add(newLocation = new JTextField(""),"span");
+        JButton addMeetingTime = new JButton("Add Meeting Time", PRIMARY);
         addMeetingTime.addActionListener(this);
         add(addMeetingTime, "span");
         this.pack();
@@ -90,6 +106,7 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
         setUndecorated(true);
         sectionEdit = sE;
         meetingTime = mE;
+        getContentPane().setBackground(Colors.LIGHT_PRIMARY.getColor());
         setLayout(new MigLayout("","[grow,fill]",""));
         setMinimumSize(new Dimension(280,200));
         setTitle("New Meeting Time");
@@ -154,6 +171,7 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
         em.setEditor(editor4);
 
         JPanel panel = new JPanel(new MigLayout("insets 0","[grow,fill]","[grow,fill]"));
+        panel.setBackground(Colors.LIGHT_PRIMARY.getColor());
         panel.add(new JLabel(" Su"));
         panel.add(new JLabel(" Mo"));
         panel.add(new JLabel(" Tu"));
@@ -207,9 +225,9 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
 
         add(panel,"span 4,wrap");
         add(new JLabel("Location"), "wrap");
-        add(newLocation = new JTextField(),"span");
+        add(newLocation = new JTextField(""),"span");
         newLocation.setText(meetingTime.getLocation());
-        JButton editMeetingTime = new JButton("Finished Editing");
+        JButton editMeetingTime = new JButton("Finished Editing", PRIMARY);
         editMeetingTime.addActionListener(this);
         add(editMeetingTime, "span");
         this.pack();
@@ -309,4 +327,47 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
             JOptionPane.showMessageDialog(null, errorMessage);
         }
     }
+
+    private class JLabel extends javax.swing.JLabel {
+
+        private JLabel(final String text) {
+            super(text);
+            setForeground(Color.WHITE);
+        }
+    }
+
+    private class JCheckBox extends javax.swing.JCheckBox {
+
+        JCheckBox() {
+            setBackground(Colors.LIGHT_PRIMARY.getColor());
+        }
+
+        JCheckBox(final String text, final boolean value) {
+            super(text, value);
+            setBackground(Colors.LIGHT_PRIMARY.getColor());
+        }
+    }
+
+    private class JSpinner extends javax.swing.JSpinner {
+
+        JSpinner(final SpinnerNumberModel model) {
+            super(model);
+            ((JSpinner.DefaultEditor) getEditor()).getTextField().setBackground(Color.blue);
+            setStyle();
+        }
+
+        JSpinner(final SpinnerListModel model) {
+            super(model);
+            ((JSpinner.ListEditor) getEditor()).getTextField().setBackground(new Color(70,69,69));
+            setStyle();
+        }
+
+        private void setStyle() {
+            getEditor().getComponent(0).setForeground(Color.WHITE);
+            setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createEmptyBorder(),
+                    BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(70,69,69))));
+        }
+    }
+
 }

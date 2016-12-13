@@ -12,6 +12,8 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static edu.oswego.csc420.schedulegenerator.JButton.ButtonStyle.*;
+
 public abstract class AbstractSectionPanel<T> extends UpdatablePanel implements ActionListener {
     protected JTable<T> table;
     private final JButton newButton, editButton, deleteButton;
@@ -19,9 +21,9 @@ public abstract class AbstractSectionPanel<T> extends UpdatablePanel implements 
     AbstractSectionPanel(final String labelText, final String newButtonText, final String editButtonText, final String deleteButtonText, final String[] headers) {
         JLabel label = new JLabel(labelText, JLabel.CENTER);
         label.setForeground(Color.WHITE);
-        this.newButton = new JButton(newButtonText, this);
-        this.editButton = new JButton(editButtonText, this);
-        this.deleteButton = new JButton(deleteButtonText, this);
+        this.newButton = new JButton(newButtonText, PRIMARY, this);
+        this.editButton = new JButton(editButtonText, WARNING, this);
+        this.deleteButton = new JButton(deleteButtonText, DANGER, this);
         table = new JTable<>(headers, this::objectRowMapper, this::onRowSelected);
 
         setBackground(Colors.PRIMARY);

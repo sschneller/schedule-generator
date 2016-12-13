@@ -16,12 +16,11 @@ public class JButton extends javax.swing.JButton {
         super(icon);
     }
 
-    public JButton(final String text, final ActionListener actionListener) {
+    public JButton(final String text, final ButtonStyle style) {
         super(text);
         enabled = true;
-        addActionListener(actionListener);
-        setForeground(Colors.BUTTON_TEXT.getColor());
-        setBackground(Colors.BUTTON.getColor());
+        setForeground(style.getText());
+        setBackground(style.getPrimary());
         setRolloverEnabled(false);
         setFocusPainted(false);
         setBorderPainted(false);
@@ -44,17 +43,22 @@ public class JButton extends javax.swing.JButton {
             @Override
             public void mouseEntered(MouseEvent e) {
                 if(enabled) {
-                    JButton.this.setBackground(Colors.BUTTON_HOVER.getColor());
+                    JButton.this.setBackground(style.getHover());
                 }
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 if(enabled) {
-                    JButton.this.setBackground(Colors.BUTTON.getColor());
+                    JButton.this.setBackground(style.getPrimary());
                 }
             }
         });
+    }
+
+    public JButton(final String text, final ButtonStyle style, final ActionListener actionListener) {
+        this(text, style);
+        addActionListener(actionListener);
     }
 
     @Override
@@ -72,7 +76,7 @@ public class JButton extends javax.swing.JButton {
         super.paint(g);
     }
 
-    private enum ButtonStyle {
+    public enum ButtonStyle {
         DEFAULT(new Color(70,69, 69), new Color(44, 44, 44)),
         PRIMARY(new Color(55,90,127), new Color(40, 65, 91)),
         SUCCESS(new Color(0, 188, 140), new Color(0, 137, 102)),
@@ -83,7 +87,7 @@ public class JButton extends javax.swing.JButton {
         final Color text, hover, primary;
 
         ButtonStyle(final Color primary, final Color hover) {
-            this.text    = Color.WHITE;
+            this.text    = Colors.LIGHT_PRIMARY.getColor();
             this.hover   = hover;
             this.primary = primary;
         }

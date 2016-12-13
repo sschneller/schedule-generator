@@ -6,14 +6,7 @@ public enum  Colors {
     DARK_PRIMARY(55, 90, 127),
     LIGHT_PRIMARY(34,34,34),
     PRIMARY(48,48,48),
-    ACCENT(70,69,69),
-    BUTTON(55,90,127),
-    BUTTON_HOVER(40,65,91),
-    BUTTON_TEXT(Color.WHITE),
-    BUTTON_DISABLED(47,70,94),
-    BUTTON_DISABLED_TEXT(162,165,167),
-    TEXT_FIELD(70,69,69),
-    TEXT_FIELD_TEXT(Color.WHITE);
+    ACCENT(70,69,69);
 
     final Color color;
 
