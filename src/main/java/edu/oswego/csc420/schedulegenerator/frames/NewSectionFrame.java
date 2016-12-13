@@ -86,6 +86,8 @@ public class NewSectionFrame extends JDialog implements ActionListener {
                 course.addSection(createdSection);
                 new NewMeetingTimeFrame(createdSection, rootFrame).setVisible(true);
                 this.setVisible(false);
+                rootFrame.setDialogShown(false);
+                rootFrame.repaint();
             }
             else{
                 JOptionPane.showMessageDialog(null, errorMessage);
@@ -97,6 +99,8 @@ public class NewSectionFrame extends JDialog implements ActionListener {
                 sec.setCrn(newCRN.getText());
                 sec.setTeacher(newTeacher.getText());
                 this.setVisible(false);
+                rootFrame.setDialogShown(false);
+                rootFrame.repaint();
             }
             else {
                 JOptionPane.showMessageDialog(null, errorMessage);
