@@ -68,24 +68,38 @@ public class NewSectionFrame extends JDialog implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String errorMessage = "";
+
+        if(newSectionNum.getText().equals("")){
+            errorMessage += "Need to Enter a Section Number!" + System.lineSeparator();
+        }
+        if(newCRN.getText().equals("")){
+            errorMessage += "Need to Enter a CRN!" + System.lineSeparator();
+        }
+        if(newTeacher.getText().equals("")){
+            errorMessage += "Need to Enter a Teacher!" + System.lineSeparator();
+        }
+
         if(e.getSource() == addSection) {
-            if (!(newSectionNum.getText().equals("")) && !(newCRN.getText().equals("")) && !(newTeacher.getText().equals(""))) {
+            if (errorMessage.equals("")) {
                 createdSection = new Section(newSectionNum.getText(), newCRN.getText(), newTeacher.getText());
                 course.addSection(createdSection);
                 new NewMeetingTimeFrame(createdSection, rootFrame).setVisible(true);
                 this.setVisible(false);
-            } else {
-                //Add pop up message saying to enter field
+            }
+            else{
+                JOptionPane.showMessageDialog(null, errorMessage);
             }
         }
         if(e.getSource() == editSection) {
-            if (!(newSectionNum.getText().equals("")) && !(newCRN.getText().equals("")) && !(newTeacher.getText().equals(""))) {
+            if (errorMessage.equals("")) {
                 sec.setSectionNumber(newSectionNum.getText());
                 sec.setCrn(newCRN.getText());
                 sec.setTeacher(newTeacher.getText());
                 this.setVisible(false);
-            } else {
-                //Add pop up message saying to enter field
+            }
+            else {
+                JOptionPane.showMessageDialog(null, errorMessage);
             }
         }
     }

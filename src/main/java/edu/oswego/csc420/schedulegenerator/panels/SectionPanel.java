@@ -26,23 +26,33 @@ public class SectionPanel extends AbstractSectionPanel<Section> {
 
     @Override
     public void onNewButtonClick() {
-        new NewSectionFrame(course, (JFrame)this.getTopLevelAncestor()).setVisible(true);
+        new NewSectionFrame(course, (JFrame) this.getTopLevelAncestor()).setVisible(true);
         update();
     }
 
     @Override
     public void onEditButtonClick() {
-        int selectedRow = table.getSelectedRow();
-        new NewSectionFrame(course.getSections().get(selectedRow), (JFrame)this.getTopLevelAncestor()).setVisible(true);
-        update();
+        if(table.getSelectedRow() != -1){
+            int selectedRow = table.getSelectedRow();
+            new NewSectionFrame(course.getSections().get(selectedRow), (JFrame) this.getTopLevelAncestor()).setVisible(true);
+            update();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "A Section Needs to Be Selected to Edit!");
+        }
     }
 
     @Override
     public void onDeleteButtonClick() {
-        int selectedRow = table.getSelectedRow();
-        course.removeSection(course.getSections().get(selectedRow));
-        sectionInformationPanel.setSection(null);
-        update();
+        if(table.getSelectedRow() != -1){
+            int selectedRow = table.getSelectedRow();
+            course.removeSection(course.getSections().get(selectedRow));
+            sectionInformationPanel.setSection(null);
+            update();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "A Section Needs to Be Selected to Delete!");
+        }
     }
 
     @Override
