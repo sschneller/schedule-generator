@@ -4,10 +4,8 @@ import com.google.common.io.Files;
 import edu.oswego.csc420.schedulegenerator.panels.AccordionPanel;
 import edu.oswego.csc420.schedulegenerator.frames.GeneratedScheduleFrame;
 import net.miginfocom.swing.MigLayout;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
+
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -88,12 +86,16 @@ public class GUI extends JFrame implements ActionListener {
                 scheduleSet.forEach(p -> {
                     p.getSchedule().forEach(g ->
                             g.getRight().getMeetingTimes().forEach(m -> System.out.println(m.getStart() + " - " + m.getEnd())));
-                    System.out.println("E: " + p.getEarliest() + " L: " + p.getLatest());});
-                System.out.println(generator.generate());
-                GeneratedScheduleFrame gsf = new GeneratedScheduleFrame(new ArrayList<>(scheduleSet));
-                gsf.setSize(890,650);
-                gsf.setLocationRelativeTo(null);
-                gsf.setVisible(true);
+                });
+                if(scheduleSet.size() < 1) {
+                    JOptionPane.showMessageDialog(null, "No Schedules Were Able To Be Generated With This Class Configuration");
+                }
+                else {
+                    GeneratedScheduleFrame gsf = new GeneratedScheduleFrame(new ArrayList<>(scheduleSet));
+                    gsf.setSize(890, 650);
+                    gsf.setLocationRelativeTo(null);
+                    gsf.setVisible(true);
+                }
                 break;
             }
             case("Delete Course"): {

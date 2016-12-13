@@ -87,7 +87,7 @@ public class JButton extends javax.swing.JButton {
         final Color text, hover, primary;
 
         ButtonStyle(final Color primary, final Color hover) {
-            this.text    = Colors.LIGHT_PRIMARY.getColor();
+            this.text    = Color.WHITE;
             this.hover   = hover;
             this.primary = primary;
         }
