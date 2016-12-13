@@ -38,6 +38,7 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
         add(new JLabel("Minute"));
         add(new JLabel(""),"wrap");
         add(new JLabel("Start:"));
+
         add(sh = new JSpinner(new SpinnerNumberModel(8, 1, 12, 1)));
         add(sm = new JSpinner(new SpinnerNumberModel(0, 0, 60, 1)));
         add(sap = new JSpinner(new SpinnerListModel(new String[]{"AM","PM"})),"wrap");
@@ -45,6 +46,16 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
         add(eh = new JSpinner(new SpinnerNumberModel(9, 1, 12, 1)));
         add(em = new JSpinner(new SpinnerNumberModel(0, 0, 60, 1)));
         add(eap = new JSpinner(new SpinnerListModel(new String[]{"AM","PM"})),"wrap");
+
+        JSpinner.NumberEditor editor1 = new JSpinner.NumberEditor(sh, "00");
+        sh.setEditor(editor1);
+        JSpinner.NumberEditor editor2 = new JSpinner.NumberEditor(sm, "00");
+        sm.setEditor(editor2);
+        JSpinner.NumberEditor editor3 = new JSpinner.NumberEditor(eh, "00");
+        eh.setEditor(editor3);
+        JSpinner.NumberEditor editor4 = new JSpinner.NumberEditor(em, "00");
+        em.setEditor(editor4);
+
         JPanel panel = new JPanel(new MigLayout("insets 0","[grow,fill]","[grow,fill]"));
         panel.add(new JLabel(" Su"));
         panel.add(new JLabel(" Mo"));
@@ -88,6 +99,7 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
         add(new JLabel("Minute"));
         add(new JLabel(""),"wrap");
         add(new JLabel("Start:"));
+
         int startingHour = meetingTime.getStart().getHour();
         String[] startingAMPM;
         if(startingHour > 12 && startingHour < 24){
@@ -104,10 +116,13 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
         else{
             startingAMPM = new String[]{"AM", "PM"};
         }
+
         add(sh = new JSpinner(new SpinnerNumberModel(startingHour, 1, 12, 1)));
         add(sm = new JSpinner(new SpinnerNumberModel(meetingTime.getStart().getMinute(), 0, 60, 1)));
         add(sap = new JSpinner(new SpinnerListModel(startingAMPM)),"wrap");
+
         add(new JLabel("End:"));
+
         int endingHour = meetingTime.getEnd().getHour();
         String[] endingAMPM;
         if(endingHour > 12 && endingHour < 24){
@@ -124,9 +139,20 @@ public class NewMeetingTimeFrame extends JDialog implements ActionListener {
         else{
             endingAMPM = new String[]{"AM", "PM"};
         }
+
         add(eh = new JSpinner(new SpinnerNumberModel(endingHour, 1, 12, 1)));
         add(em = new JSpinner(new SpinnerNumberModel(meetingTime.getEnd().getMinute(), 0, 60, 1)));
         add(eap = new JSpinner(new SpinnerListModel(endingAMPM)),"wrap");
+
+        JSpinner.NumberEditor editor1 = new JSpinner.NumberEditor(sh, "00");
+        sh.setEditor(editor1);
+        JSpinner.NumberEditor editor2 = new JSpinner.NumberEditor(sm, "00");
+        sm.setEditor(editor2);
+        JSpinner.NumberEditor editor3 = new JSpinner.NumberEditor(eh, "00");
+        eh.setEditor(editor3);
+        JSpinner.NumberEditor editor4 = new JSpinner.NumberEditor(em, "00");
+        em.setEditor(editor4);
+
         JPanel panel = new JPanel(new MigLayout("insets 0","[grow,fill]","[grow,fill]"));
         panel.add(new JLabel(" Su"));
         panel.add(new JLabel(" Mo"));

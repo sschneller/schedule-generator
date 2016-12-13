@@ -19,13 +19,13 @@ import java.util.function.Function;
  * A wrapper for course and section objects.
  */
 public class Schedule implements Comparable<Schedule> {
-    private final List<Pair<Course,Section>> schedule;
+    private final Set<Pair<Course,Section>> schedule;
 
     /**
      * Constructor.
      */
     public Schedule() {
-        schedule = new ArrayList<>();
+        schedule = new HashSet<>();
     }
 
     /**
@@ -34,7 +34,7 @@ public class Schedule implements Comparable<Schedule> {
      * @param schedule the schedule to clone from.
      */
     private Schedule(final Schedule schedule) {
-        this.schedule = new ArrayList<>(schedule.getSchedule());
+        this.schedule = new HashSet<>(schedule.getSchedule());
     }
 
     /**
@@ -57,14 +57,16 @@ public class Schedule implements Comparable<Schedule> {
      * @return true if the section can fit in this schedule.
      */
     public boolean fits(final Section section) {
-        return schedule.parallelStream()
+        boolean fits = schedule.parallelStream()
                 .flatMap(s -> s.getValue()
                         .getMeetingTimes()
-                        .parallelStream())
+                        .stream())
                 .noneMatch(m -> section.getMeetingTimes()
-                        .parallelStream()
-                        .anyMatch(meetingTime -> meetingTime
-                                .overlaps(m)));
+                        .stream()
+                        .anyMatch(meetingTime -> meetingTime.overlaps(m)));
+
+        System.out.println("Fits: " + fits);
+        return fits;
     }
 
     /**
@@ -72,8 +74,8 @@ public class Schedule implements Comparable<Schedule> {
      *
      * @return a set of Course-Section pairs that represents a schedule.
      */
-    public List<Pair<Course,Section>> getSchedule() {
-        return Collections.unmodifiableList(schedule);
+    public Set<Pair<Course,Section>> getSchedule() {
+        return Collections.unmodifiableSet(schedule);
     }
 
     /**

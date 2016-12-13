@@ -5,7 +5,7 @@ import edu.oswego.csc420.schedulegenerator.Course;
 import edu.oswego.csc420.schedulegenerator.JTextField;
 import net.miginfocom.swing.MigLayout;
 
-import javax.swing.*;
+import javax.swing.JCheckBox;
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -16,13 +16,12 @@ public class CoursePanel extends UpdatablePanel {
     private final JTextField subject, number, name;
 
     public CoursePanel(final Course course, final Runnable listener) {
-        this.course   = course;
-        this.name     = new JTextField(course.getName(), t -> update());
-        this.number   = new JTextField(course.getCourseNumber(), t -> update());
-        this.subject  = new JTextField(course.getSubject(), t -> update());
-        this.listener = listener;
-        this.optional = new JCheckBox();
-        optional.setOpaque(true);
+        this.course    = course;
+        this.name      = new JTextField(course.getName(), t -> update());
+        this.number    = new JTextField(course.getCourseNumber(), t -> update());
+        this.subject   = new JTextField(course.getSubject(), t -> update());
+        this.listener  = listener;
+        this.optional  = new JCheckBox();
 
         setLayout(new MigLayout("","[grow,fill][grow,fill][grow,fill][grow,fill]","[][][grow,fill]"));
         add(new JLabel("Course Subject:"));
