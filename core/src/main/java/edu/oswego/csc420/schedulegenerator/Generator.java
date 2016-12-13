@@ -46,29 +46,35 @@ public class Generator {
             }
         });
 
-        // Generate the optional class schedules
-        final Set<Schedule> optionalSchedules = generate(Collections.unmodifiableList(optional), new Schedule(), true);
+        System.out.println("Mandatory: " + mandatory.size());
+        System.out.println("Optional: " + optional.size());
 
-        // Check for left out optional classes
-        optional.parallelStream()
-                .flatMap(c -> c.getSections().parallelStream()
-                        .map(s -> Pair.of(c,s)))
-                .filter(p -> optionalSchedules.parallelStream()
-                        .noneMatch(s -> s.getSchedule().contains(p)))
-                .map(p -> {
-                    final Schedule s = new Schedule();
-                    s.addCourse(p.getLeft(), p.getRight());
-                    return s;})
-                .forEach(optionalSchedules::add);
+        System.out.println("Schedule:");
+        return generate(Collections.unmodifiableList(mandatory), new Schedule(), false);
 
-        // Create the schedules with optional classes
-        return generate(Collections.unmodifiableList(mandatory), new Schedule(), false).parallelStream()
-                .flatMap(s -> optionalSchedules.parallelStream().map(os -> {
-            final Schedule schedule = s.duplicate();
-            os.getSchedule().stream()
-                    .filter(p -> s.fits(p.getRight())).forEach(p -> schedule.addCourse(p.getLeft(), p.getRight()));
-            return schedule;
-        })).collect(Collectors.toSet());
+//        // Generate the optional class schedules
+//        final Set<Schedule> optionalSchedules = generate(Collections.unmodifiableList(optional), new Schedule(), true);
+//
+//        // Check for left out optional classes
+//        optional.parallelStream()
+//                .flatMap(c -> c.getSections().parallelStream()
+//                        .map(s -> Pair.of(c,s)))
+//                .filter(p -> optionalSchedules.parallelStream()
+//                        .noneMatch(s -> s.getSchedule().contains(p)))
+//                .map(p -> {
+//                    final Schedule s = new Schedule();
+//                    s.addCourse(p.getLeft(), p.getRight());
+//                    return s;})
+//                .forEach(optionalSchedules::add);
+//
+//        // Create the schedules with optional classes
+//        return generate(Collections.unmodifiableList(mandatory), new Schedule(), false).stream()
+//                .flatMap(s -> optionalSchedules.parallelStream().map(os -> {
+//            final Schedule schedule = s.duplicate();
+//            os.getSchedule().stream()
+//                    .filter(p -> s.fits(p.getRight())).forEach(p -> schedule.addCourse(p.getLeft(), p.getRight()));
+//            return schedule;
+//        })).collect(Collectors.toSet());
     }
 
     /**
@@ -83,6 +89,7 @@ public class Generator {
     private Set<Schedule> generate(final List<Course> courses, final Schedule schedule, final boolean isOptional) {
         // Check if there is no more courses
         if(courses.isEmpty()) {
+            System.out.println("EMPTYYYY");
             if(schedule.getSchedule().isEmpty()) {
                 return new HashSet<>();
             } else {
@@ -93,12 +100,18 @@ public class Generator {
         // Get the current course
         final Course course = courses.get(0);
         // Remove the current course from the courses list
-        final List<Course> coursesLeft = courses.subList(1, courses.size() - 1);
+        System.out.println("Size: " + courses.size() + " Begin: " + Math.min(1,courses.size() - 1));
+        final List<Course> coursesLeft = courses.size() == 1 ? new ArrayList<>(1) : courses.subList(1, courses.size());
         // Create the schedules set
-        final Set<Schedule> schedules = new ConcurrentSkipListSet<>();
+        final Set<Schedule> schedules = course.getSections().size() == 0 ? new HashSet<>(Collections.singletonList(schedule)) : new HashSet<>();
+
+        System.out.println("Current Course: " + course.getName());
+        System.out.println("\tSections: " + course.getSections().size());
+        System.out.println("\tCourses Left: " + coursesLeft.size());
 
         // Iterate through the sections
-        course.getSections().parallelStream().forEach(s -> {
+        course.getSections().forEach(s -> {
+            System.out.println("\tSection: " + s.getTeacher() + " - " + s.getSectionNumber());
             if(schedule.fits(s)) {
                 final Schedule newSchedule = schedule.duplicate();
                 newSchedule.addCourse(course, s);
