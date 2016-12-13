@@ -157,6 +157,46 @@ public class MeetingTime {
 
     @Override
     public String toString() {
-        return start.toString() + " - " + end.toString() + " " + days.stream().map(d -> d.getDisplayName(TextStyle.NARROW, Locale.US)).collect(Collectors.joining());
+        String startTime, endTime, startMinutes, endMinutes;
+
+        if(start.getMinute() < 10) {
+            startMinutes = "0" + start.getMinute();
+        }
+        else{
+            startMinutes = start.getMinute() + "";
+        }
+        if(end.getMinute() < 10) {
+            endMinutes = "0" + end.getMinute();
+        }
+        else{
+            endMinutes = end.getMinute() + "";
+        }
+
+        if(start.getHour() == 0){
+            startTime = "12:" + startMinutes + " AM";
+        }
+        else if(start.getHour() == 12){
+            startTime = "12:" + startMinutes + " PM";
+        }
+        else if(start.getHour() > 12){
+            startTime = start.getHour() - 12 + ":" + startMinutes + " PM";
+        }
+        else{
+            startTime = start.getHour() + ":" + startMinutes + " AM";
+        }
+
+        if(end.getHour() == 0){
+            endTime = "12:" + endMinutes + " AM";
+        }
+        else if(end.getHour() == 12){
+            endTime = "12:" + endMinutes + " PM";
+        }
+        else if(end.getHour() > 12){
+            endTime = end.getHour() - 12 + ":" + endMinutes + " PM";
+        }
+        else{
+            endTime = end.getHour() + ":" + endMinutes + " AM";
+        }
+        return startTime + " - " + endTime;
     }
 }

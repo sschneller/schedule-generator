@@ -1,6 +1,7 @@
 package edu.oswego.csc420.schedulegenerator.panels;
 
 import edu.oswego.csc420.schedulegenerator.Course;
+import edu.oswego.csc420.schedulegenerator.GUI;
 import net.miginfocom.swing.MigLayout;
 
 import java.awt.event.MouseEvent;

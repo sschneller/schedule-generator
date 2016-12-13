@@ -101,7 +101,7 @@ public class SectionInformationPanel extends AbstractSectionPanel<MeetingTime> {
             startTime = "12:" + startMinutes + " PM";
         }
         else if(object.getStart().getHour() > 12){
-            startTime = object.getStart().getHour() - 12 + ":" + startMinutes + "PM";
+            startTime = object.getStart().getHour() - 12 + ":" + startMinutes + " PM";
         }
         else{
             startTime = object.getStart().getHour() + ":" + startMinutes + " AM";

@@ -4,7 +4,6 @@ import com.google.common.io.Files;
 import edu.oswego.csc420.schedulegenerator.panels.AccordionPanel;
 import edu.oswego.csc420.schedulegenerator.frames.GeneratedScheduleFrame;
 import net.miginfocom.swing.MigLayout;
-
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -24,6 +23,7 @@ public class GUI extends JFrame implements ActionListener {
     private final JFileChooser fileChooser;
     private static final String fileExtension = "csg";
     private boolean dialogShown = false;
+    private JButton newCourseBtn, importBtn, exportBtn, generateBtn;
 
     public static void main(String[] args) {
         final GUI gui = new GUI();
@@ -41,12 +41,11 @@ public class GUI extends JFrame implements ActionListener {
         fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new FileNameExtensionFilter("Course File", fileExtension));
         setLayout(new MigLayout("","[grow 100, fill][grow 1, fill][grow 1, fill]30%[grow 100, fill]","[grow,fill][]"));
-
         add(accordionPanel, "wrap, span");
-        add(new JButton("New Course", this));
-        add(new JButton("Import", this));
-        add(new JButton("Export", this));
-        add(new JButton("Generate", this));
+        add(newCourseBtn = new JButton("New Course", this));
+        add(importBtn = new JButton("Import", this));
+        add(exportBtn = new JButton("Export", this));
+        add(generateBtn = new JButton("Generate", this));
     }
 
     @Override
@@ -113,6 +112,24 @@ public class GUI extends JFrame implements ActionListener {
 
     public void setDialogShown(boolean state) {
         dialogShown = state;
+    }
+
+    public void switchDeleteMode() {
+        if(getComponentCount() > 2) {
+            remove(1);
+            remove(2);
+            remove(3);
+            remove(4);
+            validate();
+            add(new JButton("Delete Course", this), "span");
+        }
+        else {
+            remove(1);
+            add(newCourseBtn);
+            add(importBtn);
+            add(exportBtn);
+            add(generateBtn);
+        }
     }
 
     @Override

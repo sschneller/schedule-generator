@@ -101,116 +101,62 @@ public class GeneratedScheduleFrame extends JFrame {
                                 g.setColor(Color.PINK);
                                 g.fillRect(1, (31) + (mult * yDivider) + (partial), xDivider - 1, ((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial)));
                                 g.setColor(Color.BLACK);
-                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName(), SUNDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
+                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber(), SUNDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
+                                g.drawString(mt.toString(), SUNDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(mt.toString()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2 + g.getFontMetrics().getHeight());
                                 break;
                             }
                             case MONDAY: {
                                 g.setColor(Color.PINK);
                                 g.fillRect(1 + xDivider, (31) + (mult * yDivider) + partial, xDivider - 1, ((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial)));
                                 g.setColor(Color.BLACK);
-                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName(), MONDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
+                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber(), MONDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
+                                g.drawString(mt.toString(), MONDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(mt.toString()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2 + g.getFontMetrics().getHeight());
                                 break;
                             }
                             case TUESDAY: {
                                 g.setColor(Color.PINK);
                                 g.fillRect(1 + 2 * xDivider, (31) + (mult * yDivider) + partial, xDivider - 1, ((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial)));
                                 g.setColor(Color.BLACK);
-                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName(), TUESDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
+                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber(), TUESDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
+                                g.drawString(mt.toString(), TUESDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(mt.toString()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2 + g.getFontMetrics().getHeight());
                                 break;
                             }
                             case WEDNESDAY: {
                                 g.setColor(Color.PINK);
                                 g.fillRect(1 + 3 * xDivider, (31) + (mult * yDivider) + partial, xDivider - 1, ((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial)));
                                 g.setColor(Color.BLACK);
-                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName(), WEDNESDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
+                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber(), WEDNESDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
+                                g.drawString(mt.toString(), WEDNESDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(mt.toString()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2 + g.getFontMetrics().getHeight());
                                 break;
                             }
                             case THURSDAY: {
                                 g.setColor(Color.PINK);
                                 g.fillRect(1 + 4 * xDivider, (31) + (mult * yDivider) + partial, xDivider - 1, ((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial)));
                                 g.setColor(Color.BLACK);
-                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName(), THURSDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
+                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber(), THURSDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
+                                g.drawString(mt.toString(), THURSDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(mt.toString()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2 + g.getFontMetrics().getHeight());
                                 break;
                             }
                             case FRIDAY: {
                                 g.setColor(Color.PINK);
                                 g.fillRect(1 + 5 * xDivider, (31) + (mult * yDivider) + partial, xDivider - 1, ((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial)));
                                 g.setColor(Color.BLACK);
-                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName(), FRIDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
+                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber(), FRIDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
+                                g.drawString(mt.toString(), FRIDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(mt.toString()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2 + g.getFontMetrics().getHeight());
                                 break;
                             }
                             case SATURDAY: {
                                 g.setColor(Color.PINK);
                                 g.fillRect(1 + 6 * xDivider, (31) + (mult * yDivider) + partial, xDivider - 1, ((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial)));
                                 g.setColor(Color.BLACK);
-                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName(), SATURDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
+                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber(), SATURDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
+                                g.drawString(mt.toString(), SATURDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(mt.toString()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2 + g.getFontMetrics().getHeight());
                                 break;
                             }
                         }
                     }
                 }
             }
-
-
-//            for(SectionExample se : sectionExample) {
-//                int mult = Integer.parseInt(se.meetingTimes[0][0].substring(0, 2)) - (earliestHour - 1);
-//                int partial = (int) ((Double.parseDouble(se.meetingTimes[0][0].substring(3)) / 60.0) * yDivider);
-//                int mult2 = Integer.parseInt(se.meetingTimes[0][1].substring(0, 2)) - (earliestHour - 1);
-//                int partial2 = (int) ((Double.parseDouble(se.meetingTimes[0][1].substring(3)) / 60.0) * yDivider);
-//                for(String a : se.daysOfWeek) {
-//                    switch (a) {
-//                        case "Su": {
-//                            g.setColor(Color.PINK);
-//                            g.fillRect(1, (31) + (mult * yDivider) + (partial), xDivider - 1, ((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial)));
-//                            g.setColor(Color.BLACK);
-//                            g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName(), SUNDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
-//                            break;
-//                        }
-//                        case "M": {
-//                            g.setColor(Color.PINK);
-//                            g.fillRect(1 + xDivider, (31) + (mult * yDivider) + partial, xDivider - 1, ((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial)));
-//                            g.setColor(Color.BLACK);
-//                            g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName(), MONDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
-//                            break;
-//                        }
-//                        case "T": {
-//                            g.setColor(Color.PINK);
-//                            g.fillRect(1 + 2 * xDivider, (31) + (mult * yDivider) + partial, xDivider - 1, ((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial)));
-//                            g.setColor(Color.BLACK);
-//                            g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName(), TUESDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
-//                            break;
-//                        }
-//                        case "W": {
-//                            g.setColor(Color.PINK);
-//                            g.fillRect(1 + 3 * xDivider, (31) + (mult * yDivider) + partial, xDivider - 1, ((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial)));
-//                            g.setColor(Color.BLACK);
-//                            g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName(), WEDNESDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
-//                            break;
-//                        }
-//                        case "R": {
-//                            g.setColor(Color.PINK);
-//                            g.fillRect(1 + 4 * xDivider, (31) + (mult * yDivider) + partial, xDivider - 1, ((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial)));
-//                            g.setColor(Color.BLACK);
-//                            g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName(), THURSDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
-//                            break;
-//                        }
-//                        case "F": {
-//                            g.setColor(Color.PINK);
-//                            g.fillRect(1 + 5 * xDivider, (31) + (mult * yDivider) + partial, xDivider - 1, ((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial)));
-//                            g.setColor(Color.BLACK);
-//                            g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName(), FRIDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
-//                            break;
-//                        }
-//                        case "Sa": {
-//                            g.setColor(Color.PINK);
-//                            g.fillRect(1 + 6 * xDivider, (31) + (mult * yDivider) + partial, xDivider - 1, ((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial)));
-//                            g.setColor(Color.BLACK);
-//                            g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName(), SATURDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + "\n"  + p.getLeft().getName()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
-//                            break;
-//                        }
-//                    }
-//                }
-//            }
         }
     };
 
@@ -218,11 +164,6 @@ public class GeneratedScheduleFrame extends JFrame {
         setLayout(new MigLayout("", "[grow,fill]", "[][grow,fill]"));
 
         schedules = s;
-
-        sectionExample.add(new SectionExample("PSY305", new String[]{"M", "W", "F"}, new String[][]{{"11.30", "12.25"}}));
-        sectionExample.add(new SectionExample("CSC385", new String[]{"M", "W", "F"}, new String[][]{{"13.50", "14.45"}}));
-        sectionExample.add(new SectionExample("MAT318", new String[]{"T", "R"}, new String[][]{{"11.10", "12.30"}}));
-        sectionExample.add(new SectionExample("CSC420", new String[]{"T", "R"}, new String[][]{{"14.20", "15.40"}}));
 
         JPanel makenewfilehere = new JPanel(new MigLayout("", "[grow,fill][][][][][grow,fill]", "[]"));
         try {
@@ -240,7 +181,7 @@ public class GeneratedScheduleFrame extends JFrame {
             forward.setOpaque(false);
 
             back.addActionListener(e -> {
-                if(currentSchedule - 1 < 1) {
+                if(currentSchedule - 1 < 0) {
                     currentSchedule = schedules.size();
                 }
                 else {
@@ -262,7 +203,7 @@ public class GeneratedScheduleFrame extends JFrame {
             makenewfilehere.add(new JLabel("Schedule"), "cell 2 0");
 
             for(int i = 0; i < schedules.size(); i++) {
-                options.add(i + "");
+                options.add(i + 1 + "");
             }
 
             JComboBox<Object> comboBox = new JComboBox<>(options.toArray());

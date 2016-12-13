@@ -67,7 +67,8 @@ public class AccordionPanel extends UpdatablePanel {
         } else {
             final int entryIndex = entries.indexOf(currentEntry);
             currentEntry.expand();
-            viewableEntries.addAll(entries.subList(Math.max(0, entryIndex - 1), Math.min(entries.size(), entryIndex + 2)));
+            viewableEntries.add(currentEntry);
+            // viewableEntries.addAll(entries.subList(Math.max(0, entryIndex - 1), Math.min(entries.size(), entryIndex + 2)));
             if(entryIndex == 0) {
                 ((MigLayout) getLayout()).setRowConstraints("[grow,fill][]");
             } else if(entryIndex == entries.size() - 1) {
