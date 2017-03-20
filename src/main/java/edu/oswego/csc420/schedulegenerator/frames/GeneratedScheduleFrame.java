@@ -89,7 +89,7 @@ public class GeneratedScheduleFrame extends JFrame {
 
             g.setFont(new Font(Font.DIALOG, Font.BOLD, 12));
 
-            for(Pair<Course, Section> p :  s.getSchedule()) {
+            for(Pair<Course, Section> p : s.getSchedule()) {
                 for(MeetingTime mt : p.getRight().getMeetingTimes()) {
                     int mult = mt.getStart().getHour() - (earliestHour - 1);
                     int partial = (int) ((mt.getStart().getMinute() / 60.0) * yDivider);
@@ -101,7 +101,7 @@ public class GeneratedScheduleFrame extends JFrame {
                                 g.setColor(Colors.DARK_PRIMARY.getColor());
                                 g.fillRect(1, (31) + (mult * yDivider) + (partial), xDivider - 1, ((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial)));
                                 g.setColor(Color.WHITE);
-                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber(), SUNDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
+                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + " - " + p.getRight().getSectionNumber(), SUNDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + " - " + p.getRight().getSectionNumber()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
                                 g.drawString(mt.toString(), SUNDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(mt.toString()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2 + g.getFontMetrics().getHeight());
                                 break;
                             }
@@ -109,7 +109,7 @@ public class GeneratedScheduleFrame extends JFrame {
                                 g.setColor(Colors.DARK_PRIMARY.getColor());
                                 g.fillRect(1 + xDivider, (31) + (mult * yDivider) + partial, xDivider - 1, ((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial)));
                                 g.setColor(Color.WHITE);
-                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber(), MONDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
+                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + " - " + p.getRight().getSectionNumber(), MONDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + " - " + p.getRight().getSectionNumber()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
                                 g.drawString(mt.toString(), MONDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(mt.toString()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2 + g.getFontMetrics().getHeight());
                                 break;
                             }
@@ -117,7 +117,7 @@ public class GeneratedScheduleFrame extends JFrame {
                                 g.setColor(Colors.DARK_PRIMARY.getColor());
                                 g.fillRect(1 + 2 * xDivider, (31) + (mult * yDivider) + partial, xDivider - 1, ((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial)));
                                 g.setColor(Color.WHITE);
-                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber(), TUESDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
+                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + " - " + p.getRight().getSectionNumber(), TUESDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + " - " + p.getRight().getSectionNumber()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
                                 g.drawString(mt.toString(), TUESDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(mt.toString()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2 + g.getFontMetrics().getHeight());
                                 break;
                             }
@@ -125,7 +125,7 @@ public class GeneratedScheduleFrame extends JFrame {
                                 g.setColor(Colors.DARK_PRIMARY.getColor());
                                 g.fillRect(1 + 3 * xDivider, (31) + (mult * yDivider) + partial, xDivider - 1, ((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial)));
                                 g.setColor(Color.WHITE);
-                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber(), WEDNESDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
+                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + " - " + p.getRight().getSectionNumber(), WEDNESDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + " - " + p.getRight().getSectionNumber()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
                                 g.drawString(mt.toString(), WEDNESDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(mt.toString()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2 + g.getFontMetrics().getHeight());
                                 break;
                             }
@@ -133,7 +133,7 @@ public class GeneratedScheduleFrame extends JFrame {
                                 g.setColor(Colors.DARK_PRIMARY.getColor());
                                 g.fillRect(1 + 4 * xDivider, (31) + (mult * yDivider) + partial, xDivider - 1, ((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial)));
                                 g.setColor(Color.WHITE);
-                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber(), THURSDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
+                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + " - " + p.getRight().getSectionNumber(), THURSDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + " - " + p.getRight().getSectionNumber()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
                                 g.drawString(mt.toString(), THURSDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(mt.toString()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2 + g.getFontMetrics().getHeight());
                                 break;
                             }
@@ -141,7 +141,7 @@ public class GeneratedScheduleFrame extends JFrame {
                                 g.setColor(Colors.DARK_PRIMARY.getColor());
                                 g.fillRect(1 + 5 * xDivider, (31) + (mult * yDivider) + partial, xDivider - 1, ((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial)));
                                 g.setColor(Color.WHITE);
-                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber(), FRIDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
+                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + " - " + p.getRight().getSectionNumber(), FRIDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + " - " + p.getRight().getSectionNumber()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
                                 g.drawString(mt.toString(), FRIDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(mt.toString()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2 + g.getFontMetrics().getHeight());
                                 break;
                             }
@@ -149,7 +149,7 @@ public class GeneratedScheduleFrame extends JFrame {
                                 g.setColor(Colors.DARK_PRIMARY.getColor());
                                 g.fillRect(1 + 6 * xDivider, (31) + (mult * yDivider) + partial, xDivider - 1, ((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial)));
                                 g.setColor(Color.WHITE);
-                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber(), SATURDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
+                                g.drawString(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + " - " + p.getRight().getSectionNumber(), SATURDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(p.getLeft().getSubject() + p.getLeft().getCourseNumber() + " - " + p.getRight().getSectionNumber()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2);
                                 g.drawString(mt.toString(), SATURDAY_XLOC_CENTER - (g.getFontMetrics().stringWidth(mt.toString()) / 2), (31) + (mult * yDivider) + (partial) + (((31) + (mult2 * yDivider) + (partial2)) - ((31) + (mult * yDivider) + (partial))) / 2 + g.getFontMetrics().getHeight());
                                 break;
                             }
