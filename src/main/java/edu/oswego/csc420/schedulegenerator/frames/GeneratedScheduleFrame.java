@@ -23,7 +23,7 @@ public class GeneratedScheduleFrame extends JFrame {
     JButton forward;
     JLabel scheduleNumber;
 
-    JPanel calendar = new JPanel(new MigLayout("insets 5 5", "[grow,fill][grow,fill][grow,fill][grow,fill][grow,fill][grow,fill][grow,fill]", "[][grow,fill]")) {
+        JPanel calendar = new JPanel(new MigLayout("insets 5 5", "[grow,fill][grow,fill][grow,fill][grow,fill][grow,fill][grow,fill][grow,fill]", "[][grow,fill]")) {
         @Override
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
